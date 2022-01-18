@@ -282,6 +282,11 @@ class yeekee_bot(object):
             start_number = 172
 
 
+        # exceptions
+        if type == 'normal':
+            if start_number+state > 203:
+                start_number = start_number + 5
+
         if state < 0:
             print('can not bet yet')
             return False
