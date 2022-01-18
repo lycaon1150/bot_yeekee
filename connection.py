@@ -110,7 +110,13 @@ class yeekee_bot(object):
             start_number = 354  # strat the number of url
         elif type == 'normal':
             start_number = 172
-            
+        
+         # exceptions
+        if type == 'normal':
+            if start_number+state > 203:
+                start_number = start_number + 5
+                
+        
         _url = str('https://www.jetsada.net/member/lottery/yeekee/%s' %(start_number+state))
 
         driver = self.session_data[user]['driver']
