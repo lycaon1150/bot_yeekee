@@ -340,7 +340,8 @@ class yeekee_bot(object):
 if __name__ == "__main__":
     
     a = subprocess.call("pkill chrome", shell=True)
-    sleep(2)
+    
+    sleep(random.randint(20,100)/10)
     
     try:
         now = datetime.datetime.now()
