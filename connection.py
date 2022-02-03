@@ -119,7 +119,7 @@ class yeekee_bot(object):
     
     
 
-    def get_result(self,user,bet_tyupe):
+    def get_result(self,user,bet_type):
         
         print('get rank')
         print(self.room_url)
@@ -158,7 +158,7 @@ class yeekee_bot(object):
                  
                     
 
-    def go_shoot_number(self, user, set_delay,test_setting,bet_tyupe):   # 225k no.16-25
+    def go_shoot_number(self, user, set_delay,test_setting,bet_type):   # 225k no.16-25
         global return_dict
         this_host = self.session_data[user]['host']
         set_time_start = (21600 + 2*60) * 1000000
@@ -170,22 +170,22 @@ class yeekee_bot(object):
        
         if this_host == 'jetsada':
             state = self.room_88()
-            if bet_tyupe == 'special':
+            if bet_type == 'special':
                 start_number = 354  # strat the number of url
-            elif bet_tyupe == 'normal':
+            elif bet_type == 'normal':
                 start_number = 172
 
         elif this_host == 'huay':
-            if bet_tyupe == 'normal':
+            if bet_type == 'normal':
                 state = self.room_264()
                 start_number = 514
         
         elif this_host == 'thailotto':
-            if bet_tyupe == 'special':
+            if bet_type == 'special':
                 start_number = 450  
                 state = self.room_264()
                 
-            elif bet_tyupe == 'normal':
+            elif bet_type == 'normal':
                 start_number = 172
                 state = self.room_88()
                 
@@ -195,17 +195,17 @@ class yeekee_bot(object):
             time_to_click = state*15+362
             set_time_start = (21600 + 2*60) * 1000000
             time_par_round = 15*60*1000000
-        elif this_host == 'huay' and bet_tyupe == 'normal':
+        elif this_host == 'huay' and bet_type == 'normal':
             time_to_click = state*5+361
             set_time_start = (21600 + 1*60) * 1000000
             time_par_round = 5*60*1000000
         
         elif this_host == 'thailotto':
-            if bet_tyupe == 'special':
+            if bet_type == 'special':
                 time_to_click = state*5+361
                 set_time_start = (21600 + 1*60) * 1000000
                 time_par_round = 5*60*1000000
-            elif bet_tyupe == 'normal':
+            elif bet_type == 'normal':
                 time_to_click = state*15+362
                 set_time_start = (21600 + 2*60) * 1000000
                 time_par_round = 15*60*1000000
@@ -230,7 +230,7 @@ class yeekee_bot(object):
         
         # exceptions
         if this_host == 'jetsada' or this_host == 'thailotto':
-            if bet_tyupe == 'normal':
+            if bet_type == 'normal':
                 if room > 203:
                     room = room + 5
                 
@@ -240,9 +240,9 @@ class yeekee_bot(object):
         if this_host == 'jetsada':
             state_ref = 0
             _url = str('https://www.jetsada.net/member/lottery/yeekee/%s' % (room))
-            if bet_tyupe == "special":
+            if bet_type == "special":
                 js_send_number = 'axios.post("/member/lottery/yeekee", {number: "%s", bet_category_id: %s, yeekee_special: "plus"});' % (str(number_send),str(room))
-            elif bet_tyupe == "normal":
+            elif bet_type == "normal":
                 js_send_number = 'axios.post("/member/lottery/yeekee", {number: "%s", bet_category_id: %s, yeekee_special: ""});' % (str(number_send),str(room))
         
         elif this_host == 'huay':
@@ -301,9 +301,9 @@ class yeekee_bot(object):
                     driver.execute_script("document.getElementsByClassName('btn btn-secondary w-100')[0].click();")
                     sleep(0.5)
                     
-                    if bet_tyupe == "special" and this_host == "jetsada":
+                    if bet_type == "special" and this_host == "jetsada":
                         driver.execute_script("document.getElementsByClassName('btn btn-success w-100 btnYeekeeSubmit btn-shoot-plus')[0].click();") 
-                    elif bet_tyupe == "normal" and this_host == "jetsada":
+                    elif bet_type == "normal" and this_host == "jetsada":
                         driver.execute_script("document.getElementsByClassName('btn btn-secondary w-100 btnYeekeeSubmit')[0].click();") 
                     elif this_host == "thailotto":
                         driver.execute_script("document.getElementsByClassName('btn btn-secondary w-100 btnYeekeeSubmit')[0].click();") 
@@ -325,29 +325,29 @@ class yeekee_bot(object):
         
 
 
-    def select_number(self,user,list_number,bet_tyupe):
+    def select_number(self,user,list_number,bet_type):
         
         driver = self.session_data[user]['driver']
         this_host = self.session_data[user]['host']
         
         if this_host == 'jetsada':
             state = self.room_88()
-            if bet_tyupe == 'special':
+            if bet_type == 'special':
                 start_number = 354  # strat the number of url
-            elif bet_tyupe == 'normal':
+            elif bet_type == 'normal':
                 start_number = 172
 
         elif this_host == 'huay':
-            if bet_tyupe == 'normal':
+            if bet_type == 'normal':
                 state = self.room_264()
                 start_number = 514
         
         elif this_host == 'thailotto':
-            if bet_tyupe == 'special':
+            if bet_type == 'special':
                 start_number = 450  
                 state = self.room_264()
                 
-            elif bet_tyupe == 'normal':
+            elif bet_type == 'normal':
                 start_number = 172
                 state = self.room_88()
 
@@ -355,7 +355,7 @@ class yeekee_bot(object):
         
         # exceptions
         if this_host == 'jetsada' or this_host == 'thailotto':
-            if bet_tyupe == 'normal':
+            if bet_type == 'normal':
                 if room > 203:
                     room = room + 5
 
@@ -495,7 +495,7 @@ if __name__ == "__main__":
             
             l = [i for i in range(start,end)]
             if data[codename]['use_money'] == 'yes':
-                class_obj.select_number(codename,l,type=bet_type)
+                class_obj.select_number(codename,l,bet_type=bet_type)
 
             # thread = Process(target=class_obj.go_shoot_number,args=(codename, time_delay,test_process,bet_type))
             class_obj.go_shoot_number(codename, time_delay,test_process,bet_type)
