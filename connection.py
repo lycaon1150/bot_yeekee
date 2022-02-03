@@ -488,7 +488,7 @@ if __name__ == "__main__":
                         'balance' : balance
                         }
             print(data_json)
-            exit()
+        
             r = requests.post('http://128.199.236.187:8888/jesadabet/send_history',data=data_json)
             print(r.status_code)
                 
