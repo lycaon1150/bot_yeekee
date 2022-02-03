@@ -511,11 +511,11 @@ if __name__ == "__main__":
             host = data[codename]['host'] 
             if ( host == "thailotto" or host == "huay") :
                 if bet_type == "special":
-                    room_number = int(class_obj.room_264)
+                    room_number = int(class_obj.room_264())
                 else:
-                    room_number = int(class_obj.room_88)
+                    room_number = int(class_obj.room_88())
             else:
-                room_number = int(class_obj.room_88)
+                room_number = int(class_obj.room_88())
                 
             day_start_bet = (datetime.datetime.now() - datetime.timedelta(hours=5)).date()
             print('rank :' + str(rank))
