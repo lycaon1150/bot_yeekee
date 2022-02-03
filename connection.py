@@ -465,7 +465,7 @@ if __name__ == "__main__":
         
         data_json = {'ip': external_ip , 'host' : 'jetsada'  ,'process' : 'get_user' }
         
-        data = json.loads(requests.post('http://128.199.236.187:8888/jesadabet/get_id',data=data_json).text)['data']
+        data = json.loads(requests.post('http://128.199.236.187:8888/jesadabet/get_id',data=data_json ,timeout=60).text)['data']
         # json_user = json.dumps(data.text)
         print(data)
         
