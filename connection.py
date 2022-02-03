@@ -37,6 +37,7 @@ class yeekee_bot(object):
     def __init__(self, json_user):
         self.json_user = json_user
         self.session_data = {}
+        self.room_url = ""
         print('success created')
 
     def create_connection(self):
@@ -74,13 +75,16 @@ class yeekee_bot(object):
             self.session_data[user] = json_data
 
     def login(self, driver, host, id, pwd, url):
-        if host == 'jetsada' or host == 'huay':
+        if host == 'jetsada' or host == 'huay' or host == 'thailotto':
             print(url)
             driver.get(url)
             
             sleep(1)
             if host == 'jetsada':
                 driver.execute_script("document.getElementsByClassName('btn btn-bar btn-border btn-login-modal')[0].click();")
+                sleep(1)
+            elif host == 'thailotto':
+                driver.execute_script("document.getElementsByClassName('btn btn-bar btn-login-modal')[0].click();")
                 sleep(1)
                 
                 
@@ -91,7 +95,7 @@ class yeekee_bot(object):
             print('done login')
 
 
-    def jetsada_room(self):
+    def room_88(self):
         now = datetime.datetime.now()
         time_in_minute = (now.hour*60 + now.minute)
         if time_in_minute < 240:
@@ -102,29 +106,32 @@ class yeekee_bot(object):
         
         return state
 
-    def get_result_jetsada_bet(self,user,type):
+    def room_264(self):
+        now = datetime.datetime.now()
+        time_in_minute = (now.hour*60 + now.minute)
+        if time_in_minute < 240:
+            state = int((time_in_minute-356+1440)/5)
+            
+        else:
+            state = int((time_in_minute-356)/5)
         
-        state = self.jetsada_room() - 1
+        return state
+    
+    
+
+    def get_result(self,user,type):
         
-        if type == 'special':
-            start_number = 354  # strat the number of url
-        elif type == 'normal':
-            start_number = 172
+        print('get rank')
+        print(self.room_url)
         
-         # exceptions
-        if type == 'normal':
-            if start_number+state > 203:
-                start_number = start_number + 5
-                
-        
-        _url = str('https://www.jetsada.net/member/lottery/yeekee/%s' %(start_number+state))
+        # _url = str('https://www.jetsada.net/member/lottery/yeekee/%s' %(start_number+state))
 
         driver = self.session_data[user]['driver']
-        driver.get(_url)
+        driver.get(self.room_url)
         
         sleep(3)
         
-        print(_url)
+        # print(self.room_url)
         
         name = user.split("_")[1]
         print(name)
@@ -155,25 +162,60 @@ class yeekee_bot(object):
         global return_dict
         this_host = self.session_data[user]['host']
         set_time_start = (21600 + 2*60) * 1000000
-        time_par_round = 15*60*1000000
+        
         server_delay = 0  # อันดับท้ายๆ เพิ่มค่า
         number_send = random.randint(10000, 99999)	
+        
+        
+       
+        if this_host == 'jetsada':
+            state = self.room_88()
+            if type == 'special':
+                start_number = 354  # strat the number of url
+            elif type == 'normal':
+                start_number = 172
+
+        elif this_host == 'huay':
+            if type == 'normal':
+                state = self.room_264()
+                start_number = 514
+        
+        elif this_host == 'thailotto':
+            if type == 'special':
+                start_number = 450  
+                state = self.room_264()
+                
+            elif type == 'normal':
+                start_number = 172
+                state = self.room_88()
+                
+                
+
+        if this_host == 'jetsada':
+            time_to_click = state*15+362
+            set_time_start = (21600 + 2*60) * 1000000
+            time_par_round = 15*60*1000000
+        elif this_host == 'huay' and type == 'normal':
+            time_to_click = state*5+361
+            set_time_start = (21600 + 1*60) * 1000000
+            time_par_round = 5*60*1000000
+        
+        elif this_host == 'thailotto':
+            if type == 'special':
+                time_to_click = state*5+361
+                set_time_start = (21600 + 1*60) * 1000000
+                time_par_round = 5*60*1000000
+            elif type == 'normal':
+                time_to_click = state*15+362
+                set_time_start = (21600 + 2*60) * 1000000
+                time_par_round = 15*60*1000000
+            
+            
         if test_setting == True:
             test = time_par_round
         else:
             test = 0
-
-        state = self.jetsada_room()
-        if type == 'special':
-            if this_host == 'jetsada':
-                start_number = 354  # strat the number of url
-            elif this_host == 'huay':
-                start_number = 161
-        elif type == 'normal':
-            if this_host == 'jetsada':
-                start_number = 172
-
-        time_to_click = state*15+362
+            
         hour = int(time_to_click/60)
         minute = int(time_to_click % 60)
         
@@ -207,11 +249,17 @@ class yeekee_bot(object):
             _url = str('https://s1.huay.com/member#/lottery/yeekee/%s' % (room))
             js_send_number = 'axios.post("/protection/lottery/yeekee", { number: %s, bet_category_id: %s,main_type: 1}) ' % (str(number_send),str(room))
         
+        elif this_host == 'thailotto':
+            state_ref = 0
+            _url = str('https://thailotto.com/member/lottery/yeekee/%s' % (room))
+            
+            js_send_number = 'axios.post("/member/lottery/yeekee", {number: "%s", bet_category_id: %s, yeekee_special: ""});' % (str(number_send),str(room))
+            
+  
+            
         driver = self.session_data[user]['driver']
         driver.get(_url)
-    
-      
-
+        self.room_url = _url
         sleep(1)
         
         
@@ -219,7 +267,8 @@ class yeekee_bot(object):
         
         
         use_time = 0
-        
+        rand_time = (25 + random.randint(0, 4))
+
         delay = (1000000-set_delay)/1000000
         while(1):
             now = datetime.datetime.now()
@@ -230,9 +279,9 @@ class yeekee_bot(object):
             
                 
             if (loop_time - server_delay) % time_par_round > time_par_round - 1000000 - test and state_ref == 1:
-                print('ckick 2st')
+                print('ckick to win')
                 sleep(delay)
-                
+    
                 now = datetime.datetime.now()  
                 driver.execute_script(js_send_number) 
                 end = datetime.datetime.now()
@@ -243,18 +292,20 @@ class yeekee_bot(object):
                 break
             
             if state_ref == 0 :
-                if (loop_time - server_delay) % time_par_round > time_par_round - 1000000*25 - test:
+                if (loop_time - server_delay) % time_par_round > time_par_round - 1000000*rand_time - test:
                     print('ckick 1st')
                     sleep(delay)
                     driver.refresh()
                     sleep(1.5)
                     driver.execute_script("document.getElementsByClassName('btn btn-secondary w-100')[0].click();")
                     sleep(0.5)
+                    
                     if type == "special" and this_host == "jetsada":
                         driver.execute_script("document.getElementsByClassName('btn btn-success w-100 btnYeekeeSubmit btn-shoot-plus')[0].click();") 
                     elif type == "normal" and this_host == "jetsada":
                         driver.execute_script("document.getElementsByClassName('btn btn-secondary w-100 btnYeekeeSubmit')[0].click();") 
-     
+                    elif this_host == "thailotto":
+                        driver.execute_script("document.getElementsByClassName('btn btn-secondary w-100 btnYeekeeSubmit')[0].click();") 
 
                     # self.save_screenshots(user)
                     sleep(15.5)
@@ -270,10 +321,11 @@ class yeekee_bot(object):
         print('end')
         
         
+        
 
 
     def jetsada_select(self,user,list_number,type):
-        state = self.jetsada_room()
+        state = self.room_88()
         driver = self.session_data[user]['driver']
 
         if type == 'special':
@@ -335,6 +387,19 @@ class yeekee_bot(object):
         
         return balance
 
+    def get_balance(self,user):
+        driver = self.session_data[user]['driver']
+        _url = self.session_data[user]['url_balance'] + str(self.session_data[user]['ID'])
+        this_host = self.session_data[user]['host']
+        
+        driver.get(_url)
+        sleep(1)
+        # driver.save_screenshot('11111.png')
+
+        balance = driver.execute_script("return document.body.innerText")
+        
+        return balance
+
         
 
     def save_screenshots(self, user):
@@ -384,7 +449,7 @@ if __name__ == "__main__":
             test_process = False
             
 
-        if data[codename]['host'] == 'jetsada': 
+        if data[codename]['host'] == 'jetsada' or data[codename]['host'] == 'thailotto': 
             
             class_obj = yeekee_bot(data)
             
@@ -398,16 +463,18 @@ if __name__ == "__main__":
             if data[codename]['use_money'] == 'yes':
                 class_obj.jetsada_select(codename,l,type=bet_type)
 
-            thread = Process(target=class_obj.go_shoot_number,args=(codename, time_delay,test_process,bet_type))
-            
-            thread.start()
-            thread.join()
-            
-            sleep(5)
-            balance = class_obj.jesada_get_balance(codename)
+            # thread = Process(target=class_obj.go_shoot_number,args=(codename, time_delay,test_process,bet_type))
+            class_obj.go_shoot_number(codename, time_delay,test_process,bet_type)
+            # thread.start()
+            # thread.join()
             
             sleep(5)
-            rank = class_obj.get_result_jetsada_bet(codename,bet_type)
+            balance = class_obj.get_balance(codename)
+            
+            print('balance  :' + str(balance) )
+            sleep(5)
+            rank = class_obj.get_result(codename,bet_type)
+            
             day_start_bet = (datetime.datetime.now() - datetime.timedelta(hours=5)).date()
             print('rank :' + str(rank))
             data_json = {'username' : username ,
@@ -416,14 +483,14 @@ if __name__ == "__main__":
                         'delay_use' : time_delay ,
                         'time_use' : return_dict.get(),
                         'date' : day_start_bet , 
-                        'bet_round' : class_obj.jetsada_room() , 
+                        'bet_round' : class_obj.room_88() , 
                         'rank' : rank , 
                         'balance' : balance
                         }
             print(data_json)
-            if class_obj.jetsada_room() < 89 or class_obj.jetsada_room() > 0:
-                r = requests.post('http://128.199.236.187:8888/jesadabet/send_history',data=data_json)
-                print(r.status_code)
+            exit()
+            r = requests.post('http://128.199.236.187:8888/jesadabet/send_history',data=data_json)
+            print(r.status_code)
                 
                 
                 
@@ -432,7 +499,7 @@ if __name__ == "__main__":
         print(e)
         
         
-    sleep(2)
+    sleep(2)    
     a = subprocess.call("pkill chrome", shell=True)
 
     sleep(2)
