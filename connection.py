@@ -509,8 +509,11 @@ if __name__ == "__main__":
             sleep(5)
             rank = class_obj.get_result(codename,bet_type)
             host = data[codename]['host'] 
-            if ( host == "thailotto" or host == "huay")  and bet_type == "special":
-                room_number = class_obj.room_264
+            if ( host == "thailotto" or host == "huay") :
+                if bet_type == "special":
+                    room_number = class_obj.room_264
+                else:
+                    room_number = class_obj.room_88
             else:
                 room_number = class_obj.room_88
                 
