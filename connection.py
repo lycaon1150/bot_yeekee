@@ -451,7 +451,7 @@ if __name__ == "__main__":
     
     a = subprocess.call("pkill chrome", shell=True)
     
-    sleep(random.randint(0,150)/10)
+    # sleep(random.randint(0,150)/10)
     
     try:
         now = datetime.datetime.now()
