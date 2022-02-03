@@ -508,7 +508,12 @@ if __name__ == "__main__":
             print('balance  :' + str(balance) )
             sleep(5)
             rank = class_obj.get_result(codename,bet_type)
-            
+            host = data[codename]['host'] 
+            if ( host == "thailotto" or host == "huay")  and bet_type == "special":
+                room_number = class_obj.room_264
+            else:
+                room_number = class_obj.room_88
+                
             day_start_bet = (datetime.datetime.now() - datetime.timedelta(hours=5)).date()
             print('rank :' + str(rank))
             data_json = {'username' : username ,
@@ -517,7 +522,7 @@ if __name__ == "__main__":
                         'delay_use' : time_delay ,
                         'time_use' : return_dict.get(),
                         'date' : day_start_bet , 
-                        'bet_round' : class_obj.room_88() , 
+                        'bet_round' : room_number , 
                         'rank' : rank , 
                         'balance' : balance
                         }
