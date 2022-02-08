@@ -397,8 +397,8 @@ class yeekee_bot(object):
 
             sleep(1)
 
-            # driver.execute_script("return document.getElementsByClassName('input-bottom-bet float-left')[0];").send_keys(2)
-            # sleep(1)
+            driver.execute_script("return document.getElementsByClassName('input-bottom-bet float-left')[0];").send_keys(2)
+            sleep(1)
             driver.execute_script("document.getElementsByClassName('btn btn-primary btn-bet-l')[0].click();")
             sleep(1)
             driver.execute_script("document.getElementsByClassName('btn btn-primary btn-bet-l')[1].click();")
