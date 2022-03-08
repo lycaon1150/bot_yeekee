@@ -47,6 +47,7 @@ class yeekee_bot(object):
         self.session_data = {}
         self.room_url = ""
         self.room_number = ""
+        self.state = ""
         print('success created')
 
     def create_connection(self):
@@ -256,6 +257,7 @@ class yeekee_bot(object):
         return 0
         
     def get_room(self,user):
+        
         this_host = self.session_data[user]['host']
         driver = self.session_data[user]['driver']
         code = self.session_data[user]['authorization']
@@ -313,7 +315,8 @@ class yeekee_bot(object):
             if bet_type == 'normal':
                 if room > 203:
                     room = room + 5
-                    
+
+        
         return room , state
     
     
@@ -412,6 +415,7 @@ class yeekee_bot(object):
         driver.save_screenshot('shot.png')
         self.room_url = _url
         self.room_number = room
+        self.state = state
         sleep(1)
         
         
@@ -660,7 +664,7 @@ if __name__ == "__main__":
             
             
             host = data[codename]['host'] 
-            x , room_number = class_obj.room_number
+            room_number = class_obj.state
             
             day_start_bet = (datetime.datetime.now() - datetime.timedelta(hours=5)).date()
             
