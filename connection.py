@@ -60,7 +60,7 @@ class yeekee_bot(object):
         for user in self.json_user.keys():
             
             
-            if self.json_user[user]['host'] != 'chudjenbet':
+            if self.json_user[user]['host'] == "jetsada" or self.json_user[user]['host'] == "thailotto":
                 options = Options()
                 # options.add_argument('--proxy-server=203.150.128.60:8080')
                 options.add_argument('--headless')
@@ -93,7 +93,7 @@ class yeekee_bot(object):
             # options.add_argument(
             #     "user-data-dir=%s%s" % (file_part , user))
 
-            if self.json_user[user]['host'] != 'chudjenbet':
+            if self.json_user[user]['host'] == "jetsada" or self.json_user[user]['host'] == "thailotto":
                 driver = webdriver.Chrome(
                     ChromeDriverManager().install(), chrome_options=options ,
                     # seleniumwire_options=options_seleniumWire
