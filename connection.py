@@ -334,10 +334,6 @@ class yeekee_bot(object):
         room , state = self.get_room(user)
         
         
-
-
-
-
         ##### set time to click number #########
         
         if this_host == 'jetsada':
@@ -408,6 +404,7 @@ class yeekee_bot(object):
         elif this_host == 'chudjenbet':
             state_ref = 0
             _url = str('https://chudjenbet.com/member/lotto/%s' % (room))
+            js_send_number = str(chudjen.post_number(code,room,number_send))
             
         driver = self.session_data[user]['driver']
         driver.get(_url)
@@ -439,11 +436,7 @@ class yeekee_bot(object):
                 sleep(delay)
     
                 now = datetime.datetime.now()  
-                if this_host == "chudjenbet":
-                    driver.execute_script(str(chudjen.post_number(code,room,number_send)))
-                elif this_host == "jetsada" or this_host == 'thailotto' or this_host == 'chudjenbet':
-                    driver.execute_script(js_send_number) 
-                
+                driver.execute_script(js_send_number) 
                 end = datetime.datetime.now()
                 
                 print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
