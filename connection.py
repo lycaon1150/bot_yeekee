@@ -68,7 +68,7 @@ class yeekee_bot(object):
                 # Last I checked this was necessary.
                 options.add_argument('--disable-gpu')
                 options.add_argument('window-size=1920x1080')
-                options.add_argument('sec-ch-ua-platform=Windows')
+                # options.add_argument('sec-ch-ua-platform=Windows')
                 # options_seleniumWire = {
                 #     'proxy': {
                 #         # 'https': 'https://Selnyolycaon:B2p3GpX@154.16.11.95:45785'
