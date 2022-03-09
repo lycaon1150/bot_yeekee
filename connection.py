@@ -231,12 +231,20 @@ class yeekee_bot(object):
         elif this_host == 'chudjenbet':
             z = len(name)
             n = 0
+            secret_name = "xxxxxxx"
             for c in name:
-                if n == 0 or n == 1 or n == z-1 or n == z-2:
+                if n == 0:
+                    secret_name[0] = str(c)
                     
-                    secret_name = str(secret_name) + str(c) 
-                else:
-                    secret_name = str(secret_name) + str('x')
+                elif n == 1:
+                    secret_name[1] = str(c)
+                    
+                elif n == z-1:  
+                    secret_name[5] = str(c)
+                    
+                elif n == z-2:
+                    secret_name[6] = str(c) 
+                
                 n = n + 1
                 
             print(secret_name)
@@ -251,9 +259,9 @@ class yeekee_bot(object):
                     
                     result.append(data['username'])
 
-            print (result)
+           
             for rank , username in enumerate(result):
-                print(username)
+              
                 if str(secret_name) == str(username):
                     return rank+1
         
