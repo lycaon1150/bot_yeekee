@@ -27,7 +27,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 import undetected_chromedriver as uc
 
 
-import chudjenbet_f as chudjen
+import js_code
 
 import paramiter as setting
 
@@ -120,7 +120,8 @@ class yeekee_bot(object):
                 self.login(json_data['driver'], json_data['host'],json_data['ID'], json_data['Password'], json_data['url'])
                 if self.json_user[user]['host'] == 'chudjenbet':
                     json_data['authorization'] = driver.execute_script("return window.localStorage['auth._token.local']")                
-                   
+                elif self.json_user[user]['host'] == 'thailotto':
+                    json_data['authorization'] = driver.execute_script("return (await window.cookieStore.get('XSRF-TOKEN')).value")  
             except:
                 pass
 
@@ -243,7 +244,7 @@ class yeekee_bot(object):
            
             result = []
             for i in range(1,4):
-                _r = list(driver.execute_script(str(chudjen.get_rank(code,room,i)))['records'])
+                _r = list(driver.execute_script(str(js_code.get_rank_chudjenbet(code,room,i)))['records'])
                 # print(_r)
             
                 for data in _r:
@@ -285,7 +286,7 @@ class yeekee_bot(object):
                 state = self.room_88()
                 
         elif this_host == 'chudjenbet':
-            data_room_chudjenbet = driver.execute_script(chudjen.get_room(code))
+            data_room_chudjenbet = driver.execute_script(js_code.get_room_chudjenbet(code))
 
             if bet_type == 'special':
                 for item in data_room_chudjenbet['records']:
@@ -401,11 +402,12 @@ class yeekee_bot(object):
             state_ref = 0
             _url = str('https://thailotto.com/member/lottery/yeekee/%s' % (room))
             
-            js_send_number = 'axios.post("/member/lottery/yeekee", {number: "%s", bet_category_id: %s, yeekee_special: ""});' % (str(number_send),str(room))
+            # js_send_number = 'axios.post("/member/lottery/yeekee", {number: "%s", bet_category_id: %s, yeekee_special: ""});' % (str(number_send),str(room))
+            js_send_number = str(js_code.post_number_chudjenbet(code,room,number_send))
         elif this_host == 'chudjenbet':
             state_ref = 0
             _url = str('https://chudjenbet.com/member/lotto/%s' % (room))
-            js_send_number = str(chudjen.post_number(code,room,number_send))
+            js_send_number = str(js_code.post_number_chudjenbet(code,room,number_send))
             
         driver = self.session_data[user]['driver']
         driver.get(_url)
@@ -454,14 +456,7 @@ class yeekee_bot(object):
                     driver.refresh()
                     sleep(1.5)
                     driver.save_screenshot('1150.png')
-                    
-                    ######### กด เข้าหน้ายิงเลข ##############
-                    
-                    if this_host == "jetsada" or this_host == "thailotto":
-                        driver.execute_script("document.getElementsByClassName('btn btn-secondary w-100')[0].click();")
-                    # elif this_host == "chudjenbet":
-                    #     driver.execute_script("document.getElementsByClassName('pad-item random')[0].click();")
-                    
+                          
                     sleep(0.5)
                     
                     ######### ยิงเลขครั้งแรก ##############
@@ -470,18 +465,14 @@ class yeekee_bot(object):
                         driver.execute_script("document.getElementsByClassName('btn btn-success w-100 btnYeekeeSubmit btn-shoot-plus')[0].click();") 
                     elif bet_type == "normal" and this_host == "jetsada":
                         driver.execute_script("document.getElementsByClassName('btn btn-secondary w-100 btnYeekeeSubmit')[0].click();") 
-                    elif this_host == "thailotto":
-                        driver.execute_script("document.getElementsByClassName('btn btn-secondary w-100 btnYeekeeSubmit')[0].click();") 
-                    elif this_host == "chudjenbet":
-                        driver.execute_script(chudjen.post_number(code,room,number_send)) 
-                    
-                    # self.save_screenshots(user)
+                    # elif this_host == "thailotto":
+                    #     driver.execute_script("document.getElementsByClassName('btn btn-secondary w-100 btnYeekeeSubmit')[0].click();") 
+                    elif this_host == "thailotto" or this_host == "chudjenbet":
+                        driver.execute_script(js_send_number) 
+           
                     sleep(15.5)
-                    if this_host == "jetsada" or this_host == "thailotto":
-                        driver.execute_script("document.getElementsByClassName('btn btn-secondary w-100')[0].click();")
-                    # elif this_host == "chudjenbet":
-                    #     driver.execute_script("document.getElementsByClassName('pad-item random')[0].click();")
-                    sleep(0.5)
+                
+                   
                     state_ref = 1
                 
             
@@ -575,7 +566,7 @@ class yeekee_bot(object):
             balance = driver.execute_script("return document.body.innerText")
         
         elif this_host == 'chudjenbet':
-            balance = driver.execute_script(str(chudjen.get_balance(code)))['data']['real_credit']
+            balance = driver.execute_script(str(js_code.get_balance_chudjenbet(code)))['data']['real_credit']
         
         
         return balance
@@ -658,7 +649,7 @@ if __name__ == "__main__":
             
             
             host = data[codename]['host'] 
-            room_number = class_obj.state
+            room_number = class_obj.state + 1
             
             day_start_bet = (datetime.datetime.now() - datetime.timedelta(hours=5)).date()
             
