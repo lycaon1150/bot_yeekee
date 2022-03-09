@@ -17,7 +17,7 @@ def get_room_chudjenbet(code):
 
 
 def post_number_chudjenbet(code,room,num):
-    js = """await fetch('https://chudjenbet.com/api/member/lotto/shoot/number/%s', {
+    js = """fetch('https://chudjenbet.com/api/member/lotto/shoot/number/%s', {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -101,7 +101,7 @@ def get_rank_chudjenbet(code,room,page):
 
 
 
-def post_number_chudjenbet(code,room,num):
+def post_number_jesadabet(code,room,num):
     js = """fetch('https://thailotto.com/member/lottery/yeekee', {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin

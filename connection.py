@@ -249,7 +249,7 @@ class yeekee_bot(object):
                     secret_name[6] = str(c) 
                 
                 n = n + 1
-            secret_name = ''.join(secret_name)    
+            secret_name = str(''.join(secret_name))    
             print(secret_name)
             room = self.room_number
            
@@ -259,7 +259,7 @@ class yeekee_bot(object):
                 # print(_r)
             
                 for data in _r:
-                    
+                
                     result.append(data['username'])
 
            
@@ -416,7 +416,7 @@ class yeekee_bot(object):
             _url = str('https://thailotto.com/member/lottery/yeekee/%s' % (room))
             
             # js_send_number = 'axios.post("/member/lottery/yeekee", {number: "%s", bet_category_id: %s, yeekee_special: ""});' % (str(number_send),str(room))
-            js_send_number = str(js_code.post_number_chudjenbet(code,room,number_send))
+            js_send_number = str(js_code.post_number_jesadabet(code,room,number_send))
         elif this_host == 'chudjenbet':
             state_ref = 0
             _url = str('https://chudjenbet.com/member/lotto/%s' % (room))
