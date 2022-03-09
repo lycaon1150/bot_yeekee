@@ -250,8 +250,10 @@ class yeekee_bot(object):
                 for data in _r:
                     
                     result.append(data['username'])
-        
+
+            print (result)
             for rank , username in enumerate(result):
+                print(username)
                 if str(secret_name) == str(username):
                     return rank+1
         

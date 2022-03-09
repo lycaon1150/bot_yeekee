@@ -17,7 +17,7 @@ def get_room_chudjenbet(code):
 
 
 def post_number_chudjenbet(code,room,num):
-    js = """fetch('https://chudjenbet.com/api/member/lotto/shoot/number/%s', {
+    js = """await fetch('https://chudjenbet.com/api/member/lotto/shoot/number/%s', {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
