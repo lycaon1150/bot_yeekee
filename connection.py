@@ -234,7 +234,7 @@ class yeekee_bot(object):
             n = 0
             
             secret_name = "xxxxxxx"
-            
+            secret_name = list(secret_name)
             for c in name:
                 if n == 0:
                     secret_name[0] = str(c)
@@ -249,7 +249,7 @@ class yeekee_bot(object):
                     secret_name[6] = str(c) 
                 
                 n = n + 1
-                
+            secret_name = ''.join(secret_name)    
             print(secret_name)
             room = self.room_number
            
