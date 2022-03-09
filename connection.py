@@ -61,47 +61,48 @@ class yeekee_bot(object):
         for user in self.json_user.keys():
             
             
-            if self.json_user[user]['host'] == "jetsada" or self.json_user[user]['host'] == "thailotto":
-                options = Options()
-                # options.add_argument('--proxy-server=203.150.128.60:8080')
-                options.add_argument('--headless')
-                # Last I checked this was necessary.
-                options.add_argument('--disable-gpu')
-                options.add_argument('window-size=1920x1080')
-                # options.add_argument('sec-ch-ua-platform=Windows')
-                # options_seleniumWire = {
-                #     'proxy': {
-                #         # 'https': 'https://Selnyolycaon:B2p3GpX@154.16.11.95:45785'
-                #         # 'http : http://203.150.128.60:8080'
-                #     }
-                # }
+            # if self.json_user[user]['host'] == "jetsada" or self.json_user[user]['host'] == "thailotto":
+            #     options = Options()
+            #     # options.add_argument('--proxy-server=203.150.128.60:8080')
+            #     options.add_argument('--headless')
+            #     # Last I checked this was necessary.
+            #     options.add_argument('--disable-gpu')
+            #     options.add_argument('window-size=1920x1080')
+            #     # options.add_argument('sec-ch-ua-platform=Windows')
+            #     # options_seleniumWire = {
+            #     #     'proxy': {
+            #     #         # 'https': 'https://Selnyolycaon:B2p3GpX@154.16.11.95:45785'
+            #     #         # 'http : http://203.150.128.60:8080'
+            #     #     }
+            #     # }
         
-            elif self.json_user[user]['host'] == 'chudjenbet':
-                options = uc.ChromeOptions()
-                options.add_argument("--headless")
-                options.add_argument('window-size=1920x1080')
-                options.add_argument('whitelisted-ips')
-                # options.add_argument("no-sandbox")
-                # options.add_argument("disable-dev-shm-usage")
-                options.add_argument("--disable-extensions")
-                options.add_argument("enable-automation")
-                # options.add_argument("--disable-browser-side-navigation")
-                options.add_argument("--disable-web-security")
-                # options.add_argument("--disable-dev-shm-usage")
-                options.add_argument("--disable-infobars")
-                options.add_argument("--disable-gpu")
+            # elif self.json_user[user]['host'] == 'chudjenbet':
+            options = uc.ChromeOptions()
+            options.add_argument("--headless")
+            options.add_argument('window-size=640x480')
+            options.add_argument('whitelisted-ips')
+            # options.add_argument("no-sandbox")
+            # options.add_argument("disable-dev-shm-usage")
+            options.add_argument("--disable-extensions")
+            options.add_argument("enable-automation")
+            # options.add_argument("--disable-browser-side-navigation")
+            options.add_argument("--disable-web-security")
+            # options.add_argument("--disable-dev-shm-usage")
+            options.add_argument("--disable-infobars")
+            options.add_argument("--disable-gpu")
             # set chorme user cookie
             # options.add_argument(
             #     "user-data-dir=%s%s" % (file_part , user))
 
-            if self.json_user[user]['host'] == "jetsada" or self.json_user[user]['host'] == "thailotto":
-                driver = webdriver.Chrome(
-                    ChromeDriverManager().install(), chrome_options=options ,
-                    # seleniumwire_options=options_seleniumWire
-                    )
+            # if self.json_user[user]['host'] == "jetsada" or self.json_user[user]['host'] == "thailotto":
+            #     driver = webdriver.Chrome(
+            #         ChromeDriverManager().install(), chrome_options=options ,
+            #         # seleniumwire_options=options_seleniumWire
+            #         )
                 
-            elif self.json_user[user]['host'] == 'chudjenbet':
-                driver = uc.Chrome(version_main=93, options=options)    
+            # elif self.json_user[user]['host'] == 'chudjenbet':
+                
+            driver = uc.Chrome(version_main=93, options=options)    
             
             
             data_id = self.json_user[user]
@@ -243,7 +244,7 @@ class yeekee_bot(object):
             result = []
             for i in range(1,4):
                 _r = list(driver.execute_script(str(chudjen.get_rank(code,room,i)))['records'])
-                print(_r)
+                # print(_r)
             
                 for data in _r:
                     
