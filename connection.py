@@ -228,10 +228,13 @@ class yeekee_bot(object):
                 if find_name == name or find_name == secret_name:
                     return i+1
                 
+                
         elif this_host == 'chudjenbet':
             z = len(name)
             n = 0
+            
             secret_name = "xxxxxxx"
+            
             for c in name:
                 if n == 0:
                     secret_name[0] = str(c)
