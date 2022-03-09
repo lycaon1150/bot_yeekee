@@ -78,14 +78,16 @@ class yeekee_bot(object):
         
             # elif self.json_user[user]['host'] == 'chudjenbet':
             options = uc.ChromeOptions()
+            prefs={'disk-cache-size': 4096}
+            options.add_experimental_option('prefs', prefs)
             options.add_argument("--headless")
             options.add_argument('window-size=640x480')
             options.add_argument('whitelisted-ips')
-            # options.add_argument("no-sandbox")
-            # options.add_argument("disable-dev-shm-usage")
+            options.add_argument("no-sandbox")
+            options.add_argument("disable-dev-shm-usage")
             options.add_argument("--disable-extensions")
             options.add_argument("enable-automation")
-            # options.add_argument("--disable-browser-side-navigation")
+            options.add_argument("--disable-browser-side-navigation")
             options.add_argument("--disable-web-security")
             # options.add_argument("--disable-dev-shm-usage")
             options.add_argument("--disable-infobars")
