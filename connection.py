@@ -243,12 +243,14 @@ class yeekee_bot(object):
                     secret_name[1] = str(c)
                     
                 elif n == z-1:  
-                    secret_name[5] = str(c)
+                    secret_name[6] = str(c)
                     
                 elif n == z-2:
-                    secret_name[6] = str(c) 
+                    secret_name[5] = str(c) 
                 
                 n = n + 1
+                
+                
             secret_name = str(''.join(secret_name))    
             print(secret_name)
             room = self.room_number
