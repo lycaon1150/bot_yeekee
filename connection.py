@@ -425,8 +425,8 @@ class yeekee_bot(object):
             js_send_number = str(js_code.post_number_chudjenbet(code,room,number_send))
             
         driver = self.session_data[user]['driver']
-        driver.get(_url)
-        sleep(5)
+        # driver.get(_url)
+        sleep(2)
         driver.save_screenshot('shot.png')
         self.room_url = _url
         self.room_number = room
@@ -462,8 +462,7 @@ class yeekee_bot(object):
                 return_dict.put(use_time)
                 break
             
-            
-            
+
             if state_ref == 0 :
                 if (loop_time - server_delay) % time_par_round > time_par_round - 1000000*rand_time - test:
                     print('ckick 1st')
@@ -476,14 +475,7 @@ class yeekee_bot(object):
                     
                     ######### ยิงเลขครั้งแรก ##############
                     
-                    if bet_type == "special" and this_host == "jetsada":
-                        driver.execute_script("document.getElementsByClassName('btn btn-success w-100 btnYeekeeSubmit btn-shoot-plus')[0].click();") 
-                    elif bet_type == "normal" and this_host == "jetsada":
-                        driver.execute_script("document.getElementsByClassName('btn btn-secondary w-100 btnYeekeeSubmit')[0].click();") 
-                    # elif this_host == "thailotto":
-                    #     driver.execute_script("document.getElementsByClassName('btn btn-secondary w-100 btnYeekeeSubmit')[0].click();") 
-                    elif this_host == "thailotto" or this_host == "chudjenbet":
-                        driver.execute_script(js_send_number) 
+                    driver.execute_script(js_send_number) 
            
                     sleep(15.5)
                 
@@ -505,29 +497,11 @@ class yeekee_bot(object):
         
         driver = self.session_data[user]['driver']
         this_host = self.session_data[user]['host']
-        
+        code = self.session_data[user]['authorization']
         
         room , state = self.get_room(user)
-        
-        
-
 
         ###### set url for go shot number #########
-
-        if this_host == 'jetsada':
-            _url = str('https://www.jetsada.net/member/lottery/yeekee/%s' % (room))
-            
-        
-        elif this_host == 'huay':
-            _url = str('https://s1.huay.com/member#/lottery/yeekee/%s' % (room))
-           
-        
-        elif this_host == 'thailotto':
-            _url = str('https://thailotto.com/member/lottery/yeekee/%s' % (room))
-        
-        elif this_host == 'chudjenbet':
-            _url = str('https://chudjenbet.com/member/lotto/%s' % (room))
-
             
         if state < 0:
             print('can not bet yet')
@@ -535,33 +509,31 @@ class yeekee_bot(object):
         else:
             print('start___select')
  
-        driver.get(_url)
+        # driver.get(_url)
         sleep(2)
 
 
         if this_host == 'jetsada' or this_host == 'thailotto':
-            driver.execute_script("document.getElementsByClassName('link-tab')[1].click();")  
-            sleep(1)
-
-            driver.execute_script("document.getElementsByClassName('bet-list-item orange')[0].click();") 
-
+            betListJsonStringify = '['
+    
             for n in list_number:
-                bet_numer = n+1000
-                driver.execute_script("document.getElementsByClassName('bet-items-square')[%s].click();" % bet_numer) 
+                if n < 10:
+                    n = str(0) + str(n)
                 
-            driver.execute_script("document.getElementsByClassName('btn btn-orange')[0].click();") 
-
-            sleep(1)
-
-            driver.execute_script("return document.getElementsByClassName('input-bottom-bet float-left')[0];").send_keys(2)
-            sleep(1)
-            driver.execute_script("document.getElementsByClassName('btn btn-primary btn-bet-l')[0].click();")
-            sleep(1)
-            driver.execute_script("document.getElementsByClassName('btn btn-primary btn-bet-l')[1].click();")
-            sleep(1)
-        
-        
+                betListJsonStringify = betListJsonStringify + str(r'{\"type\":3,\"slug\":\"bet_two_top\",\"number\":\"%s\",\"price\":%s},' % (str(n),str(2)))
             
+            count_n = len(betListJsonStringify)
+            betListJsonStringify = list(betListJsonStringify)
+            betListJsonStringify[count_n-1] = ']'
+            betListJsonStringify = ''.join(betListJsonStringify)
+
+            bet_text = '{"stake_method":2,"bet_category_id":%s,"betListJsonStringify":"%s","thaistock20checklist":[]}' % (str(room),betListJsonStringify)
+           
+            js = js_code.bet_number_jesadabet(code,bet_text)
+
+            driver.execute_script(js)
+        
+        print('done bet number')
 
 
     def get_balance(self,user):
