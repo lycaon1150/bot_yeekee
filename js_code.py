@@ -32,7 +32,27 @@ def post_number_chudjenbet(code,room,num):
         "number": "%s"
     })
 })""" % (str(room),str(code),str(num))
+
     return js
+
+
+def bet_number_chudjenbet(code,bet_text):
+    js = """fetch('https://chudjenbet.com/api/game/lotto/speed', {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+        'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded', 
+            ,
+        'authorization': '%s'
+    },
+    'body': JSON.stringify(%s)
+})""" % (str(code),str(bet_text))
+   
+    return js
+
 
 def get_balance_chudjenbet(code):
     js = """return await fetch('https://chudjenbet.com/auth/me', {

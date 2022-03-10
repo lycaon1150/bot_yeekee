@@ -509,29 +509,44 @@ class yeekee_bot(object):
         else:
             print('start___select')
  
-        # driver.get(_url)
+        
         sleep(2)
 
 
-        if this_host == 'jetsada' or this_host == 'thailotto':
-            betListJsonStringify = '['
-    
-            for n in list_number:
-                if n < 10:
-                    n = str(0) + str(n)
-                
-                betListJsonStringify = betListJsonStringify + str(r'{\"type\":3,\"slug\":\"bet_two_top\",\"number\":\"%s\",\"price\":%s},' % (str(n),str(2)))
+        # this_host == 'jetsada' or this_host == 'thailotto' or this_host == 'chudjenbet':
+        betListJsonStringify = '['
+
+        for n in list_number:
+            if n < 10:
+                n = str(0) + str(n)
             
-            count_n = len(betListJsonStringify)
-            betListJsonStringify = list(betListJsonStringify)
-            betListJsonStringify[count_n-1] = ']'
-            betListJsonStringify = ''.join(betListJsonStringify)
+            if this_host == 'jetsada' or this_host == 'thailotto':
+                betListJsonStringify = betListJsonStringify + str(r'{\"type\":3,\"slug\":\"bet_two_top\",\"number\":\"%s\",\"price\":2},' % (str(n)))
+            elif this_host == 'chudjenbet':
+                betListJsonStringify = betListJsonStringify + str(r'{\"slug\":\"two_top\",\"number\":\"%s\",\"price\":\"2\",\"rate\":\"90\"},' % (str(n)))
+            
+        count_n = len(betListJsonStringify)
+        betListJsonStringify = list(betListJsonStringify)
+        betListJsonStringify[count_n-1] = ']'
+        betListJsonStringify = ''.join(betListJsonStringify)
 
+        if this_host == 'jetsada' or this_host == 'thailotto':
             bet_text = '{"stake_method":2,"bet_category_id":%s,"betListJsonStringify":"%s","thaistock20checklist":[]}' % (str(room),betListJsonStringify)
-           
             js = js_code.bet_number_jesadabet(code,bet_text)
+            sleep(2)
+            driver.get('https://thailotto.com/member/affiliate')
+            sleep(2)
+        elif this_host == 'chudjenbet':
+            bet_text = '{"lotto_id":%s,"stakes":"%s","hashed":""}' % (str(room),betListJsonStringify)
+            js = js_code.bet_number_chudjenbet(code,bet_text)
+            sleep(2)
+            driver.get('https://chudjenbet.com/member/report')
+            sleep(2)
+        
 
-            driver.execute_script(js)
+        driver.execute_script(js)
+    
+       
         
         print('done bet number')
 
