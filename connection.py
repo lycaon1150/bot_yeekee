@@ -542,8 +542,15 @@ class yeekee_bot(object):
             sleep(2)
         elif this_host == 'chudjenbet':
             hash = random.getrandbits(128)
+            if bet_type == 'special':
+                link = 'speed'
+            elif bet_type == 'vip_264':
+                link = 'speed_vip'
+            elif bet_type == 'normal':
+                link = 'yeekee'
+                
             bet_text = '{"lotto_id":%s,"stakes":"%s","hashed":"%s"}' % (str(room),betListJsonStringify,str(hash))
-            js = js_code.bet_number_chudjenbet(code,bet_text)
+            js = js_code.bet_number_chudjenbet(code,link,bet_text)
             sleep(2)
             driver.get('https://chudjenbet.com/member/affiliate')
             sleep(2)
