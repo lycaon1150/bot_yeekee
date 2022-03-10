@@ -118,6 +118,7 @@ class yeekee_bot(object):
             try:
                 
                 self.login(json_data['driver'], json_data['host'],json_data['ID'], json_data['Password'], json_data['url'])
+                sleep(2)
                 if self.json_user[user]['host'] == 'chudjenbet':
                     json_data['authorization'] = driver.execute_script("return window.localStorage['auth._token.local']")                
                 elif self.json_user[user]['host'] == 'thailotto':
@@ -517,13 +518,16 @@ class yeekee_bot(object):
         betListJsonStringify = '['
 
         for n in list_number:
+            num = ""
             if n < 10:
-                n = str(0) + str(n)
-            
+                num = str(0) + str(n)
+            else:
+                num = str(n)
+                
             if this_host == 'jetsada' or this_host == 'thailotto':
-                betListJsonStringify = betListJsonStringify + str(r'{\"type\":3,\"slug\":\"bet_two_top\",\"number\":\"%s\",\"price\":2},' % (str(n)))
+                betListJsonStringify = betListJsonStringify + str(r'{\"type\":3,\"slug\":\"bet_two_top\",\"number\":\"%s\",\"price\":2},' % (str(num)))
             elif this_host == 'chudjenbet':
-                betListJsonStringify = betListJsonStringify + str(r'{\"slug\":\"two_top\",\"number\":\"%s\",\"price\":\"2\",\"rate\":\"90\"},' % (str(n)))
+                betListJsonStringify = betListJsonStringify + str(r'{\"slug\":\"two_top\",\"number\":\"%s\",\"price\":\"2\",\"rate\":\"90\"},' % (str(num)))
             
         count_n = len(betListJsonStringify)
         betListJsonStringify = list(betListJsonStringify)
@@ -537,7 +541,8 @@ class yeekee_bot(object):
             driver.get('https://thailotto.com/member/affiliate')
             sleep(2)
         elif this_host == 'chudjenbet':
-            bet_text = '{"lotto_id":%s,"stakes":"%s","hashed":""}' % (str(room),betListJsonStringify)
+            hash = random.getrandbits(128)
+            bet_text = '{"lotto_id":%s,"stakes":"%s","hashed":"%s"}' % (str(room),betListJsonStringify,str(hash))
             js = js_code.bet_number_chudjenbet(code,bet_text)
             sleep(2)
             driver.get('https://chudjenbet.com/member/affiliate')
