@@ -540,7 +540,7 @@ class yeekee_bot(object):
             bet_text = '{"lotto_id":%s,"stakes":"%s","hashed":""}' % (str(room),betListJsonStringify)
             js = js_code.bet_number_chudjenbet(code,bet_text)
             sleep(2)
-            driver.get('https://chudjenbet.com/member/report')
+            driver.get('https://chudjenbet.com/member/affiliate')
             sleep(2)
         
 
