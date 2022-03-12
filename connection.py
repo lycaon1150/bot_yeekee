@@ -658,13 +658,13 @@ if __name__ == "__main__":
 
             #### ยิงเลข ####
             class_obj.go_shoot_number(codename, time_delay,test_process,bet_type)
-            sleep(5)
+            sleep(15)
             
             #### เช็ค balance ล่าสุด ####
             balance = class_obj.get_balance(codename)
             
             print('balance  :' + str(balance) )
-            sleep(5)
+            sleep(1)
             rank = class_obj.get_result(codename,bet_type)
             print('rank :' + str(rank))
             

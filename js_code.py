@@ -156,3 +156,20 @@ def bet_number_jesadabet(code,bet_text):
                 'body': JSON.stringify(%s)
                 })""" % (str(code),str(bet_text))
     return js
+
+
+def post_bonus_jesadabet(code):
+    js = """fetch('https://thailotto.com/member/game/lucky-box', {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+            'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded', 
+                ,
+            'x-xsrf-token': '%s'
+        }
+            })""" % (str(code))
+    
+    return js
