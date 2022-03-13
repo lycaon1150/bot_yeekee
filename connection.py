@@ -328,6 +328,13 @@ class yeekee_bot(object):
                 
                 state = self.room_88()
             
+            elif bet_type == 'vip_88':
+                for item in data_room_chudjenbet['records']:
+                    if item['category_id'] == 1701:
+                        start_number = int(item['id'])
+                        break
+                    
+                state = self.room_88()
             
         room = start_number+state       
         # exceptions
@@ -380,7 +387,7 @@ class yeekee_bot(object):
                 time_to_click = state*5+361
                 set_time_start = (21600 + 1*60) * 1000000
                 time_par_round = 5*60*1000000
-            elif bet_type == 'normal':
+            elif bet_type == 'normal' or bet_type == 'vip_88' :
                 time_to_click = state*15+362
                 set_time_start = (21600 + 2*60) * 1000000
                 time_par_round = 15*60*1000000
@@ -561,6 +568,8 @@ class yeekee_bot(object):
                 link = 'speed'
             elif bet_type == 'vip_264':
                 link = 'speed_vip'
+            elif bet_type == 'vip_88':
+                link = 'yeekee_vip'
             elif bet_type == 'normal':
                 link = 'yeekee'
                 
