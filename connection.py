@@ -1,6 +1,7 @@
 import code
 from curses import reset_shell_mode
 import datetime
+from ensurepip import version
 from lib2to3.pgen2 import driver
 import multiprocessing
 import pickle
@@ -32,6 +33,7 @@ import js_code
 import paramiter as setting
 
 file_part = "/home/bitnami/project/xpsoft/bot/funtion/"
+version_yeekee = "v1.00"
 
 external_ip = requests.get('https://api.ipify.org').text
 print(external_ip)
@@ -689,7 +691,8 @@ if __name__ == "__main__":
                         'date' : day_start_bet , 
                         'bet_round' : room_number , 
                         'rank' : rank , 
-                        'balance' : balance
+                        'balance' : balance,
+                        'version' : version_yeekee
                         }
             print(data_json)
         
