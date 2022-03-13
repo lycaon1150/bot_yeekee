@@ -330,7 +330,7 @@ class yeekee_bot(object):
             
             elif bet_type == 'vip_88':
                 for item in data_room_chudjenbet['records']:
-                    if item['category_id'] == 1701:
+                    if item['category_id'] == 201:
                         start_number = int(item['id'])
                         break
                     
