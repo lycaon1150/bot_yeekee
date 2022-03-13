@@ -527,13 +527,19 @@ class yeekee_bot(object):
             if this_host == 'jetsada' or this_host == 'thailotto':
                 betListJsonStringify = betListJsonStringify + str(r'{\"type\":3,\"slug\":\"bet_two_top\",\"number\":\"%s\",\"price\":2},' % (str(num)))
             elif this_host == 'chudjenbet':
+                price = 2
+
                 if bet_type == 'special':
                     rate = 90
                 elif bet_type == 'vip_264':
                     rate = 92
                 elif bet_type == 'normal':
                     rate = 90
-                betListJsonStringify = betListJsonStringify + str(r'{\"slug\":\"two_top\",\"number\":\"%s\",\"price\":\"2\",\"rate\":\"%s\"},' % (str(num),str(rate)))
+                elif bet_type == 'vip_88':
+                    rate = 90
+                    price = 10
+                    
+                betListJsonStringify = betListJsonStringify + str(r'{\"slug\":\"two_top\",\"number\":\"%s\",\"price\":\"%s\",\"rate\":\"%s\"},' % (str(num),str(price),str(rate)))
             
         count_n = len(betListJsonStringify)
         betListJsonStringify = list(betListJsonStringify)
