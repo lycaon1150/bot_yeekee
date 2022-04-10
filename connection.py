@@ -125,10 +125,20 @@ class yeekee_bot(object):
                     json_data['authorization'] = driver.execute_script("return window.localStorage['auth._token.local']")                
                 elif self.json_user[user]['host'] == 'thailotto':
                     json_data['authorization'] = driver.execute_script("return (await window.cookieStore.get('XSRF-TOKEN')).value")  
+                print('done get authorization')
             except:
-                pass
-
+                print('error with login')
+                return 0
+            
+            
             self.session_data[user] = json_data
+            
+            
+            if json_data['authorization']  == '':
+                return 0
+            else:
+                return 1 
+            
 
     def login(self, driver, host, id, pwd, url):
         print(url)
@@ -662,8 +672,13 @@ if __name__ == "__main__":
             
             class_obj = yeekee_bot(data)
             
-            class_obj.create_connection()
-
+            for item in range(3):
+                a = subprocess.call("pkill chrome", shell=True)
+                sleep(2)
+                r = class_obj.create_connection()
+                if r == 1:
+                    break
+                
             start = int(data[codename]['start'])
             end = int(data[codename]['end'])+1
             sleep(2)
