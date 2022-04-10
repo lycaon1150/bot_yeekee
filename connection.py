@@ -33,7 +33,7 @@ import js_code
 import paramiter as setting
 
 file_part = "/home/bitnami/project/xpsoft/bot/funtion/"
-version_yeekee = "v1.00"
+version_yeekee = "v1.01"
 
 external_ip = requests.get('https://api.ipify.org').text
 print(external_ip)
