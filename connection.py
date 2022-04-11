@@ -3,6 +3,7 @@ from curses import reset_shell_mode
 import datetime
 from ensurepip import version
 from lib2to3.pgen2 import driver
+from logging import exception
 import multiprocessing
 import pickle
 import random
@@ -93,12 +94,9 @@ class yeekee_bot(object):
             
             try:
                 
-                self.login(json_data['driver'], json_data['host'],json_data['ID'], json_data['Password'], json_data['url'])
+                json_data['authorization'] = self.login(json_data['driver'], json_data['host'],json_data['ID'], json_data['Password'], json_data['url'])
                 sleep(2)
-                if self.json_user[user]['host'] == 'chudjenbet':
-                    json_data['authorization'] = driver.execute_script("return window.localStorage['auth._token.local']")                
-                elif self.json_user[user]['host'] == 'thailotto':
-                    json_data['authorization'] = driver.execute_script("return (await window.cookieStore.get('XSRF-TOKEN')).value")  
+               
                 print('done get authorization')
             except:
                 print('error with login')
@@ -115,6 +113,7 @@ class yeekee_bot(object):
             
 
     def login(self, driver, host, id, pwd, url):
+        r = ''
         print(url)
         driver.get(url)
         sleep(5)
@@ -134,6 +133,9 @@ class yeekee_bot(object):
             driver.execute_script("document.getElementsByName('password')[0].value='%s';" % str(pwd))
             sleep(1)
             driver.execute_script("document.querySelectorAll('button[type=submit]')[1].click();")
+            sleep(2)
+            r = driver.execute_script("return (await window.cookieStore.get('XSRF-TOKEN')).value")
+            
             print('done login')
         elif host == 'chudjenbet':
             
@@ -146,14 +148,18 @@ class yeekee_bot(object):
                 # sleep(2)
                 # driver.execute_script("return document.querySelectorAll('button[type=submit]')[0].click();")
                 sleep(2)
-                driver.execute_script(str(js_code.login_chudjenbet(id,pwd)))
+                r = str('Bearer ') + str(driver.execute_script(js_code.login_chudjenbet(id,pwd))['data']['token'])
+                
                 sleep(4)
+                
                 print('done login')
-            except:
-                pass
+                
+            except exception as e:
+                print(e)
             
         
         driver.save_screenshot('pic_login.png')
+        return r
         
     def room_88(self):
         now = datetime.datetime.now()
@@ -294,7 +300,6 @@ class yeekee_bot(object):
                 
         elif this_host == 'chudjenbet':
             
-        
             data_room_chudjenbet = ""
             attempts = 0
             while attempts < 3:
@@ -307,7 +312,7 @@ class yeekee_bot(object):
                 except:
                     attempts = attempts + 1
                
-            
+            print(data_room_chudjenbet)
 
             if bet_type == 'special':
                 for item in data_room_chudjenbet['records']:

@@ -1,5 +1,5 @@
 def login_chudjenbet(username,password):
-    js = """fetch('https://chudjenbet.com/auth/login', {
+    js = """return await fetch('https://chudjenbet.com/auth/login', {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -9,7 +9,9 @@ def login_chudjenbet(username,password):
             // 'Content-Type': 'application/x-www-form-urlencoded', 
     },
     'body': JSON.stringify({"username":"%s","password":"%s"})
-})""" % (str(username),str(password))
+    }).then(response => { return response.json() } ); """ % (str(username),str(password))
+
+    return js
 
 
 
