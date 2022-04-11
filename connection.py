@@ -288,7 +288,20 @@ class yeekee_bot(object):
                 state = self.room_88()
                 
         elif this_host == 'chudjenbet':
-            data_room_chudjenbet = driver.execute_script(js_code.get_room_chudjenbet(code))
+            
+        
+            data_room_chudjenbet = ""
+            attempts = 0
+            while attempts < 3:
+                try:
+                    sleep(3)
+                    data_room_chudjenbet = driver.execute_script(js_code.get_room_chudjenbet(code))
+                
+                    break
+                except:
+                    attempts = attempts + 1
+               
+            
 
             if bet_type == 'special':
                 for item in data_room_chudjenbet['records']:
@@ -327,7 +340,7 @@ class yeekee_bot(object):
                 if room > 203:
                     room = room + 5
 
-        print('done get room %s   state  %s') % (room , state)
+        print('done get room %s   state  %s' % (room , state))
         return room , state
     
     
