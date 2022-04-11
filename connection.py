@@ -33,7 +33,7 @@ import js_code
 import paramiter as setting
 
 file_part = "/home/bitnami/project/xpsoft/bot/funtion/"
-version_yeekee = "v1.01"
+version_yeekee = "v1.02"
 
 external_ip = requests.get('https://api.ipify.org').text
 print(external_ip)
@@ -63,22 +63,7 @@ class yeekee_bot(object):
         for user in self.json_user.keys():
             
             
-            # if self.json_user[user]['host'] == "jetsada" or self.json_user[user]['host'] == "thailotto":
-            #     options = Options()
-            #     # options.add_argument('--proxy-server=203.150.128.60:8080')
-            #     options.add_argument('--headless')
-            #     # Last I checked this was necessary.
-            #     options.add_argument('--disable-gpu')
-            #     options.add_argument('window-size=1920x1080')
-            #     # options.add_argument('sec-ch-ua-platform=Windows')
-            #     # options_seleniumWire = {
-            #     #     'proxy': {
-            #     #         # 'https': 'https://Selnyolycaon:B2p3GpX@154.16.11.95:45785'
-            #     #         # 'http : http://203.150.128.60:8080'
-            #     #     }
-            #     # }
-        
-            # elif self.json_user[user]['host'] == 'chudjenbet':
+ 
             options = uc.ChromeOptions()
             options.add_argument("--headless")
             options.add_argument('window-size=1920x1080')
@@ -92,18 +77,7 @@ class yeekee_bot(object):
             # options.add_argument("--disable-dev-shm-usage")
             options.add_argument("--disable-infobars")
             options.add_argument("--disable-gpu")
-            # set chorme user cookie
-            # options.add_argument(
-            #     "user-data-dir=%s%s" % (file_part , user))
 
-            # if self.json_user[user]['host'] == "jetsada" or self.json_user[user]['host'] == "thailotto":
-            #     driver = webdriver.Chrome(
-            #         ChromeDriverManager().install(), chrome_options=options ,
-            #         # seleniumwire_options=options_seleniumWire
-            #         )
-                
-            # elif self.json_user[user]['host'] == 'chudjenbet':
-                
             driver = uc.Chrome(version_main=93, options=options)    
             
             
@@ -113,7 +87,7 @@ class yeekee_bot(object):
             
             driver.get('https://api.ipify.org')
             sleep(1)
-            driver.save_screenshot('ip.png')
+            driver.save_screenshot('pic_ip.png')
             json_data['driver'] = driver
             json_data['authorization']  = ''
             
@@ -168,16 +142,16 @@ class yeekee_bot(object):
                 sleep(2)
                 driver.find_element_by_xpath('//input[@placeholder="Username"]').send_keys(str(id))
                 driver.find_element_by_xpath('//input[@placeholder="Password"]').send_keys(str(pwd))
-                # print(driver.execute_script("return document.getElementsByClassName('app__form-control bg-white')[0].value='%s';" % str(id)))
-                # print(driver.execute_script("return document.getElementsByClassName('app__form-control bg-white')[1].value='%s';" % str(pwd)))
+                
                 sleep(2)
                 driver.execute_script("return document.querySelectorAll('button[type=submit]')[0].click();")
-                sleep(2)
+                sleep(4)
+                print('done login')
             except:
                 pass
-            print('done login')
+            
         
-        driver.save_screenshot('login.png')
+        driver.save_screenshot('pic_login.png')
         
     def room_88(self):
         now = datetime.datetime.now()
@@ -287,7 +261,7 @@ class yeekee_bot(object):
         return 0
         
     def get_room(self,user):
-        
+        print('get_room')
         this_host = self.session_data[user]['host']
         driver = self.session_data[user]['driver']
         code = self.session_data[user]['authorization']
@@ -353,7 +327,7 @@ class yeekee_bot(object):
                 if room > 203:
                     room = room + 5
 
-        
+        print('done get room %s   state  %s') % (room , state)
         return room , state
     
     
@@ -447,7 +421,7 @@ class yeekee_bot(object):
         driver = self.session_data[user]['driver']
         # driver.get(_url)
         sleep(2)
-        driver.save_screenshot('shot.png')
+        driver.save_screenshot('pic_shot.png')
         self.room_url = _url
         self.room_number = room
         self.state = state
@@ -489,7 +463,7 @@ class yeekee_bot(object):
                     sleep(delay)
                     driver.refresh()
                     sleep(1.5)
-                    driver.save_screenshot('1150.png')
+                    # driver.save_screenshot('1150.png')
                           
                     sleep(0.5)
                     
@@ -514,7 +488,7 @@ class yeekee_bot(object):
 
 
     def select_number(self,user,list_number,bet_type):
-        
+        print('select_number_process')
         driver = self.session_data[user]['driver']
         this_host = self.session_data[user]['host']
         code = self.session_data[user]['authorization']
