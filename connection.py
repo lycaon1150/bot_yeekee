@@ -268,6 +268,9 @@ class yeekee_bot(object):
         driver = self.session_data[user]['driver']
         code = self.session_data[user]['authorization']
         bet_type = self.session_data[user]['bet_type']
+        
+        start_number = 0
+        
         if this_host == 'jetsada':
             state = self.room_88()
             if bet_type == 'special':
@@ -296,6 +299,7 @@ class yeekee_bot(object):
             attempts = 0
             while attempts < 3:
                 try:
+                    print('get_room_by_js : ',attempts)
                     sleep(3)
                     data_room_chudjenbet = driver.execute_script(js_code.get_room_chudjenbet(code))
                 
