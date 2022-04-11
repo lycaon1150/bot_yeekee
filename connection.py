@@ -340,7 +340,7 @@ class yeekee_bot(object):
                 if room > 203:
                     room = room + 5
 
-        print('done get room %s   state  %s' % (room , state))
+        print('done get room :',room,'state',state)
         return room , state
     
     
