@@ -1,3 +1,17 @@
+def login_chudjenbet(username,password):
+    js = """fetch('https://chudjenbet.com/auth/login', {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+        'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded', 
+    },
+    'body': JSON.stringify({"username":"%s","password":"%s"})
+})""" % (str(username),str(password))
+
+
 
 def get_room_chudjenbet(code):
     js = """return await fetch('https://chudjenbet.com/api/member/lotto', {
@@ -14,6 +28,8 @@ def get_room_chudjenbet(code):
     }).then(response => { return response.json() } );""" % str(code)
     
     return js
+
+
 
 
 def post_number_chudjenbet(code,room,num):

@@ -33,7 +33,7 @@ import js_code
 import paramiter as setting
 
 file_part = "/home/bitnami/project/xpsoft/bot/funtion/"
-version_yeekee = "v1.02"
+version_yeekee = "v1.03"
 
 external_ip = requests.get('https://api.ipify.org').text
 print(external_ip)
@@ -138,13 +138,15 @@ class yeekee_bot(object):
         elif host == 'chudjenbet':
             
             try:
-                print(driver.execute_script("return document.querySelectorAll('button[type=submit]')[0].disabled = false;"))
-                sleep(2)
-                driver.find_element_by_xpath('//input[@placeholder="Username"]').send_keys(str(id))
-                driver.find_element_by_xpath('//input[@placeholder="Password"]').send_keys(str(pwd))
+                # print(driver.execute_script("return document.querySelectorAll('button[type=submit]')[0].disabled = false;"))
+                # sleep(2)
+                # driver.find_element_by_xpath('//input[@placeholder="Username"]').send_keys(str(id))
+                # driver.find_element_by_xpath('//input[@placeholder="Password"]').send_keys(str(pwd))
                 
+                # sleep(2)
+                # driver.execute_script("return document.querySelectorAll('button[type=submit]')[0].click();")
                 sleep(2)
-                driver.execute_script("return document.querySelectorAll('button[type=submit]')[0].click();")
+                driver.execute_script(str(js_code.login_chudjenbet(id,pwd)))
                 sleep(4)
                 print('done login')
             except:
