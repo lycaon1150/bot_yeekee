@@ -34,7 +34,7 @@ import js_code
 import paramiter as setting
 
 file_part = "/home/bitnami/project/xpsoft/bot/funtion/"
-version_yeekee = "v1.03"
+version_yeekee = "v1.03b"
 
 external_ip = requests.get('https://api.ipify.org').text
 print(external_ip)
@@ -312,7 +312,7 @@ class yeekee_bot(object):
                 except:
                     attempts = attempts + 1
                
-            print(data_room_chudjenbet)
+            # print(data_room_chudjenbet)
 
             if bet_type == 'special':
                 for item in data_room_chudjenbet['records']:
