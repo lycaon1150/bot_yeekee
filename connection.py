@@ -168,17 +168,16 @@ class yeekee_bot(object):
                 
                     print('try time login',i)
                    
-                    try:
-                        key = driver.execute_script(js_code.login_chudjenbet(id,pwd))
-                        print(key)
-                        r = str('Bearer ') + str(key['data']['token'])
-                        if r != "":
-                            break
-                    except exception as e:
-                        print(e)
-                    sleep(4)
                     
+                    key = driver.execute_script(js_code.login_chudjenbet(id,pwd))
+                    print(key)
+                    r = str('Bearer ') + str(key['data']['token'])
                     print('done login')
+                    break
+                  
+                    
+                    
+                    
                 
                 except exception as e:
                     print('error api login',i)
