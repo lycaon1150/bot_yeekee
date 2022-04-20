@@ -118,9 +118,8 @@ class yeekee_bot(object):
         r = ''
         print(url)
         driver.get(url)
-        sleep(5)
-        driver.refresh()
-        sleep(5)
+        sleep(3)
+        
         print(driver.execute_script('return navigator.webdriver'))
         if host in [ 'jetsada' , 'huay' , 'thailotto' , 'ruay' ]:
             
@@ -182,9 +181,8 @@ class yeekee_bot(object):
                 except exception as e:
                     print('error api login',i)
                     driver.get(url)
-                    sleep(5)
-                    driver.refresh()
-                    sleep(5)
+                    sleep(3)
+                    
                     print('retry login')
                     print(e)
                 
