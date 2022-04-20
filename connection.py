@@ -34,7 +34,7 @@ import js_code
 import paramiter as setting
 
 file_part = "/home/bitnami/project/xpsoft/bot/funtion/"
-version_yeekee = "v1.04b"
+version_yeekee = "v1.04c"
 print(version_yeekee)
 external_ip = requests.get('https://api.ipify.org').text
 print(external_ip)
@@ -178,8 +178,8 @@ class yeekee_bot(object):
                     
                     
                 
-                except exception as e:
-                    print('error api login',i)
+                except Exception as e:
+                    print('error api login')
                     driver.get(url)
                     sleep(3)
                     
