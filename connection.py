@@ -34,7 +34,7 @@ import js_code
 import paramiter as setting
 
 file_part = "/home/bitnami/project/xpsoft/bot/funtion/"
-version_yeekee = "v1.03c"
+version_yeekee = "v1.03f"
 
 external_ip = requests.get('https://api.ipify.org').text
 print(external_ip)
@@ -165,8 +165,17 @@ class yeekee_bot(object):
                 # sleep(2)
                 # driver.execute_script("return document.querySelectorAll('button[type=submit]')[0].click();")
                 sleep(2)
-                r = str('Bearer ') + str(driver.execute_script(js_code.login_chudjenbet(id,pwd))['data']['token'])
-                
+                r = ""
+                for i in range(5):
+                    sleep(10)
+                    try:
+                        key = driver.execute_script(js_code.login_chudjenbet(id,pwd))
+                        print(key)
+                        r = str('Bearer ') + str(key['data']['token'])
+                        if r != "":
+                            break
+                    except exception as e:
+                        print(e)
                 sleep(4)
                 
                 print('done login')
