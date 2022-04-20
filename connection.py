@@ -98,9 +98,7 @@ class yeekee_bot(object):
                 sleep(2)
                 json_data['authorization'] = self.login(json_data['driver'], json_data['host'],json_data['ID'], json_data['Password'], json_data['url'])
                 sleep(2)
-                if json_data['authorization']  != '':
-                    print('done get authorization')
-                    break
+                
                 
             except:
                 print('error with login')
@@ -704,12 +702,11 @@ if __name__ == "__main__":
             
             class_obj = yeekee_bot(data)
             
-            for item in range(3):
-                a = subprocess.call("pkill chrome", shell=True)
-                sleep(2)
-                r = class_obj.create_connection()
-                if r == 1:
-                    break
+            
+            a = subprocess.call("pkill chrome", shell=True)
+            sleep(2)
+            r = class_obj.create_connection()
+                
                 
             start = int(data[codename]['start'])
             end = int(data[codename]['end'])+1
