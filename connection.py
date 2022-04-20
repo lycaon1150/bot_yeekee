@@ -34,7 +34,7 @@ import js_code
 import paramiter as setting
 
 file_part = "/home/bitnami/project/xpsoft/bot/funtion/"
-version_yeekee = "v1.04c"
+version_yeekee = "v1.04d"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -171,13 +171,18 @@ class yeekee_bot(object):
                     driver.execute_script("document.querySelectorAll('button[type=submit]')[0].click();")
                     sleep(4)
                     r = driver.execute_script("return window.localStorage['auth._token.local']")
+                    
                     print('key == ',r)
                     # key = driver.execute_script(js_code.login_chudjenbet(id,pwd))
                     # print(key)
                     # r = str('Bearer ') + str(key['data']['token'])
                     
                     print('done login')
-                    break
+                    if r == 'false':
+                        driver.get(url)
+                        sleep(3)
+                    else:
+                        break
                   
                     
                     
