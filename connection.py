@@ -35,6 +35,8 @@ import paramiter as setting
 
 file_part = "/home/bitnami/project/xpsoft/bot/funtion/"
 version_yeekee = "v1.04c"
+print(datetime.datetime.now())
+
 print(version_yeekee)
 external_ip = requests.get('https://api.ipify.org').text
 print(external_ip)
@@ -165,7 +167,7 @@ class yeekee_bot(object):
                     driver.find_element_by_xpath('//input[@placeholder="Username"]').send_keys(str(id))
                     driver.find_element_by_xpath('//input[@placeholder="Password"]').send_keys(str(pwd))
                     
-                    sleep(1)
+                    sleep(3)
                     driver.execute_script("document.querySelectorAll('button[type=submit]')[0].click();")
                     sleep(4)
                     r = driver.execute_script("return window.localStorage['auth._token.local']")
