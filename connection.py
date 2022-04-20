@@ -34,7 +34,7 @@ import js_code
 import paramiter as setting
 
 file_part = "/home/bitnami/project/xpsoft/bot/funtion/"
-version_yeekee = "v1.03b"
+version_yeekee = "v1.03c"
 
 external_ip = requests.get('https://api.ipify.org').text
 print(external_ip)
@@ -92,15 +92,19 @@ class yeekee_bot(object):
             json_data['driver'] = driver
             json_data['authorization']  = ''
             
-            try:
-                
-                json_data['authorization'] = self.login(json_data['driver'], json_data['host'],json_data['ID'], json_data['Password'], json_data['url'])
-                sleep(2)
-               
-                print('done get authorization')
-            except:
-                print('error with login')
-                return 0
+            for try_i in range(3):
+                try:
+                    
+                    sleep(3)
+                    json_data['authorization'] = self.login(json_data['driver'], json_data['host'],json_data['ID'], json_data['Password'], json_data['url'])
+                    sleep(3)
+                    if json_data['authorization']  != '':
+                        print('done get authorization')
+                        break
+                    
+                except:
+                    print('error with login')
+                    return 0
             
             
             self.session_data[user] = json_data
@@ -116,9 +120,11 @@ class yeekee_bot(object):
         r = ''
         print(url)
         driver.get(url)
-        sleep(5)
+        sleep(2)
+        driver.refresh()
+        sleep(2)
         print(driver.execute_script('return navigator.webdriver'))
-        if host == 'jetsada' or host == 'huay' or host == 'thailotto':
+        if host in [ 'jetsada' , 'huay' , 'thailotto' , 'ruay' ]:
             
             if host == 'jetsada':
                 driver.execute_script("document.getElementsByClassName('btn btn-bar btn-border btn-login-modal')[0].click();")
@@ -132,11 +138,22 @@ class yeekee_bot(object):
             driver.execute_script("document.getElementsByName('username')[0].value='%s';" % str(id))
             driver.execute_script("document.getElementsByName('password')[0].value='%s';" % str(pwd))
             sleep(1)
-            driver.execute_script("document.querySelectorAll('button[type=submit]')[1].click();")
-            sleep(2)
-            r = driver.execute_script("return (await window.cookieStore.get('XSRF-TOKEN')).value")
             
+            if host in [ 'jetsada' , 'huay' , 'thailotto' ] :
+            
+                driver.execute_script("document.querySelectorAll('button[type=submit]')[1].click();")
+                sleep(2)
+                r = driver.execute_script("return (await window.cookieStore.get('XSRF-TOKEN')).value")
+            
+            elif host in ['ruay'] :
+                
+                driver.execute_script("document.querySelectorAll('button[type=submit]')[0].click();")
+                sleep(2)
+                # driver.save_screenshot('pic_login.png')
+                r = driver.execute_script("""a = document.cookie.split(';');c = '' ; for (let i = 0; i < a.length; i++) { b = a[i].split('=');if(b[0] == ' csrf_cookie'){c = b[1] }} return c; """)
+                print(r)
             print('done login')
+            
         elif host == 'chudjenbet':
             
             try:
@@ -666,7 +683,7 @@ if __name__ == "__main__":
             test_process = False
             
 
-        if data[codename]['host'] == 'jetsada' or data[codename]['host'] == 'thailotto' or data[codename]['host'] == 'chudjenbet' : 
+        if data[codename]['host'] in ['jetsada' , 'thailotto' , 'chudjenbet', 'ruay'] : 
             
             class_obj = yeekee_bot(data)
             
