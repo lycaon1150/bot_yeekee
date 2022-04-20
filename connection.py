@@ -155,22 +155,25 @@ class yeekee_bot(object):
             
             for i in range(5):
                 try:
-                    # print(driver.execute_script("return document.querySelectorAll('button[type=submit]')[0].disabled = false;"))
-                    # sleep(2)
-                    # driver.find_element_by_xpath('//input[@placeholder="Username"]').send_keys(str(id))
-                    # driver.find_element_by_xpath('//input[@placeholder="Password"]').send_keys(str(pwd))
-                    
-                    # sleep(2)
-                    # driver.execute_script("return document.querySelectorAll('button[type=submit]')[0].click();")
                     sleep(2)
                     r = ""
                 
                     print('try time login',i)
-                   
                     
-                    key = driver.execute_script(js_code.login_chudjenbet(id,pwd))
-                    print(key)
-                    r = str('Bearer ') + str(key['data']['token'])
+                    print(driver.execute_script("return document.querySelectorAll('button[type=submit]')[0].disabled = false;"))
+                    sleep(1)
+                    driver.find_element_by_xpath('//input[@placeholder="Username"]').send_keys(str(id))
+                    driver.find_element_by_xpath('//input[@placeholder="Password"]').send_keys(str(pwd))
+                    
+                    sleep(1)
+                    driver.execute_script("return document.querySelectorAll('button[type=submit]')[0].click();")
+                    sleep(4)
+                    r = driver.execute_script("return await window.localStorage['auth._token.local']")
+                    
+                    # key = driver.execute_script(js_code.login_chudjenbet(id,pwd))
+                    # print(key)
+                    # r = str('Bearer ') + str(key['data']['token'])
+                    
                     print('done login')
                     break
                   
