@@ -166,9 +166,9 @@ class yeekee_bot(object):
                     driver.find_element_by_xpath('//input[@placeholder="Password"]').send_keys(str(pwd))
                     
                     sleep(1)
-                    driver.execute_script("return document.querySelectorAll('button[type=submit]')[0].click();")
+                    driver.execute_script("document.querySelectorAll('button[type=submit]')[0].click();")
                     sleep(4)
-                    r = driver.execute_script("return await window.localStorage['auth._token.local']")
+                    r = driver.execute_script("return window.localStorage['auth._token.local']")
                     print('key == ',r)
                     # key = driver.execute_script(js_code.login_chudjenbet(id,pwd))
                     # print(key)
