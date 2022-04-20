@@ -92,20 +92,20 @@ class yeekee_bot(object):
             json_data['driver'] = driver
             json_data['authorization']  = ''
             
-            for try_i in range(10):
-                try:
-                    
-                    sleep(5)
-                    json_data['authorization'] = self.login(json_data['driver'], json_data['host'],json_data['ID'], json_data['Password'], json_data['url'])
-                    sleep(5)
-                    if json_data['authorization']  != '':
-                        print('done get authorization')
-                        break
-                    
-                except:
-                    print('error with login')
-                    return 0
             
+            try:
+                
+                sleep(2)
+                json_data['authorization'] = self.login(json_data['driver'], json_data['host'],json_data['ID'], json_data['Password'], json_data['url'])
+                sleep(2)
+                if json_data['authorization']  != '':
+                    print('done get authorization')
+                    break
+                
+            except:
+                print('error with login')
+                return 0
+        
             
             self.session_data[user] = json_data
             
@@ -120,9 +120,9 @@ class yeekee_bot(object):
         r = ''
         print(url)
         driver.get(url)
-        sleep(2)
+        sleep(5)
         driver.refresh()
-        sleep(2)
+        sleep(5)
         print(driver.execute_script('return navigator.webdriver'))
         if host in [ 'jetsada' , 'huay' , 'thailotto' , 'ruay' ]:
             
@@ -156,18 +156,20 @@ class yeekee_bot(object):
             
         elif host == 'chudjenbet':
             
-            try:
-                # print(driver.execute_script("return document.querySelectorAll('button[type=submit]')[0].disabled = false;"))
-                # sleep(2)
-                # driver.find_element_by_xpath('//input[@placeholder="Username"]').send_keys(str(id))
-                # driver.find_element_by_xpath('//input[@placeholder="Password"]').send_keys(str(pwd))
+            for i in range(5):
+                try:
+                    # print(driver.execute_script("return document.querySelectorAll('button[type=submit]')[0].disabled = false;"))
+                    # sleep(2)
+                    # driver.find_element_by_xpath('//input[@placeholder="Username"]').send_keys(str(id))
+                    # driver.find_element_by_xpath('//input[@placeholder="Password"]').send_keys(str(pwd))
+                    
+                    # sleep(2)
+                    # driver.execute_script("return document.querySelectorAll('button[type=submit]')[0].click();")
+                    sleep(2)
+                    r = ""
                 
-                # sleep(2)
-                # driver.execute_script("return document.querySelectorAll('button[type=submit]')[0].click();")
-                sleep(2)
-                r = ""
-                for i in range(5):
-                    sleep(10)
+                    print('try time login',i)
+                   
                     try:
                         key = driver.execute_script(js_code.login_chudjenbet(id,pwd))
                         print(key)
@@ -176,13 +178,19 @@ class yeekee_bot(object):
                             break
                     except exception as e:
                         print(e)
-                sleep(4)
+                    sleep(4)
+                    
+                    print('done login')
                 
-                print('done login')
+                except exception as e:
+                    print('error api login',i)
+                    driver.get(url)
+                    sleep(5)
+                    driver.refresh()
+                    sleep(5)
+                    print('retry login')
+                    print(e)
                 
-            except exception as e:
-                print(e)
-            
         
         driver.save_screenshot('pic_login.png')
         return r
