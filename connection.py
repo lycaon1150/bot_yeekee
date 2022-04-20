@@ -189,7 +189,7 @@ class yeekee_bot(object):
                     print('retry login')
                     print(e)
                 
-        
+        sleep(3)
         driver.save_screenshot('pic_login.png')
         return r
         
