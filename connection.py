@@ -34,7 +34,7 @@ import js_code
 import paramiter as setting
 
 file_part = "/home/bitnami/project/xpsoft/bot/funtion/"
-version_yeekee = "v1.03f"
+version_yeekee = "v1.03g"
 
 external_ip = requests.get('https://api.ipify.org').text
 print(external_ip)
@@ -92,12 +92,12 @@ class yeekee_bot(object):
             json_data['driver'] = driver
             json_data['authorization']  = ''
             
-            for try_i in range(3):
+            for try_i in range(10):
                 try:
                     
-                    sleep(3)
+                    sleep(5)
                     json_data['authorization'] = self.login(json_data['driver'], json_data['host'],json_data['ID'], json_data['Password'], json_data['url'])
-                    sleep(3)
+                    sleep(5)
                     if json_data['authorization']  != '':
                         print('done get authorization')
                         break
