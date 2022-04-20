@@ -169,7 +169,7 @@ class yeekee_bot(object):
                     driver.execute_script("return document.querySelectorAll('button[type=submit]')[0].click();")
                     sleep(4)
                     r = driver.execute_script("return await window.localStorage['auth._token.local']")
-                    
+                    print('key == ',r)
                     # key = driver.execute_script(js_code.login_chudjenbet(id,pwd))
                     # print(key)
                     # r = str('Bearer ') + str(key['data']['token'])
