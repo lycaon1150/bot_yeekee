@@ -32,9 +32,13 @@ import undetected_chromedriver as uc
 import js_code
 
 import paramiter as setting
+import os
 
-file_part = "/home/bitnami/project/xpsoft/bot/funtion/"
-version_yeekee = "v1.04d"
+
+
+
+file_part = os.path.dirname(os.path.realpath(__file__))
+version_yeekee = "v1.04e"
 print(datetime.datetime.now())
 
 print(version_yeekee)
