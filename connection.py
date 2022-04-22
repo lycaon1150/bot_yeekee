@@ -1,14 +1,14 @@
 import code
-from curses import reset_shell_mode
+# from curses import reset_shell_mode
 import datetime
-from ensurepip import version
+# from ensurepip import version
 from lib2to3.pgen2 import driver
-from logging import exception
-import multiprocessing
+# from logging import exception
+# import multiprocessing
 import pickle
 import random
 import re
-import sched
+# import sched
 import subprocess
 import sys
 import time
@@ -17,9 +17,9 @@ from webbrowser import get
 import requests
 import json
 
-from multiprocessing import Process , Queue
-from re import I
-from threading import Thread
+# from multiprocessing import Process , Queue
+# from re import I
+# from threading import Thread
 from time import sleep
 
 import selenium
@@ -38,7 +38,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.04e"
+version_yeekee = "v1.05"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -46,8 +46,6 @@ external_ip = requests.get('https://api.ipify.org').text
 print(external_ip)
 
 
-
-return_dict = Queue()
 
 
 class yeekee_bot(object):
@@ -57,6 +55,9 @@ class yeekee_bot(object):
         self.room_url = ""
         self.room_number = ""
         self.state = ""
+        self.use_time = 0
+        self.number_send = ""
+
         print('success created')
 
     def create_connection(self):
@@ -85,7 +86,7 @@ class yeekee_bot(object):
             options.add_argument("--disable-infobars")
             options.add_argument("--disable-gpu")
 
-            driver = uc.Chrome(version_main=93, options=options)    
+            driver = uc.Chrome(version_main=100, options=options)    
             
             
             data_id = self.json_user[user]
@@ -97,7 +98,7 @@ class yeekee_bot(object):
             driver.save_screenshot('pic_ip.png')
             json_data['driver'] = driver
             json_data['authorization']  = ''
-            
+            driver.delete_all_cookies()
             
             try:
                 
@@ -125,7 +126,7 @@ class yeekee_bot(object):
         print(url)
         driver.get(url)
         sleep(3)
-        
+        driver.save_screenshot('pic_home.png')
         print(driver.execute_script('return navigator.webdriver'))
         if host in [ 'jetsada' , 'huay' , 'thailotto' , 'ruay' ]:
             
@@ -176,15 +177,19 @@ class yeekee_bot(object):
                     sleep(4)
                     r = driver.execute_script("return window.localStorage['auth._token.local']")
                     
-                    print('key == ',r)
+                    # print('key == ',r)
                     # key = driver.execute_script(js_code.login_chudjenbet(id,pwd))
                     # print(key)
                     # r = str('Bearer ') + str(key['data']['token'])
                     
                     print('done login')
                     if r == 'false':
+                        driver.save_screenshot('pic_error_login.png')
+                        driver.delete_all_cookies()
+                        sleep(1)
                         driver.get(url)
                         sleep(3)
+                        driver.save_screenshot('pic_home.png')
                     else:
                         break
                   
@@ -292,20 +297,21 @@ class yeekee_bot(object):
             secret_name = str(''.join(secret_name))    
             print(secret_name)
             room = self.room_number
-           
+            number_send = self.number_send
             result = []
+            number = []
             for i in range(1,4):
                 _r = list(driver.execute_script(str(js_code.get_rank_chudjenbet(code,room,i)))['records'])
                 # print(_r)
             
                 for data in _r:
-                
+                    number.append(data['number'])
                     result.append(data['username'])
 
            
             for rank , username in enumerate(result):
               
-                if str(secret_name) == str(username):
+                if str(secret_name) == str(username) and str(number_send) == str(number[rank]):
                     return rank+1
         
         print('end process get_result')
@@ -399,13 +405,13 @@ class yeekee_bot(object):
     
     
     def go_shoot_number(self, user, set_delay,test_setting,bet_type):   # 225k no.16-25
-        global return_dict
         code = self.session_data[user]['authorization']
         this_host = self.session_data[user]['host']
         set_time_start = (21600 + 2*60) * 1000000
         
         server_delay = 0  # อันดับท้ายๆ เพิ่มค่า
         number_send = random.randint(10000, 99999)	
+        self.number_send = number_send 
         print('number_send',number_send)
         
         
@@ -520,7 +526,7 @@ class yeekee_bot(object):
                 
                 print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
                 use_time = (end-now).microseconds
-                return_dict.put(use_time)
+                self.use_time = use_time
                 break
             
 
@@ -751,7 +757,7 @@ if __name__ == "__main__":
                         'host' : data[codename]['host'] , 
                         'bet_type' : data[codename]['bet_type'] ,
                         'delay_use' : time_delay ,
-                        'time_use' : return_dict.get(),
+                        'time_use' : class_obj.use_time,
                         'date' : day_start_bet , 
                         'bet_round' : room_number , 
                         'rank' : rank , 
