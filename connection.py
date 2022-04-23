@@ -38,7 +38,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.05b"
+version_yeekee = "v1.05c"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -86,13 +86,16 @@ class yeekee_bot(object):
             options.add_argument("--disable-infobars")
             options.add_argument("--disable-gpu")
 
+            data_id = self.json_user[user]
+
+
             if data_id['host'] == "thailotto":
                 driver = uc.Chrome(version_main=93, options=options)  
             else:
                 driver = uc.Chrome(version_main=100, options=options)    
             
             
-            data_id = self.json_user[user]
+            
 
             json_data = data_id
             
