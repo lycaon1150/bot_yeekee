@@ -75,7 +75,8 @@ class yeekee_bot(object):
         # options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--disable-infobars")
         options.add_argument("--disable-gpu")
-
+        options.add_argument("--incognito")
+        
         if host == "thailotto":
             self.driver = uc.Chrome(version_main=93, options=options)  
         else:
