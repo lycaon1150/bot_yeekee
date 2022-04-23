@@ -567,7 +567,8 @@ class yeekee_bot(object):
 
 
     def select_number(self,user,list_number,bet_type):
-        print('select_number_process')
+        print('select_number_process',datetime.datetime.now())
+        
         driver = self.session_data[user]['driver']
         this_host = self.session_data[user]['host']
         code = self.session_data[user]['authorization']
