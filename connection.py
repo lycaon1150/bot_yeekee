@@ -38,7 +38,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.06"
+version_yeekee = "v1.07"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -61,7 +61,7 @@ class yeekee_bot(object):
 
         print('success created')
 
-    def launchBrowser(self,host):
+    def launchBrowser(self,server):
         options = uc.ChromeOptions()
         options.add_argument("--headless")
         options.add_argument('window-size=1920x1080')
@@ -77,9 +77,9 @@ class yeekee_bot(object):
         options.add_argument("--disable-gpu")
         options.add_argument("--incognito")
         
-        if host == "thailotto":
+        if server == "aws":
             self.driver = uc.Chrome(version_main=93, options=options)  
-        else:
+        elif server == "digitalocean":
             self.driver = uc.Chrome(version_main=100, options=options)  
 
         
@@ -100,7 +100,7 @@ class yeekee_bot(object):
 
             data_id = self.json_user[user]
 
-            self.launchBrowser(data_id['host'])
+            self.launchBrowser(data_id['sever'])
               
             
             
