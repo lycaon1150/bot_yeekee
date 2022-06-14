@@ -143,7 +143,9 @@ class yeekee_bot(object):
         sleep(3)
         self.driver.save_screenshot('pic_home.png')
         print(self.driver.execute_script('return navigator.webdriver'))
-        if host in [ 'jetsada' , 'huay' , 'thailotto' , 'ruay' ]:
+        
+        
+        if host in [ 'jetsada' , 'huay' , 'thailotto' , 'ruay' , 'lottovip']:
             
             if host == 'jetsada':
                 self.driver.execute_script("document.getElementsByClassName('btn btn-bar btn-border btn-login-modal')[0].click();")
@@ -164,7 +166,7 @@ class yeekee_bot(object):
                 sleep(2)
                 r = self.driver.execute_script("return (await window.cookieStore.get('XSRF-TOKEN')).value")
             
-            elif host in ['ruay'] :
+            elif host in  ['ruay','lottovip'] :
                 
                 self.driver.execute_script("document.querySelectorAll('button[type=submit]')[0].click();")
                 sleep(2)
@@ -333,6 +335,18 @@ class yeekee_bot(object):
                 if str(secret_name) == str(username) and str(number_send) == str(number[rank]):
                     return rank+1
         
+        elif this_host in  ['ruay','lottovip'] :
+
+            for i in range(1,4):
+                _url_ruay = self.room_url + "/" + str(i)
+                self.driver.get(_url_ruay)
+                sleep(2)
+                for j in range(20):
+                    if str(self.number_send) == str(self.driver.execute_script("return document.getElementsByClassName('mb-0')[%s].textContent" % i)):
+                        return (i-1)*20 + j+1
+            
+            
+            
         print('end process get_result')
         return 0
         
@@ -343,6 +357,7 @@ class yeekee_bot(object):
         bet_type = self.session_data[user]['bet_type']
         
         start_number = 0
+        state = 0 
         
         if this_host == 'jetsada':
             state = self.room_88()
@@ -411,13 +426,33 @@ class yeekee_bot(object):
                     
                 state = self.room_88()
             
+       
+            
         room = start_number+state       
         # exceptions
         if this_host == 'jetsada' or this_host == 'thailotto':
             if bet_type == 'normal':
                 if room > 203:
                     room = room + 5
-
+                    
+        if this_host in  ['ruay','lottovip'] :
+            if this_host == 'ruay':
+                if bet_type == 'normal':
+                    self.driver.get('https://www.ruay.com/member/lottery/yeekee')
+                    sleep(3)
+                    room = self.driver.execute_script('return document.getElementsByClassName("countdown")[0].id')
+                    sleep(1)
+                    state = self.room_88()
+            elif this_host == 'lottovip':
+                if bet_type == 'normal':
+                    self.driver.get('https://www.lottovip.com/member/lottery/yeekee')
+                    sleep(3)
+                    link_url = self.driver.execute_script('return document.getElementsByClassName("col-6 col-sm-6 col-md-6 col-lg-3")[1].firstElementChild.href')
+                    sleep(1)
+                    link_url_list = link_url.split('/')
+                    room = link_url_list[len(link_url_list)-1]
+                    state = self.room_88()    
+                
         print('done get room :',room,'state',state)
         return room , state
     
@@ -467,6 +502,18 @@ class yeekee_bot(object):
                 set_time_start = (21600 + 2*60) * 1000000
                 time_par_round = 15*60*1000000
             
+        elif this_host in ['ruay','lottovip']:
+            if bet_type == 'special':
+                time_to_click = state*5+361
+                set_time_start = (21600 + 1*60) * 1000000
+                time_par_round = 5*60*1000000
+            elif bet_type == 'normal':
+                time_to_click = state*15+362
+                set_time_start = (21600 + 2*60) * 1000000
+                time_par_round = 15*60*1000000    
+            
+        
+        
         if test_setting == True:
             test = time_par_round
         else:
@@ -508,7 +555,20 @@ class yeekee_bot(object):
             state_ref = 0
             _url = str('https://chudjenbet.com/member/lotto/%s' % (room))
             js_send_number = str(js_code.post_number_chudjenbet(code,room,number_send))
-            
+        
+        elif this_host in ['ruay','lottovip']:
+            state_ref = 0
+            if this_host == 'ruay':
+                _url = str('https://www.ruay.com/member/lottery/yeekee/%s' % (room))
+                
+                js_send_number = str(js_code.post_number_chudjenbet(room,number_send,"https://www.ruay.com/Api/y_number"))
+            elif this_host == 'lottovip':
+                _url = str('https://www.lottovip.com/member/lottery/yeekee/%s' % (room))
+                
+                js_send_number = str(js_code.post_number_chudjenbet(room,number_send,"https://www.lottovip.com/Api/y_number"))
+                
+        
+        
         # self.driver.get(_url)
         sleep(2)
         self.driver.save_screenshot('pic_shot.png')
@@ -731,7 +791,7 @@ if __name__ == "__main__":
             test_process = False
             
 
-        if data[codename]['host'] in ['jetsada' , 'thailotto' , 'chudjenbet', 'ruay'] : 
+        if data[codename]['host'] in ['jetsada' , 'thailotto' , 'chudjenbet', 'ruay' , 'lottovip' ] : 
             
             class_obj = yeekee_bot(data)
             

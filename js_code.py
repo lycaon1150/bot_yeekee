@@ -191,3 +191,24 @@ def post_bonus_jesadabet(code):
             })""" % (str(code))
     
     return js
+
+def post_number_ruay(room,number,url):
+    js = """var data = "ynum%5Bid%5D=""" + str(room) + """&ynum%5Bying%5D=""" + str(number) + """";
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+                console.log(this.responseText);
+            }
+            });
+
+            
+            xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+            xhr.setRequestHeader("cache-control", "no-cache");
+            """ + """xhr.open("POST", "%s");""" % (url) + """
+            xhr.send(data);
+            """
+            
+    return js
