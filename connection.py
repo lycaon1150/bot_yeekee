@@ -336,13 +336,14 @@ class yeekee_bot(object):
                     return rank+1
         
         elif this_host in  ['ruay','lottovip'] :
-
+            print('wait 120 sec for get Rank')
+            sleep(120)
             for i in range(1,4):
                 _url_ruay = self.room_url + "/" + str(i)
                 self.driver.get(_url_ruay)
                 sleep(2)
                 for j in range(20):
-                    if str(self.number_send) == str(self.driver.execute_script("return document.getElementsByClassName('mb-0')[%s].textContent" % i)):
+                    if str(self.number_send) == str(self.driver.execute_script("return document.getElementsByClassName('mb-0')[%s].textContent" % str(j))):
                         return (i-1)*20 + j+1
             
             
@@ -559,16 +560,17 @@ class yeekee_bot(object):
         elif this_host in ['ruay','lottovip']:
             state_ref = 0
             if this_host == 'ruay':
+                server_delay = 0
                 _url = str('https://www.ruay.com/member/lottery/yeekee/%s' % (room))
                 
-                js_send_number = str(js_code.post_number_chudjenbet(room,number_send,"https://www.ruay.com/Api/y_number"))
+                js_send_number = str(js_code.post_number_ruay(room,number_send,"https://www.ruay.com/Api/y_number"))
             elif this_host == 'lottovip':
                 _url = str('https://www.lottovip.com/member/lottery/yeekee/%s' % (room))
                 
-                js_send_number = str(js_code.post_number_chudjenbet(room,number_send,"https://www.lottovip.com/Api/y_number"))
+                js_send_number = str(js_code.post_number_ruay(room,number_send,"https://www.lottovip.com/Api/y_number"))
                 
         
-        
+        # print(js_send_number)
         # self.driver.get(_url)
         sleep(2)
         self.driver.save_screenshot('pic_shot.png')
@@ -582,7 +584,7 @@ class yeekee_bot(object):
         
         
         use_time = 0
-        rand_time = (25 + random.randint(0, 4))
+        rand_time = (27 + random.randint(0, 4))
 
         delay = (1000000-set_delay)/1000000
         while(1):
@@ -620,7 +622,7 @@ class yeekee_bot(object):
                     ######### ยิงเลขครั้งแรก ##############
                     
                     self.driver.execute_script(js_send_number) 
-           
+                    print('done ckick 1st')
                     sleep(15.5)
                 
                    
@@ -739,6 +741,15 @@ class yeekee_bot(object):
         elif this_host == 'chudjenbet':
             balance = self.driver.execute_script(str(js_code.get_balance_chudjenbet(code)))['data']['real_credit']
         
+        elif this_host == 'lottovip':
+            self.driver.get('https://www.lottovip.com/member/credit_balance')
+            
+            balance = self.driver.execute_script("return document.body.innerText")
+            
+        elif this_host == 'ruay':
+            self.driver.get('https://www.ruay.com/member/credit_balance')
+            
+            balance = self.driver.execute_script("return document.body.innerText")
         
         return balance
 

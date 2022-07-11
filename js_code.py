@@ -204,10 +204,11 @@ def post_number_ruay(room,number,url):
             }
             });
 
+          
             
+            """ + """xhr.open("POST", "%s",true);""" % (url) + """
             xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
             xhr.setRequestHeader("cache-control", "no-cache");
-            """ + """xhr.open("POST", "%s");""" % (url) + """
             xhr.send(data);
             """
             
