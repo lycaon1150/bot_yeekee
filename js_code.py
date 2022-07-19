@@ -31,6 +31,21 @@ def get_room_chudjenbet(code):
     
     return js
 
+def get_room_ltobet(tpye,code):
+    js = """return await fetch('https://www.ltobet.com/api/member/lotto?type=%s', { 
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+            'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded', 
+                ,
+            'authorization': '%s'
+        }
+    }).then(response => { return response.json() } );""" % (str(tpye),str(code))
+    
+    return js
 
 
 
@@ -54,6 +69,32 @@ def post_number_chudjenbet(code,room,num):
     return js
 
 
+def post_number_ltobet(code,room,num,bet_type):
+    
+    if bet_type == 'zodiac':
+        url_api = 'https://www.ltobet.com/api/member/lotto/shoot/zodiac_number/%s' % room
+    else:
+        url_api = 'https://www.ltobet.com/api/member/lotto/shoot/number/%s' % room
+        
+    js = """fetch('%s', {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+        'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded', 
+            ,
+        'authorization': '%s'
+    },
+    'body': JSON.stringify({
+        "number": "%s"
+    })
+})""" % (str(url_api),str(code),str(num))
+
+    return js
+
+
 def bet_number_chudjenbet(code,link,bet_text):
     js = """fetch('https://chudjenbet.com/api/game/lotto/%s', {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -71,9 +112,47 @@ def bet_number_chudjenbet(code,link,bet_text):
    
     return js
 
+def bet_number_ltobet(code,link,bet_text):
+    
+    if link == 'zodiac':
+        url_api = 'https://www.ltobet.com/api/game/lotto_zodiac/zodiac'
+    else:
+        url_api = 'https://www.ltobet.com/api/game/lotto/%s' % link
+    
+    js = """fetch('%s', {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+        'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded', 
+            ,
+        'authorization': '%s'
+    },
+    'body': JSON.stringify(%s)
+})""" % (str(url_api),str(code),str(bet_text))
+   
+    return js
 
 def get_balance_chudjenbet(code):
     js = """return await fetch('https://chudjenbet.com/auth/me', {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+            'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded', 
+                ,
+            'authorization': '%s'
+        }
+    }).then(response => { return response.json() } );""" % str(code)
+    
+    return js
+
+def get_balance_ltobet(code):
+    js = """return await fetch('https://www.ltobet.com/auth/me', {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -137,7 +216,27 @@ def get_rank_chudjenbet(code,room,page):
     
     return js
 
-
+def get_rank_ltobet(code,room,page,bet_type):
+    
+    if bet_type == 'zodiac':
+        url_room = 'https://www.ltobet.com/api/member/lotto/shoot/zodiac_number/%s?page=%s' % (str(room),str(page))
+    else:
+        url_room = 'https://www.ltobet.com/api/member/lotto/shoot/number/%s?page=%s' % (str(room),str(page))
+    
+    js = """return await fetch('%s', {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+            'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded', 
+                ,
+            'authorization': '%s'
+        }
+    }).then(response => { return response.json() } );""" % (url_room,str(code))
+    
+    return js
 
 def post_number_jesadabet(code,room,num):
     js = """fetch('https://thailotto.com/member/lottery/yeekee', {

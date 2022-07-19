@@ -174,7 +174,25 @@ class yeekee_bot(object):
                 r = self.driver.execute_script("""a = document.cookie.split(';');c = '' ; for (let i = 0; i < a.length; i++) { b = a[i].split('=');if(b[0] == ' csrf_cookie'){c = b[1] }} return c; """)
                 print(r)
             print('done login')
+        
+        elif host == 'ltobet':
             
+            sleep(2)
+            # self.driver.execute_script("document.getElementsByClassName('form-control rounded-4 form-control-lg')[0].value = '%s';" % str(id))
+            # self.driver.execute_script("document.getElementsByClassName('form-control rounded-4 form-control-lg')[1].value = '%s';" % str(pwd))
+            sleep(1)
+            self.driver.find_element_by_xpath('//input[@type="text"]').send_keys(str(id))
+            self.driver.find_element_by_xpath('//input[@type="password"]').send_keys(str(pwd))
+            
+            sleep(1)
+            self.driver.execute_script("document.getElementsByClassName('btn btn-lg btn-primary w-100 mb-4 rounded-4 text-bold text-lg')[0].click()")
+            
+            sleep(5)
+            r = self.driver.execute_script("return window.localStorage['auth._token.local']")
+            
+            
+            
+        
         elif host == 'chudjenbet':
             
             for i in range(3):
@@ -291,7 +309,50 @@ class yeekee_bot(object):
                 
                 if find_name == name or find_name == secret_name:
                     return i+1
+        
+        elif this_host == 'ltobet':
+            z = len(name)
+            n = 0
+            
+            secret_name = "xxxxxxx"
+            secret_name = list(secret_name)
+            for c in name:
+                if n == 0:
+                    secret_name[0] = str(c)
+                    
+                elif n == 1:
+                    secret_name[1] = str(c)
+                    
+                elif n == z-1:  
+                    secret_name[6] = str(c)
+                    
+                elif n == z-2:
+                    secret_name[5] = str(c) 
                 
+                n = n + 1
+                
+                
+            secret_name = str(''.join(secret_name))    
+            print(secret_name)
+            room = self.room_number
+            number_send = self.number_send
+            result = []
+            number = []
+            for i in range(1,4):
+                _r = list(self.driver.execute_script(str(js_code.get_rank_ltobet(code,room,i,bet_type)))['records'])
+                # print(_r)
+                sleep(5)
+                for data in _r:
+                    number.append(data['number'])
+                    result.append(data['username'])
+
+           
+            for rank , username in enumerate(result):
+              
+                if str(secret_name) == str(username) and str(number_send) == str(number[rank]):
+                    return rank+1
+            
+            
                 
         elif this_host == 'chudjenbet':
             z = len(name)
@@ -426,10 +487,55 @@ class yeekee_bot(object):
                         break
                     
                 state = self.room_88()
+                
+            room = start_number+state 
             
-       
+        elif this_host == 'ltobet':
             
-        room = start_number+state       
+            data_room_chudjenbet = ""
+            attempts = 0
+            # while attempts < 3:
+            #     try:
+            #         print('get_room_by_js : ',attempts)
+            #         sleep(3)
+            #         data_room_chudjenbet = self.driver.execute_script(js_code.get_room_ltobet(code))
+                
+            #         break
+            #     except:
+            #         attempts = attempts + 1
+               
+            # print(data_room_chudjenbet)
+            
+        
+            if bet_type == 'special':
+                data_room_chudjenbet = self.driver.execute_script(js_code.get_room_ltobet('speed',code))
+                state = self.room_264()
+                room = data_room_chudjenbet['records'][state]['id']
+                    
+              
+            elif bet_type == 'vip_264':
+                data_room_chudjenbet = self.driver.execute_script(js_code.get_room_ltobet('speed_vip',code))
+                state = self.room_264()
+                room = data_room_chudjenbet['records'][state]['id']
+                
+            elif bet_type == 'normal':
+                data_room_chudjenbet = self.driver.execute_script(js_code.get_room_ltobet('yeekee',code))
+                state = self.room_88()
+                room = data_room_chudjenbet['records'][state]['id']
+                
+          
+            elif bet_type == 'vip_88':
+                data_room_chudjenbet = self.driver.execute_script(js_code.get_room_ltobet('yeekee_vip',code))
+                state = self.room_88()
+                room = data_room_chudjenbet['records'][state]['id']
+                
+            elif bet_type == 'zodiac':
+                data_room_chudjenbet = self.driver.execute_script(js_code.get_room_ltobet('zodiac',code))
+                state = self.room_88()
+                room = data_room_chudjenbet['records'][state]['id']
+            
+            
+              
         # exceptions
         if this_host == 'jetsada' or this_host == 'thailotto':
             if bet_type == 'normal':
@@ -464,7 +570,15 @@ class yeekee_bot(object):
         set_time_start = (21600 + 2*60) * 1000000
         
         server_delay = 0  # อันดับท้ายๆ เพิ่มค่า
-        number_send = random.randint(10000, 99999)	
+        number_send = 0
+        
+        	
+        if bet_type == 'zodiac':
+            number_send = random.randint(1, 12)
+        else:
+            number_send = random.randint(10000, 99999)
+            
+            
         self.number_send = number_send 
         print('number_send',number_send)
         
@@ -493,12 +607,12 @@ class yeekee_bot(object):
                 set_time_start = (21600 + 2*60) * 1000000
                 time_par_round = 15*60*1000000
                 
-        elif this_host == 'chudjenbet':
+        elif this_host == 'chudjenbet' or this_host == 'ltobet' :
             if bet_type == 'special' or bet_type == 'vip_264' :
                 time_to_click = state*5+361
                 set_time_start = (21600 + 1*60) * 1000000
                 time_par_round = 5*60*1000000
-            elif bet_type == 'normal' or bet_type == 'vip_88' :
+            elif bet_type == 'normal' or bet_type == 'vip_88' or bet_type == 'zodiac' :
                 time_to_click = state*15+362
                 set_time_start = (21600 + 2*60) * 1000000
                 time_par_round = 15*60*1000000
@@ -568,7 +682,11 @@ class yeekee_bot(object):
                 _url = str('https://www.lottovip.com/member/lottery/yeekee/%s' % (room))
                 
                 js_send_number = str(js_code.post_number_ruay(room,number_send,"https://www.lottovip.com/Api/y_number"))
-                
+        
+        elif this_host == 'ltobet':
+            state_ref = 0
+            _url = str('https://chudjenbet.com/member/lotto/%s' % (room))
+            js_send_number = str(js_code.post_number_ltobet(code,room,number_send,bet_type))        
         
         # print(js_send_number)
         # self.driver.get(_url)
@@ -677,11 +795,29 @@ class yeekee_bot(object):
                 if bet_type == 'special':
                     rate = 90
                 elif bet_type == 'vip_264':
-                    rate = 92
+                    rate = 90
                 elif bet_type == 'normal':
                     rate = 90
                 elif bet_type == 'vip_88':
                     rate = 90
+                    price = 10
+                    
+                betListJsonStringify = betListJsonStringify + str(r'{\"slug\":\"two_top\",\"number\":\"%s\",\"price\":\"%s\",\"rate\":\"%s\"},' % (str(num),str(price),str(rate)))
+            
+            elif this_host == 'ltobet':
+                price = 2
+
+                if bet_type == 'special':
+                    rate = 90
+                elif bet_type == 'vip_264':
+                    rate = 90
+                elif bet_type == 'normal':
+                    rate = 90
+                elif bet_type == 'vip_88':
+                    rate = 90
+                    price = 20
+                elif bet_type == 'zodiac':
+                    rate = 10
                     price = 10
                     
                 betListJsonStringify = betListJsonStringify + str(r'{\"slug\":\"two_top\",\"number\":\"%s\",\"price\":\"%s\",\"rate\":\"%s\"},' % (str(num),str(price),str(rate)))
@@ -697,6 +833,7 @@ class yeekee_bot(object):
             sleep(2)
             self.driver.get('https://thailotto.com/member/affiliate')
             sleep(2)
+        
         elif this_host == 'chudjenbet':
             hash = random.getrandbits(128)
             link = ''
@@ -708,6 +845,7 @@ class yeekee_bot(object):
                 link = 'yeekee_vip'
             elif bet_type == 'normal':
                 link = 'yeekee'
+            
                 
             bet_text = '{"lotto_id":%s,"stakes":"%s","hashed":"%s"}' % (str(room),betListJsonStringify,str(hash))
             js = js_code.bet_number_chudjenbet(code,link,bet_text)
@@ -715,7 +853,26 @@ class yeekee_bot(object):
             self.driver.get('https://chudjenbet.com/member/affiliate')
             sleep(2)
         
-
+        elif this_host == 'ltobet':
+            hash = random.getrandbits(128)
+            link = ''
+            if bet_type == 'special':
+                link = 'speed'
+            elif bet_type == 'vip_264':
+                link = 'speed_vip'
+            elif bet_type == 'vip_88':
+                link = 'yeekee_vip'
+            elif bet_type == 'normal':
+                link = 'yeekee'
+            elif bet_type == 'zodiac':
+                link = 'zodiac'
+                
+            bet_text = '{"lotto_id":%s,"stakes":"%s","hashed":"%s"}' % (str(room),betListJsonStringify,str(hash))
+            js = js_code.bet_number_ltobet(code,link,bet_text)
+            sleep(2)
+            self.driver.get('https://www.ltobet.com/member/affiliate')
+            sleep(2)
+            
         self.driver.execute_script(js)
     
        
@@ -751,6 +908,12 @@ class yeekee_bot(object):
             
             balance = self.driver.execute_script("return document.body.innerText")
         
+        elif this_host == 'ltobet':
+            balance = self.driver.execute_script(str(js_code.get_balance_ltobet(code)))['data']['real_credit']
+            if balance == "not have wallet":
+                balance = 0.00
+                
+                
         return balance
 
         
@@ -802,8 +965,8 @@ if __name__ == "__main__":
             test_process = False
             
 
-        if data[codename]['host'] in ['jetsada' , 'thailotto' , 'chudjenbet', 'ruay' , 'lottovip' ] : 
-            
+        # if data[codename]['host'] in ['jetsada' , 'thailotto' , 'chudjenbet', 'ruay' , 'lottovip' ] : 
+        if 1 == 1 :
             class_obj = yeekee_bot(data)
             
             
