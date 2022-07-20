@@ -38,7 +38,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.09"
+version_yeekee = "v1.09b"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -428,6 +428,8 @@ class yeekee_bot(object):
             elif bet_type == 'normal':
                 start_number = 172
 
+            room = start_number+state 
+            
         elif this_host == 'huay':
             if bet_type == 'normal':
                 state = self.room_264()
@@ -441,7 +443,8 @@ class yeekee_bot(object):
             elif bet_type == 'normal':
                 start_number = 172
                 state = self.room_88()
-                
+            
+            
         elif this_host == 'chudjenbet':
             
             data_room_chudjenbet = ""
