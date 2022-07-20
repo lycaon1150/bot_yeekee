@@ -444,6 +444,7 @@ class yeekee_bot(object):
                 start_number = 172
                 state = self.room_88()
             
+            room = start_number+state
             
         elif this_host == 'chudjenbet':
             
@@ -541,6 +542,7 @@ class yeekee_bot(object):
               
         # exceptions
         if this_host == 'jetsada' or this_host == 'thailotto':
+             
             if bet_type == 'normal':
                 if room > 203:
                     room = room + 5
