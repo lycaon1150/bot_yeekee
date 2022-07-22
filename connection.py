@@ -27,7 +27,8 @@ from seleniumwire import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 import undetected_chromedriver as uc
-
+from pyvirtualdisplay import Display
+ 
 
 import js_code
 
@@ -38,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.09b"
+version_yeekee = "v1.10"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -58,13 +59,16 @@ class yeekee_bot(object):
         self.use_time = 0
         self.number_send = ""
         self.driver = ''
-
+        self.display = Display(visible=0, size=(800, 800)) 
+        
         print('success created')
 
-    def launchBrowser(self,server):
+    def launchBrowser(self,server,host):
+        
+        
         options = uc.ChromeOptions()
-        options.add_argument("--headless")
-        options.add_argument('window-size=1920x1080')
+        
+        # options.add_argument('window-size=1920x1080')
         # options.add_argument('whitelisted-ips')
         options.add_argument("no-sandbox")
         options.add_argument("disable-dev-shm-usage")
@@ -78,6 +82,11 @@ class yeekee_bot(object):
         options.add_argument("--incognito")
         
         if server == "aws":
+            if host == 'chudjenbet':
+                self.display.start()
+            else:
+                options.add_argument("--headless")
+                
             self.driver = uc.Chrome(version_main=93, options=options)  
         elif server == "digitalocean":
             self.driver = uc.Chrome(version_main=100, options=options)  
@@ -100,7 +109,7 @@ class yeekee_bot(object):
 
             data_id = self.json_user[user]
 
-            self.launchBrowser(data_id['sever'])
+            self.launchBrowser(data_id['sever'],data_id['host'])
               
             
             
@@ -385,7 +394,7 @@ class yeekee_bot(object):
             for i in range(1,4):
                 _r = list(self.driver.execute_script(str(js_code.get_rank_chudjenbet(code,room,i)))['records'])
                 # print(_r)
-            
+                sleep(5)
                 for data in _r:
                     number.append(data['number'])
                     result.append(data['username'])
