@@ -350,7 +350,7 @@ class yeekee_bot(object):
             for i in range(1,4):
                 _r = list(self.driver.execute_script(str(js_code.get_rank_ltobet(code,room,i,bet_type)))['records'])
                 # print(_r)
-                sleep(5)
+                random.randint(2, 5)
                 for data in _r:
                     number.append(data['number'])
                     result.append(data['username'])
@@ -394,7 +394,7 @@ class yeekee_bot(object):
             for i in range(1,4):
                 _r = list(self.driver.execute_script(str(js_code.get_rank_chudjenbet(code,room,i)))['records'])
                 # print(_r)
-                sleep(5)
+                random.randint(2, 5)
                 for data in _r:
                     number.append(data['number'])
                     result.append(data['username'])
