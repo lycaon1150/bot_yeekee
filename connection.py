@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.10"
+version_yeekee = "v1.11"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -931,7 +931,8 @@ class yeekee_bot(object):
                 
         return balance
 
-        
+    def stop_display(self):
+        self.display.stop()
 
     def save_screenshots(self, user):
         now = datetime.datetime.now()
@@ -947,7 +948,7 @@ class yeekee_bot(object):
 if __name__ == "__main__":
     
     a = subprocess.call("pkill chrome", shell=True)
-    
+    a = subprocess.call("pkill Xvfb", shell=True)
     # sleep(random.randint(0,150)/10)
     
     try:
@@ -1034,6 +1035,7 @@ if __name__ == "__main__":
             r = requests.post('http://128.199.236.187:8888/jesadabet/send_history',data=data_json)
             print(r.status_code)
             class_obj.driver.quit()
+            class_obj.stop_display()
                 
                 
                 
