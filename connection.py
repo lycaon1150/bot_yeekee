@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.11"
+version_yeekee = "v1.12"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -59,6 +59,7 @@ class yeekee_bot(object):
         self.use_time = 0
         self.number_send = ""
         self.driver = ''
+        self.bonus = 0
         self.display = Display(visible=0, size=(800, 800)) 
         
         print('success created')
@@ -347,14 +348,30 @@ class yeekee_bot(object):
             number_send = self.number_send
             result = []
             number = []
-            for i in range(1,4):
+            
+            if bet_type == 'zodiac':
+                max_room = 2
+                reward_list = list(self.driver.execute_script(str(js_code.get_rank_ltobet(code,room,1,bet_type)))['userRewards'])
+           
+                for json_item in reward_list:
+                    print(json_item)
+                    if str(secret_name) == str(json_item['username']) and str(number_send) == str(json_item['number']):
+                        self.bonus = json_item['reward']
+                        
+            else:
+                max_room = 4
+            
+            print('bonus : ' + str(self.bonus))
+            
+            for i in range(1,max_room):
                 _r = list(self.driver.execute_script(str(js_code.get_rank_ltobet(code,room,i,bet_type)))['records'])
                 # print(_r)
-                random.randint(2, 5)
+                random.randint(1, 3)
                 for data in _r:
                     number.append(data['number'])
                     result.append(data['username'])
 
+            
            
             for rank , username in enumerate(result):
               
@@ -391,10 +408,10 @@ class yeekee_bot(object):
             number_send = self.number_send
             result = []
             number = []
-            for i in range(1,4):
+            for i in range(1,3):
                 _r = list(self.driver.execute_script(str(js_code.get_rank_chudjenbet(code,room,i)))['records'])
                 # print(_r)
-                random.randint(2, 5)
+                random.randint(2, 4)
                 for data in _r:
                     number.append(data['number'])
                     result.append(data['username'])
@@ -507,19 +524,7 @@ class yeekee_bot(object):
             
             data_room_chudjenbet = ""
             attempts = 0
-            # while attempts < 3:
-            #     try:
-            #         print('get_room_by_js : ',attempts)
-            #         sleep(3)
-            #         data_room_chudjenbet = self.driver.execute_script(js_code.get_room_ltobet(code))
-                
-            #         break
-            #     except:
-            #         attempts = attempts + 1
-               
-            # print(data_room_chudjenbet)
-            
-        
+      
             if bet_type == 'special':
                 data_room_chudjenbet = self.driver.execute_script(js_code.get_room_ltobet('speed',code))
                 state = self.room_264()
@@ -796,7 +801,7 @@ class yeekee_bot(object):
 
         for n in list_number:
             num = ""
-            if n < 10:
+            if n < 10 and bet_type != 'zodiac':
                 num = str(0) + str(n)
             else:
                 num = str(n)
@@ -833,9 +838,12 @@ class yeekee_bot(object):
                     price = 20
                 elif bet_type == 'zodiac':
                     rate = 10
-                    price = 10
-                    
-                betListJsonStringify = betListJsonStringify + str(r'{\"slug\":\"two_top\",\"number\":\"%s\",\"price\":\"%s\",\"rate\":\"%s\"},' % (str(num),str(price),str(rate)))
+                    price = 25
+                
+                if bet_type == 'zodiac':
+                    betListJsonStringify = betListJsonStringify + str(r'{\"slug\":\"zodiac\",\"znumber\":\"%s\",\"number\":\"\",\"price\":\"%s\",\"rate\":\"%s\"},' % (str(num),str(price),str(rate)))
+                else:
+                    betListJsonStringify = betListJsonStringify + str(r'{\"slug\":\"two_top\",\"number\":\"%s\",\"price\":\"%s\",\"rate\":\"%s\"},' % (str(num),str(price),str(rate)))
             
         count_n = len(betListJsonStringify)
         betListJsonStringify = list(betListJsonStringify)
@@ -1015,7 +1023,7 @@ if __name__ == "__main__":
             
             host = data[codename]['host'] 
             room_number = class_obj.state + 1
-            
+          
             day_start_bet = (datetime.datetime.now() - datetime.timedelta(hours=5)).date()
             
             
@@ -1028,7 +1036,8 @@ if __name__ == "__main__":
                         'bet_round' : room_number , 
                         'rank' : rank , 
                         'balance' : balance,
-                        'version' : version_yeekee
+                        'version' : version_yeekee,
+                        'bonus' : class_obj.bonus
                         }
             print(data_json)
         
@@ -1046,7 +1055,7 @@ if __name__ == "__main__":
         
     sleep(2)    
     a = subprocess.call("pkill chrome", shell=True)
-
+    print('done')
     sleep(2)
     exit()
 
