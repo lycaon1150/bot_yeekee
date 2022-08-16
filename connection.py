@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.12"
+version_yeekee = "v1.13"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -458,6 +458,9 @@ class yeekee_bot(object):
             
         elif this_host == 'huay':
             if bet_type == 'normal':
+                state = self.room_88()
+                start_number = 161
+            elif bet_type == 'special':
                 state = self.room_264()
                 start_number = 514
         
@@ -588,7 +591,7 @@ class yeekee_bot(object):
         this_host = self.session_data[user]['host']
         set_time_start = (21600 + 2*60) * 1000000
         
-        server_delay = 0  # อันดับท้ายๆ เพิ่มค่า
+        server_delay = int(self.session_data[user]['server_delay'])
         number_send = 0
         
         	
@@ -693,7 +696,7 @@ class yeekee_bot(object):
         elif this_host in ['ruay','lottovip']:
             state_ref = 0
             if this_host == 'ruay':
-                server_delay = 0
+                
                 _url = str('https://www.ruay.com/member/lottery/yeekee/%s' % (room))
                 
                 js_send_number = str(js_code.post_number_ruay(room,number_send,"https://www.ruay.com/Api/y_number"))
@@ -732,7 +735,7 @@ class yeekee_bot(object):
             
             
                 
-            if (loop_time - server_delay) % time_par_round > time_par_round - 1000000 - test and state_ref == 1:
+            if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000 - test and state_ref == 1:
                 print('ckick to win')
                 sleep(delay)
     
@@ -747,7 +750,7 @@ class yeekee_bot(object):
             
 
             if state_ref == 0 :
-                if (loop_time - server_delay) % time_par_round > time_par_round - 1000000*rand_time - test:
+                if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*rand_time - test:
                     print('ckick 1st')
                     sleep(delay)
                     self.driver.refresh()
