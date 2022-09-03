@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.13"
+version_yeekee = "v1.13b"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -591,7 +591,7 @@ class yeekee_bot(object):
         this_host = self.session_data[user]['host']
         set_time_start = (21600 + 2*60) * 1000000
         
-        server_delay = int(self.session_data[user]['server_delay'])
+        server_delay = float(self.session_data[user]['server_delay'])
         number_send = 0
         
         	
