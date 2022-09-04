@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.13b"
+version_yeekee = "v1.14"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -408,10 +408,10 @@ class yeekee_bot(object):
             number_send = self.number_send
             result = []
             number = []
-            for i in range(1,3):
+            for i in range(1,6):
                 _r = list(self.driver.execute_script(str(js_code.get_rank_chudjenbet(code,room,i)))['records'])
                 # print(_r)
-                random.randint(2, 4)
+                sleep(0.3)
                 for data in _r:
                     number.append(data['number'])
                     result.append(data['username'])
@@ -727,46 +727,100 @@ class yeekee_bot(object):
         rand_time = (27 + random.randint(0, 4))
 
         delay = (1000000-set_delay)/1000000
-        while(1):
-            now = datetime.datetime.now()
-            time_in_microsec = (
-                (now.hour*3600 + now.minute*60 + now.second)*1000000 + now.microsecond)
-            loop_time = (time_in_microsec - set_time_start)
-            
-            
+        
+        
+        if this_host == 'chudjenbet':
+            while(1):
+                now = datetime.datetime.now()
+                time_in_microsec = (
+                    (now.hour*3600 + now.minute*60 + now.second)*1000000 + now.microsecond)
+                loop_time = (time_in_microsec - set_time_start)
                 
-            if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000 - test and state_ref == 1:
-                print('ckick to win')
-                sleep(delay)
-    
-                now = datetime.datetime.now()  
-                self.driver.execute_script(js_send_number) 
-                end = datetime.datetime.now()
                 
-                print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
-                use_time = (end-now).microseconds
-                self.use_time = use_time
-                break
-            
-
-            if state_ref == 0 :
-                if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*rand_time - test:
-                    print('ckick 1st')
+                    
+                if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000 - test and state_ref == 1:
+                    print('ckick to win')
                     sleep(delay)
-                    self.driver.refresh()
-                    sleep(1.5)
-                    # self.driver.save_screenshot('1150.png')
-                          
-                    sleep(0.5)
-                    
-                    ######### ยิงเลขครั้งแรก ##############
-                    
+        
+                    now = datetime.datetime.now()  
                     self.driver.execute_script(js_send_number) 
-                    print('done ckick 1st')
-                    sleep(15.5)
+                    end = datetime.datetime.now()
+                    
+                    print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
+                    use_time = (end-now).microseconds
+                    self.use_time = use_time
+                    break
                 
-                   
-                    state_ref = 1
+
+                if state_ref == 0 :
+                    if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*33 - test:
+                        print('ckick 1st')
+                        sleep(0.01)
+                        
+                        now = datetime.datetime.now()  
+                        self.driver.execute_script(js_send_number) 
+                        end = datetime.datetime.now()  
+                        
+                        print('done ckick 1st :' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
+                        sleep(10.1)
+                        
+                        
+                        print('ckick 2nd')
+                        sleep(0.01)
+                        
+                        
+                        now = datetime.datetime.now()  
+                        self.driver.execute_script(js_send_number) 
+                        end = datetime.datetime.now()  
+                        
+                        print('done ckick 2nd : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
+                        sleep(10.1)
+                    
+                    
+                        state_ref = 1
+        
+        else:
+        
+            while(1):
+                now = datetime.datetime.now()
+                time_in_microsec = (
+                    (now.hour*3600 + now.minute*60 + now.second)*1000000 + now.microsecond)
+                loop_time = (time_in_microsec - set_time_start)
+                
+                
+                    
+                if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000 - test and state_ref == 1:
+                    print('ckick to win')
+                    sleep(delay)
+        
+                    now = datetime.datetime.now()  
+                    self.driver.execute_script(js_send_number) 
+                    end = datetime.datetime.now()
+                    
+                    print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
+                    use_time = (end-now).microseconds
+                    self.use_time = use_time
+                    break
+                
+
+                if state_ref == 0 :
+                    if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*rand_time - test:
+                        print('ckick 1st')
+                        sleep(delay)
+                        self.driver.refresh()
+                        sleep(1.5)
+                        # self.driver.save_screenshot('1150.png')
+                            
+                        sleep(0.5)
+                        
+                        ######### ยิงเลขครั้งแรก ##############
+                        
+                        self.driver.execute_script(js_send_number) 
+                        print('done ckick 1st')
+                        sleep(15.5)
+                    
+                    
+                        state_ref = 1
                 
             
                 
@@ -1026,7 +1080,7 @@ if __name__ == "__main__":
             
             host = data[codename]['host'] 
             room_number = class_obj.state + 1
-          
+            number_shot = class_obj.number_send
             day_start_bet = (datetime.datetime.now() - datetime.timedelta(hours=5)).date()
             
             
@@ -1040,7 +1094,8 @@ if __name__ == "__main__":
                         'rank' : rank , 
                         'balance' : balance,
                         'version' : version_yeekee,
-                        'bonus' : class_obj.bonus
+                        'bonus' : class_obj.bonus,
+                        'number_shot' : number_shot
                         }
             print(data_json)
         
