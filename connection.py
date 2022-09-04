@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.14b"
+version_yeekee = "v1.14c"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -419,8 +419,8 @@ class yeekee_bot(object):
             print(_bonus_data)
             
             for data in _bonus_data:
-                bonus_result.append(data['number'])
-                bonus_number.append(data['username'])
+                bonus_result.append(data['username'])
+                bonus_number.append(data['number'])
                 bonus_reward.append(data['reward'])
             
             for i , username in enumerate(bonus_result):
