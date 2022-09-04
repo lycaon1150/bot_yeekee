@@ -416,6 +416,8 @@ class yeekee_bot(object):
             
             _bonus_data = list(self.driver.execute_script(str(js_code.get_bonus_chudjenbet(code,room)))['userRewards'])
             
+            print(_bonus_data)
+            
             for data in _bonus_data:
                 bonus_result.append(data['number'])
                 bonus_number.append(data['username'])
@@ -1098,7 +1100,7 @@ if __name__ == "__main__":
 
             #### ยิงเลข ####
             class_obj.go_shoot_number(codename, time_delay,test_process,bet_type)
-            sleep(15)
+            sleep(30)
             
             #### เช็ค balance ล่าสุด ####
             balance = class_obj.get_balance(codename)
