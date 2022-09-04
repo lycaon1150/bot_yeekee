@@ -408,6 +408,25 @@ class yeekee_bot(object):
             number_send = self.number_send
             result = []
             number = []
+            
+            bonus_result =[]
+            bonus_number =[]
+            bonus_reward = []
+            
+            
+            _bonus_data = list(self.driver.execute_script(str(js_code.get_bonus_chudjenbet(code,room)))['userRewards'])
+            
+            for data in _bonus_data:
+                bonus_result.append(data['number'])
+                bonus_number.append(data['username'])
+                bonus_reward.append(data['reward'])
+            
+            for i , username in enumerate(bonus_result):
+                if str(secret_name) == str(username) and str(number_send) == str(bonus_number[i]):
+                    self.bonus = bonus_reward[i]
+                    break
+            
+            
             for i in range(1,6):
                 _r = list(self.driver.execute_script(str(js_code.get_rank_chudjenbet(code,room,i)))['records'])
                 # print(_r)
@@ -764,7 +783,7 @@ class yeekee_bot(object):
                         print('done ckick 1st :' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
                         sleep(10.1)
                         
-                        
+                        #########################################
                         print('ckick 2nd')
                         sleep(0.01)
                         
@@ -774,6 +793,18 @@ class yeekee_bot(object):
                         end = datetime.datetime.now()  
                         
                         print('done ckick 2nd : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
+                        sleep(10.1)
+                        
+                        #########################################
+                        print('ckick 3th')
+                        sleep(0.01)
+                        
+                        
+                        now = datetime.datetime.now()  
+                        self.driver.execute_script(js_send_number) 
+                        end = datetime.datetime.now()  
+                        
+                        print('done ckick 3th : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
                         sleep(10.1)
                     
                     

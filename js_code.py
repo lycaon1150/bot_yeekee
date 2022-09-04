@@ -216,6 +216,22 @@ def get_rank_chudjenbet(code,room,page):
     
     return js
 
+def get_bonus_chudjenbet(code,room):
+    js = """return await fetch('https://chudjenbet.com/api/member/lotto/shoot/number/%s?uniqueId=rand_3', {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+            'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded', 
+                ,
+            'authorization': '%s'
+        }
+    }).then(response => { return response.json() } );""" % (str(room),str(code))
+    
+    return js
+
 def get_rank_ltobet(code,room,page,bet_type):
     
     if bet_type == 'zodiac':
