@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.15"
+version_yeekee = "v1.15b"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -66,36 +66,39 @@ class yeekee_bot(object):
         
     def get_bonus_vip(self,host):
         
-        state = 0
-        
-        if host == "chudjenbet" :
+        try:
+            state = 0
             
-            
-            print('check VIP level')
-            data_vip = self.driver.execute_script(js_code.check_vip_chudjenbet(code))
+            if host == "chudjenbet" :
+                
+                
+                print('check VIP level')
+                data_vip = self.driver.execute_script(js_code.check_vip_chudjenbet(code))
 
-            
-            
-            for j in range(90):
-                a = data_vip['data']['data'][j]['status']
                 
-                if a == "null":
-                    state = 0;
-                elif a == "bonus":
+                
+                for j in range(90):
+                    a = data_vip['data']['data'][j]['status']
                     
-                    state = j+1;
-                    break;
-                
-                
-            if (state == 0):
-                print('no vip get')
-                
+                    if a == "null":
+                        state = 0;
+                    elif a == "bonus":
+                        
+                        state = j+1;
+                        break;
+                    
+                    
+                if (state == 0):
+                    print('no vip get')
+                    
+                else:
+                    print("Get Bonus  " + str(state))
+                    data_vip = self.driver.execute_script(js_code.get_vip_chudjenbet(code,state))
+            
             else:
-                print("Get Bonus  " + str(state))
-                data_vip = self.driver.execute_script(js_code.get_vip_chudjenbet(code,state))
-        
-        else:
-            print('Only Cj can get VIP process')
+                print('Only Cj can get VIP process')
+        except:
+            print("get_bonus_vip error")
             
 
     def launchBrowser(self,server,host):
