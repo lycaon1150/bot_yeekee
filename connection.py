@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.15b"
+version_yeekee = "v1.15c"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -64,11 +64,11 @@ class yeekee_bot(object):
         
         print('success created')
         
-    def get_bonus_vip(self,host):
+    def get_bonus_vip(self,user,host):
         
         try:
             state = 0
-            
+            code = self.session_data[user]['authorization']
             if host == "chudjenbet" :
                 
                 
@@ -1138,7 +1138,7 @@ if __name__ == "__main__":
             #### ยิงเลข ####
             class_obj.go_shoot_number(codename, time_delay,test_process,bet_type)
             sleep(30)
-            class_obj.get_bonus_vip(data[codename]['host'])
+            class_obj.get_bonus_vip(codename,data[codename]['host'])
             sleep(5)
             #### เช็ค balance ล่าสุด ####
             balance = class_obj.get_balance(codename)
