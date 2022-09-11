@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.14c"
+version_yeekee = "v1.15"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -63,6 +63,35 @@ class yeekee_bot(object):
         self.display = Display(visible=0, size=(800, 800)) 
         
         print('success created')
+        
+    def get_bonus_vip(self,host):
+        
+        state = 0
+        
+        if host == "chudjenbet" :
+            data_vip = self.driver.execute_script(js_code.check_vip_chudjenbet(code))
+        
+            for j in range(90):
+                a = data_vip['data']['data'][j]['status']
+                
+                if a == "null":
+                    state = 0;
+                elif a == "bonus":
+                    
+                    state = j+1;
+                    break;
+                
+                
+            if (state == 0):
+                print('no vip get')
+                
+            else:
+                print("Get Bonus  " + str(state))
+                data_vip = self.driver.execute_script(js_code.get_vip_chudjenbet(code,state))
+        
+        else:
+            print('Only Cj can get VIP process')
+            
 
     def launchBrowser(self,server,host):
         
@@ -1101,9 +1130,12 @@ if __name__ == "__main__":
             #### ยิงเลข ####
             class_obj.go_shoot_number(codename, time_delay,test_process,bet_type)
             sleep(30)
-            
+            class_obj.get_bonus_vip(data[codename]['host'])
+            sleep(5)
             #### เช็ค balance ล่าสุด ####
             balance = class_obj.get_balance(codename)
+            
+            sleep(2)
             
             print('balance  :' + str(balance) )
             sleep(1)
