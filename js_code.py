@@ -340,7 +340,7 @@ def get_vip_chudjenbet(code,vip):
                 'Content-Type': 'application/json'
                     // 'Content-Type': 'application/x-www-form-urlencoded', 
                     ,
-                'authorization': %s
+                'authorization': '%s'
             },
             'body': JSON.stringify({"vip" : "%s"})
         }).then(response => { return response.json() } ); """ % (str(code),str(vip))
@@ -358,7 +358,7 @@ def check_vip_chudjenbet(code):
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
                 'Content-Type': 'application/json',
-                'authorization': %s
+                'authorization': '%s'
                     // 'Content-Type': 'application/x-www-form-urlencoded', 
             }
             }).then(response => { return response.json() } ); """ % (str(code))

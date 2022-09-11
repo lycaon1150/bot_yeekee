@@ -69,8 +69,13 @@ class yeekee_bot(object):
         state = 0
         
         if host == "chudjenbet" :
+            
+            
+            print('check VIP level')
             data_vip = self.driver.execute_script(js_code.check_vip_chudjenbet(code))
-        
+
+            
+            
             for j in range(90):
                 a = data_vip['data']['data'][j]['status']
                 
