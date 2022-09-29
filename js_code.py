@@ -329,6 +329,42 @@ def post_number_ruay(room,number,url):
             
     return js
 
+def get_vip_ltobet(code,vip):
+    js = """ await fetch('https://www.ltobet.com/api/member/privilege/bonus', {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json'
+                    // 'Content-Type': 'application/x-www-form-urlencoded', 
+                    ,
+                'authorization': '%s'
+            },
+            'body': JSON.stringify({"vip" : "%s"})
+        }).then(response => { return response.json() } ); """ % (str(code),str(vip))
+    
+    
+    
+    return js
+
+
+def check_vip_ltobet(code):
+    js = """ return await fetch('https://www.ltobet.com/api/member/privilege/bonus', {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': '%s'
+                    // 'Content-Type': 'application/x-www-form-urlencoded', 
+            }
+            }).then(response => { return response.json() } ); """ % (str(code))
+    
+    
+    
+    return js
 
 def get_vip_chudjenbet(code,vip):
     js = """ await fetch('https://chudjenbet.com/api/member/privilege/bonus', {

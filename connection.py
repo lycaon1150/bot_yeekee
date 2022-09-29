@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.15c"
+version_yeekee = "v1.16"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -94,6 +94,32 @@ class yeekee_bot(object):
                 else:
                     print("Get Bonus  " + str(state))
                     data_vip = self.driver.execute_script(js_code.get_vip_chudjenbet(code,state))
+                    
+                    
+            elif host == "ltobet":
+                print('check VIP level')
+                data_vip = self.driver.execute_script(js_code.check_vip_ltobet(code))
+
+                
+                
+                for j in range(90):
+                    a = data_vip['data']['data'][j]['status']
+                    
+                    if a == "null":
+                        state = 0;
+                    elif a == "bonus":
+                        
+                        state = j+1;
+                        break;
+                    
+                    
+                if (state == 0):
+                    print('no vip get')
+                    
+                else:
+                    print("Get Bonus  " + str(state))
+                    data_vip = self.driver.execute_script(js_code.get_vip_ltobet(code,state))
+                
             
             else:
                 print('Only Cj can get VIP process')
@@ -962,7 +988,7 @@ class yeekee_bot(object):
                     rate = 90
                 elif bet_type == 'vip_88':
                     rate = 90
-                    price = 20
+                    price = 2
                 elif bet_type == 'zodiac':
                     rate = 10
                     price = 25
