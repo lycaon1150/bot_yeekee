@@ -988,7 +988,7 @@ class yeekee_bot(object):
                     rate = 90
                 elif bet_type == 'vip_88':
                     rate = 90
-                    price = 2
+                    price = 10
                 elif bet_type == 'zodiac':
                     rate = 10
                     price = 25
