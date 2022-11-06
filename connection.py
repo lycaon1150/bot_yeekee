@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.16"
+version_yeekee = "v1.16b"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -213,7 +213,7 @@ class yeekee_bot(object):
         r = ''
         print(url)
         self.driver.get(url)
-        sleep(3)
+        sleep(5)
         self.driver.save_screenshot('pic_home.png')
         print(self.driver.execute_script('return navigator.webdriver'))
         
@@ -492,7 +492,7 @@ class yeekee_bot(object):
                     break
             
             
-            for i in range(1,6):
+            for i in range(1,7):
                 _r = list(self.driver.execute_script(str(js_code.get_rank_chudjenbet(code,room,i)))['records'])
                 # print(_r)
                 sleep(0.3)
