@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.16b"
+version_yeekee = "v1.17"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -366,6 +366,8 @@ class yeekee_bot(object):
         
         if this_host == 'jetsada' or this_host == 'thailotto':
             n = 0
+            sleep(30)
+            self.driver.get(self.room_url)
             for c in name:
                 if n == 3 or n == 4 or n == 5:
                     secret_name = str(secret_name) + str('*')
@@ -808,7 +810,7 @@ class yeekee_bot(object):
         
         
         use_time = 0
-        rand_time = (27 + random.randint(0, 4))
+        rand_time = (30 + random.randint(0, 4))
 
         delay = (1000000-set_delay)/1000000
         
@@ -914,6 +916,8 @@ class yeekee_bot(object):
                         self.driver.execute_script(js_send_number) 
                         print('done ckick 1st')
                         sleep(15.5)
+                        
+                        self.driver.refresh()
                     
                     
                         state_ref = 1

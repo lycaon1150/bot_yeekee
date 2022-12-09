@@ -255,7 +255,18 @@ def get_rank_ltobet(code,room,page,bet_type):
     return js
 
 def post_number_jesadabet(code,room,num):
-    js = """fetch('https://thailotto.com/member/lottery/yeekee', {
+    js = """
+    
+    function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+                }
+            
+    var code = getCookie('XSRF-TOKEN')
+    
+    
+    fetch('https://thailotto.com/member/lottery/yeekee', {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -264,7 +275,9 @@ def post_number_jesadabet(code,room,num):
         'Content-Type': 'application/json'
             // 'Content-Type': 'application/x-www-form-urlencoded', 
             ,
-        'x-xsrf-token': '%s'
+            // 'x-xsrf-token': '%s'
+        
+        'x-xsrf-token': code
     },
     'body': JSON.stringify({
         "number":"%s","bet_category_id":%s,"yeekee_special":""
