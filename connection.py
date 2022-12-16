@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.17b"
+version_yeekee = "v1.17c"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -366,7 +366,7 @@ class yeekee_bot(object):
         
         if this_host == 'jetsada' or this_host == 'thailotto':
             n = 0
-            sleep(30)
+            sleep(20)
             self.driver.get(self.room_url)
             for c in name:
                 if n == 3 or n == 4 or n == 5:
@@ -384,7 +384,24 @@ class yeekee_bot(object):
                 
                 if find_name == name or find_name == secret_name:
                     return i+1
+            
+            sleep(2)
+            new_url = self.room_url + '?page=2'    
+            self.driver.get(new_url)
         
+        
+            for i in range(50):
+                js = "return document.getElementsByClassName('username')[%s].innerText" %i
+                find_name = self.driver.execute_script(js)
+                # print(find_name)
+                
+                if find_name == name or find_name == secret_name:
+                    return i+51
+        
+            
+            
+            
+            
         elif this_host == 'ltobet':
             z = len(name)
             n = 0
