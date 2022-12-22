@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.17c"
+version_yeekee = "v1.17d"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -366,7 +366,7 @@ class yeekee_bot(object):
         
         if this_host == 'jetsada' or this_host == 'thailotto':
             n = 0
-            sleep(20)
+            
             self.driver.get(self.room_url)
             for c in name:
                 if n == 3 or n == 4 or n == 5:
@@ -791,6 +791,8 @@ class yeekee_bot(object):
             
             # js_send_number = 'axios.post("/member/lottery/yeekee", {number: "%s", bet_category_id: %s, yeekee_special: ""});' % (str(number_send),str(room))
             js_send_number = str(js_code.post_number_jesadabet(code,room,number_send))
+            self.driver.get('https://thailotto.com/member/affiliate')
+            
         elif this_host == 'chudjenbet':
             state_ref = 0
             _url = str('https://chudjenbet.com/member/lotto/%s' % (room))
@@ -849,7 +851,7 @@ class yeekee_bot(object):
                     now = datetime.datetime.now()  
                     self.driver.execute_script(js_send_number) 
                     end = datetime.datetime.now()
-                    self.driver.execute_script(js_send_number) 
+                    
                     
                     print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
                     use_time = (end-now).microseconds
@@ -909,10 +911,14 @@ class yeekee_bot(object):
                 if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000 - test and state_ref == 1:
                     print('ckick to win')
                     sleep(delay)
-        
+
+                    if this_host == 'thailoto':
+                        self.driver.execute_script(js_send_number) 
                     now = datetime.datetime.now()  
                     self.driver.execute_script(js_send_number) 
                     end = datetime.datetime.now()
+                    if this_host == 'thailoto':
+                        self.driver.execute_script(js_send_number) 
                     
                     print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
                     use_time = (end-now).microseconds
