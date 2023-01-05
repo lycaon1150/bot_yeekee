@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.17d"
+version_yeekee = "v1.17e"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -120,6 +120,12 @@ class yeekee_bot(object):
                     print("Get Bonus  " + str(state))
                     data_vip = self.driver.execute_script(js_code.get_vip_ltobet(code,state))
                 
+            
+            elif host == "thailotto":
+                
+                self.driver.execute_script(js_code.post_bonus_thailotto())
+                
+            
             
             else:
                 print('Only Cj can get VIP process')
@@ -1199,6 +1205,8 @@ if __name__ == "__main__":
             balance = class_obj.get_balance(codename)
             
             sleep(2)
+            
+        
             
             print('balance  :' + str(balance) )
             sleep(1)

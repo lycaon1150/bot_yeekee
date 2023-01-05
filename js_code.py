@@ -304,19 +304,27 @@ def bet_number_jesadabet(code,bet_text):
     return js
 
 
-def post_bonus_jesadabet(code):
-    js = """fetch('https://thailotto.com/member/game/lucky-box', {
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+def post_bonus_thailotto():
+    js = """function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+                }
+            
+        var code = getCookie('XSRF-TOKEN')
+        
+        
+        fetch('https://thailotto.com/member/game/lucky-box', {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
         credentials: 'same-origin', // include, *same-origin, omit
         headers: {
-            'Content-Type': 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded', 
-                ,
-            'x-xsrf-token': '%s'
+            'Content-Type': 'application/json' ,
+            'x-xsrf-token': code
         }
-            })""" % (str(code))
+        
+    })""" 
     
     return js
 
