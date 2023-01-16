@@ -1249,7 +1249,7 @@ if __name__ == "__main__":
                 class_obj.get_af_thailotto(codename,balance)
                 sleep(10) 
                 class_obj.go_shoot_number(codename, time_delay,test_process,bet_type,get_af)
-                sleep(35)
+                sleep(40)
               
             
             else : 
@@ -1264,12 +1264,13 @@ if __name__ == "__main__":
                 class_obj.go_shoot_number(codename, time_delay,test_process,bet_type,get_af)
                 sleep(30)
                 class_obj.get_bonus_vip(codename,data[codename]['host'])
-                sleep(5)
+                sleep(10)
+            
             
             #### เช็ค balance ล่าสุด ####
-            balance = class_obj.get_balance(codename)
             
-            sleep(2)
+            
+            
             
         
             
@@ -1279,13 +1280,14 @@ if __name__ == "__main__":
                 rank = 0
                 number_shot = 99999
                 bonus = 0
-                sleep(20)
+               
             else:
                 rank = class_obj.get_result(codename,bet_type)
                 number_shot = class_obj.number_send
                 bonus = class_obj.bonus
-                
+            sleep(2)
             print('rank :' + str(rank))
+            balance = class_obj.get_balance(codename)
             
             
             host = data[codename]['host'] 
