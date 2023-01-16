@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.17e"
+version_yeekee = "v1.18"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -695,7 +695,7 @@ class yeekee_bot(object):
         return room , state
     
     
-    def go_shoot_number(self, user, set_delay,test_setting,bet_type):   # 225k no.16-25
+    def go_shoot_number(self, user, set_delay,test_setting,bet_type,get_af):   # 225k no.16-25
         code = self.session_data[user]['authorization']
         this_host = self.session_data[user]['host']
         set_time_start = (21600 + 2*60) * 1000000
@@ -832,8 +832,9 @@ class yeekee_bot(object):
         
         
         
-        
-        
+        if get_af > 100:
+            js_send_number = ''
+            
         use_time = 0
         rand_time = (30 + random.randint(0, 4))
 
@@ -961,7 +962,55 @@ class yeekee_bot(object):
         print('end process shot number')
         
         
+    def get_af_thailotto(self,user,balance):
         
+        if ',' in balance:
+            balance = balance.replace(",", "")
+            
+            
+        price = int(int(int(float(balance))/100) - 2)
+        
+        print('bet price :'  + str(price))
+        code = self.session_data[user]['authorization']
+
+        room , state = self.get_room(user)
+        
+        if state < 0:
+            print('can not bet yet')
+            return False
+        else:
+            print('start___select')
+            
+        sleep(2)
+        
+        
+        betListJsonStringify = '['
+        for n in range(100):
+            
+            num = ""
+            if n < 10 :
+                num = str(0) + str(n)
+            else:
+                num = str(n)
+                
+            betListJsonStringify = betListJsonStringify + str(r'{\"type\":3,\"slug\":\"bet_two_top\",\"number\":\"%s\",\"price\":%s},' % (str(num),str(price)))
+            
+            
+        count_n = len(betListJsonStringify)
+        betListJsonStringify = list(betListJsonStringify)
+        betListJsonStringify[count_n-1] = ']'
+        betListJsonStringify = ''.join(betListJsonStringify)   
+
+        bet_text = '{"stake_method":2,"bet_category_id":%s,"betListJsonStringify":"%s","thaistock20checklist":[]}' % (str(room),betListJsonStringify)
+        js = js_code.bet_number_jesadabet(code,bet_text)
+        sleep(2)
+        self.driver.get('https://thailotto.com/member/affiliate')
+        sleep(2)
+
+        self.driver.execute_script(js)
+    
+        print('done bet number for get AF')
+
 
 
     def select_number(self,user,list_number,bet_type):
@@ -1191,16 +1240,32 @@ if __name__ == "__main__":
             end = int(data[codename]['end'])+1
             sleep(2)
             
-            l = [i for i in range(start,end)]
-            if data[codename]['use_money'] == 'yes':
-                class_obj.select_number(codename,l,bet_type=bet_type)
+            get_af = int(data[codename]['get_af'])
+            
+            
+            
+            if get_af > 100 and data[codename]['host'] == 'thailotto':
+                balance = class_obj.get_balance(codename)
+                class_obj.get_af_thailotto(codename,balance)
+                sleep(10) 
+                class_obj.go_shoot_number(codename, time_delay,test_process,bet_type,get_af)
+                sleep(35)
+              
+            
+            else : 
+                
+                #### เลือกเลข ####
+                l = [i for i in range(start,end)]
+                if data[codename]['use_money'] == 'yes':
+                    class_obj.select_number(codename,l,bet_type=bet_type)
 
 
-            #### ยิงเลข ####
-            class_obj.go_shoot_number(codename, time_delay,test_process,bet_type)
-            sleep(30)
-            class_obj.get_bonus_vip(codename,data[codename]['host'])
-            sleep(5)
+                #### ยิงเลข ####
+                class_obj.go_shoot_number(codename, time_delay,test_process,bet_type,get_af)
+                sleep(30)
+                class_obj.get_bonus_vip(codename,data[codename]['host'])
+                sleep(5)
+            
             #### เช็ค balance ล่าสุด ####
             balance = class_obj.get_balance(codename)
             
@@ -1210,14 +1275,27 @@ if __name__ == "__main__":
             
             print('balance  :' + str(balance) )
             sleep(1)
-            rank = class_obj.get_result(codename,bet_type)
+            if get_af > 100:
+                rank = 0
+                number_shot = 99999
+                bonus = 0
+                sleep(20)
+            else:
+                rank = class_obj.get_result(codename,bet_type)
+                number_shot = class_obj.number_send
+                bonus = class_obj.bonus
+                
             print('rank :' + str(rank))
             
             
             host = data[codename]['host'] 
-            room_number = class_obj.state + 1
-            number_shot = class_obj.number_send
+            
+          
+            room_number = int(class_obj.state) + 1
+            
             day_start_bet = (datetime.datetime.now() - datetime.timedelta(hours=5)).date()
+            
+            print('start send data')
             
             
             data_json = {'username' : username ,
@@ -1228,10 +1306,11 @@ if __name__ == "__main__":
                         'date' : day_start_bet , 
                         'bet_round' : room_number , 
                         'rank' : rank , 
-                        'balance' : balance,
-                        'version' : version_yeekee,
-                        'bonus' : class_obj.bonus,
-                        'number_shot' : number_shot
+                        'balance' : balance ,
+                        'version' : version_yeekee ,
+                        'bonus' : bonus ,
+                        'number_shot' : number_shot ,
+                        'get_af' : get_af
                         }
             print(data_json)
         
