@@ -1271,8 +1271,9 @@ if __name__ == "__main__":
             
             
             
-            
+            balance = class_obj.get_balance(codename)
         
+            sleep(5)
             
             print('balance  :' + str(balance) )
             sleep(1)
@@ -1287,7 +1288,7 @@ if __name__ == "__main__":
                 bonus = class_obj.bonus
             sleep(2)
             print('rank :' + str(rank))
-            balance = class_obj.get_balance(codename)
+            
             
             
             host = data[codename]['host'] 
