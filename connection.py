@@ -919,12 +919,12 @@ class yeekee_bot(object):
                     print('ckick to win')
                     sleep(delay)
 
-                    if this_host == 'thailoto':
+                    if this_host == 'thailotto':
                         self.driver.execute_script(js_send_number) 
                     now = datetime.datetime.now()  
                     self.driver.execute_script(js_send_number) 
                     end = datetime.datetime.now()
-                    if this_host == 'thailoto':
+                    if this_host == 'thailotto':
                         self.driver.execute_script(js_send_number) 
                     
                     print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
