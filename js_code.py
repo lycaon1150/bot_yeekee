@@ -254,6 +254,50 @@ def get_rank_ltobet(code,room,page,bet_type):
     
     return js
 
+
+
+def post_number_movewinbet(room,num):
+    js = """
+    
+    function getMeta(metaName) {
+    const metas = document.getElementsByTagName('meta');
+
+    for (let i = 0; i < metas.length; i++) {
+        if (metas[i].getAttribute('name') === metaName) {
+        return metas[i].getAttribute('content');
+        }
+    }
+
+    return '';
+    }
+            
+    var code = getMeta('csrf-token')
+    
+    
+    var myHeaders = new Headers();
+    myHeaders.append("x-csrf-token", code);
+
+
+    var formdata = new FormData();
+    formdata.append("number", "%s");
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: formdata,
+    redirect: 'follow'
+    };
+
+    fetch("https://www.movewinbet.live/member/yeekee-vip/%s/bet-number", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));""" % (str(num),str(room))
+    
+    return js
+
+
+
+
 def post_number_jesadabet(code,room,num):
     js = """
     
@@ -266,7 +310,7 @@ def post_number_jesadabet(code,room,num):
     var code = getCookie('XSRF-TOKEN')
     
     
-    fetch('https://thailotto.com/member/lottery/yeekee', {
+    fetch('https://thailotto.io/member/lottery/yeekee', {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -288,7 +332,7 @@ def post_number_jesadabet(code,room,num):
 
 
 def bet_number_jesadabet(code,bet_text):
-    js = """fetch('https://thailotto.com/member/lottery', {
+    js = """fetch('https://thailotto.io/member/lottery', {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
                 mode: 'cors', // no-cors, *cors, same-origin
                 cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -314,7 +358,7 @@ def post_bonus_thailotto():
         var code = getCookie('XSRF-TOKEN')
         
         
-        fetch('https://thailotto.com/member/game/lucky-box', {
+        fetch('https://thailotto.io/member/game/lucky-box', {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
