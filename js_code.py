@@ -254,9 +254,60 @@ def get_rank_ltobet(code,room,page,bet_type):
     
     return js
 
+def bet_number_movewinbet(room,betList):
+    
 
 
-def post_number_movewinbet(room,num):
+    js = """
+    
+    function getMeta(metaName) {
+    const metas = document.getElementsByTagName('meta');
+
+    for (let i = 0; i < metas.length; i++) {
+        if (metas[i].getAttribute('name') === metaName) {
+        return metas[i].getAttribute('content');
+        }
+    }
+
+    return '';
+    }
+            
+    var code = getMeta('csrf-token')
+    
+    
+    var myHeaders = new Headers();
+    myHeaders.append("x-csrf-token", code);
+
+
+    var formdata = new FormData();
+    formdata.append("bet_category_id", '%s');
+    formdata.append("categoryGroup", 'lotto');
+    formdata.append("betListJsonStringify", '%s');
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: formdata,
+    redirect: 'follow'
+    };
+
+    fetch(betUrl, requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));""" % (str(room),str(betList))
+    
+    return js
+
+
+
+def post_number_movewinbet(room,num,domain_name,type_bet):
+    
+    if type_bet == 'normal':
+        type_url = 'yeekee'
+    else:
+        type_url = 'yeekee-vip'
+
+
     js = """
     
     function getMeta(metaName) {
@@ -288,10 +339,10 @@ def post_number_movewinbet(room,num):
     redirect: 'follow'
     };
 
-    fetch("https://www.movewinbet.live/member/yeekee-vip/%s/bet-number", requestOptions)
+    fetch("https://%s/member/%s/%s/bet-number", requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
-    .catch(error => console.log('error', error));""" % (str(num),str(room))
+    .catch(error => console.log('error', error));""" % (str(num),str(domain_name),str(type_url),str(room))
     
     return js
 

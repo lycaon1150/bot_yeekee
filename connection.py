@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.18a"
+version_yeekee = "v1.19"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -61,6 +61,8 @@ class yeekee_bot(object):
         self.driver = ''
         self.bonus = 0
         self.display = Display(visible=0, size=(800, 800)) 
+        self.movewinbet_url = ""
+        
         
         print('success created')
         
@@ -307,9 +309,6 @@ class yeekee_bot(object):
                     else:
                         break
                   
-                    
-                    
-                    
                 
                 except Exception as e:
                     print('error api login')
@@ -323,6 +322,22 @@ class yeekee_bot(object):
                     
                     print('retry login')
                     print(e)
+                    
+        elif host == 'movewinbet':
+                sleep(2)
+                get_url = self.driver.current_url
+                domain_1 = get_url.replace("https://", "")
+                domian_name = domain_1.replace("/login", "")
+                self.movewinbet_url = str(domian_name)
+                
+                self.driver.find_element_by_xpath('//input[@name="username"]').send_keys(str(id))
+                self.driver.find_element_by_xpath('//input[@name="password"]').send_keys(str(pwd))
+                sleep(1)
+                
+                
+                self.driver.execute_script("document.querySelectorAll('button[type=submit]')[0].click();")
+                
+                
                 
         sleep(3)
         self.driver.save_screenshot('pic_login.png')
@@ -350,7 +365,13 @@ class yeekee_bot(object):
         
         return state
     
+    def room_264_movewinbet(self):
+        now = datetime.datetime.now()
+        time_in_minute = (now.hour*60 + now.minute)
+        state = int((time_in_minute+1)/5)
     
+        
+        return state
 
     def get_result(self,user,bet_type):
         print('do process get_result')
@@ -363,7 +384,7 @@ class yeekee_bot(object):
         this_host = self.session_data[user]['host']
         code = self.session_data[user]['authorization']
         sleep(3)
-        
+        self.driver.save_screenshot('rank.png')
         # print(self.room_url)
         
         name = user.split("_")[1]
@@ -404,9 +425,67 @@ class yeekee_bot(object):
                 if find_name == name or find_name == secret_name:
                     return i+51
         
+        
+        if this_host == 'movewinbet':
+            n = 0
+            
+            self.driver.get(self.room_url)
+            for c in name:
+                if n == 1 or n == 2:
+                    secret_name = str(secret_name) + str('*')
+                else:
+                    secret_name = str(secret_name) + str(c) 
+                n = n + 1
+            print(secret_name)
+        
+        
+            for i in range(20):
+                js = "return document.getElementsByClassName('item-col col-4 col-xl-4')[%s].innerText" % str(i*3+1)
+                find_name = self.driver.execute_script(js).split('\n')[1]
+                # print(find_name)
+                
+                if find_name == name or find_name == secret_name:
+                    return i+1
+            
+            sleep(2)
+            new_url = self.room_url + '?page=2'    
+            self.driver.get(new_url)
+        
+        
+            for i in range(20):
+                js = "return document.getElementsByClassName('item-col col-4 col-xl-4')[%s].innerText" % str(i*3+1)
+                find_name = self.driver.execute_script(js).split('\n')[1]
+                # print(find_name)
+                
+                if find_name == name or find_name == secret_name:
+                    return i+1+20
             
             
+            sleep(2)
+            new_url = self.room_url + '?page=3'    
+            self.driver.get(new_url)
+        
+        
+            for i in range(20):
+                js = "return document.getElementsByClassName('item-col col-4 col-xl-4')[%s].innerText" % str(i*3+1)
+                find_name = self.driver.execute_script(js).split('\n')[1]
+                # print(find_name)
+                
+                if find_name == name or find_name == secret_name:
+                    return i+1+40
             
+            sleep(2)
+            new_url = self.room_url + '?page=4'    
+            self.driver.get(new_url)
+        
+        
+            for i in range(20):
+                js = "return document.getElementsByClassName('item-col col-4 col-xl-4')[%s].innerText" % str(i*3+1)
+                find_name = self.driver.execute_script(js).split('\n')[1]
+                # print(find_name)
+                
+                if find_name == name or find_name == secret_name:
+                    return i+1+60 
             
         elif this_host == 'ltobet':
             z = len(name)
@@ -664,7 +743,16 @@ class yeekee_bot(object):
                 state = self.room_88()
                 room = data_room_chudjenbet['records'][state]['id']
             
+        elif this_host == 'movewinbet':
+            if bet_type == 'special':
+                start_number = 1  
+                state = self.room_264_movewinbet()
+                
+            elif bet_type == 'normal':
+                start_number = 1
+                state = self.room_88()
             
+            room = start_number+state    
               
         # exceptions
         if this_host == 'jetsada' or this_host == 'thailotto':
@@ -758,7 +846,15 @@ class yeekee_bot(object):
                 set_time_start = (21600 + 2*60) * 1000000
                 time_par_round = 15*60*1000000    
             
-        
+        elif this_host == 'movewinbet':
+            if bet_type == 'special':
+                time_to_click = state*5+6
+                set_time_start = (300 + 1*60) * 1000000
+                time_par_round = 5*60*1000000
+            elif bet_type == 'normal':
+                time_to_click = state*15+362
+                set_time_start = (21600 + 2*60) * 1000000
+                time_par_round = 15*60*1000000
         
         if test_setting == True:
             test = time_par_round
@@ -820,6 +916,18 @@ class yeekee_bot(object):
             state_ref = 0
             _url = str('https://chudjenbet.com/member/lotto/%s' % (room))
             js_send_number = str(js_code.post_number_ltobet(code,room,number_send,bet_type))        
+        
+        elif this_host == 'movewinbet':
+            state_ref = 0
+            
+            if bet_type == 'normal':
+                type_url = 'yeekee'
+            else:
+                type_url = 'yeekee-vip'
+                
+                
+            _url = str('https://%s/member/%s/%s' % (str(self.movewinbet_url) ,str(type_url) , str(room) ))
+            js_send_number = str(js_code.post_number_movewinbet(room,number_send,self.movewinbet_url,bet_type))  
         
         # print(js_send_number)
         # self.driver.get(_url)
@@ -1045,6 +1153,12 @@ class yeekee_bot(object):
                 
             if this_host == 'jetsada' or this_host == 'thailotto':
                 betListJsonStringify = betListJsonStringify + str(r'{\"type\":3,\"slug\":\"bet_two_top\",\"number\":\"%s\",\"price\":2},' % (str(num)))
+            
+            elif this_host == 'movewinbet':
+                price = 2
+                betListJsonStringify = betListJsonStringify + str('{"s":"bet_two_top","n":"%s","p":%s,"r":90},' % (str(num) , str(price)))
+                
+                
             elif this_host == 'chudjenbet':
                 price = 2
 
@@ -1092,6 +1206,22 @@ class yeekee_bot(object):
             js = js_code.bet_number_jesadabet(code,bet_text)
             sleep(2)
             self.driver.get('https://thailotto.io/member/affiliate')
+            sleep(2)
+            
+        elif this_host == 'movewinbet':
+            if bet_type == 'normal':
+                type_url = 'yeekee'
+            else:
+                type_url = 'yeekee-vip'
+            
+            movewinbet_url_bet = "https://%s/member/%s/%s/bet-number" % (str(self.movewinbet_url) , str(type_url) , str(room) )
+            
+            
+            self.driver.get(movewinbet_url_bet)
+            sleep(2)
+            js = js_code.bet_number_movewinbet(room,betListJsonStringify)
+            sleep(2)
+            self.driver.get('https://%s.live/member/affiliate')
             sleep(2)
         
         elif this_host == 'chudjenbet':
@@ -1148,7 +1278,15 @@ class yeekee_bot(object):
         code = self.session_data[user]['authorization']
         
         if this_host == 'thailotto' or this_host == 'jetsada':
-            _url = self.session_data[user]['url_balance'] + str(self.session_data[user]['ID'])
+            _url = 'https://thailotto.io/member/clear-credit-cache/' + str(self.session_data[user]['ID'])
+            self.driver.get(_url)
+            sleep(1)
+            # self.driver.save_screenshot('11111.png')
+
+            balance = self.driver.execute_script("return document.body.innerText")
+            
+        if this_host == 'movewinbet':
+            _url = 'https://%s/member/get-credit?auto_update_credit=0' % str(self.movewinbet_url) 
             self.driver.get(_url)
             sleep(1)
             # self.driver.save_screenshot('11111.png')
@@ -1204,12 +1342,15 @@ if __name__ == "__main__":
             print('bot is doing there job right now!!!')
         else:
             print('Not in time')
-            exit()
+            # exit()
         
         data_json = {'ip': external_ip , 'host' : 'jetsada'  ,'process' : 'get_user' }
         
-        data = json.loads(requests.post('http://128.199.236.187:8888/jesadabet/get_id',data=data_json ,timeout=60).text)['data']
+        data_get = json.loads(requests.post('http://128.199.236.187:8888/jesadabet/get_id',data=data_json ,timeout=60).text)
         # json_user = json.dumps(data.text)
+        
+        print(data_get)
+        data = data_get['data']
         print(data)
         
         
