@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.19a"
+version_yeekee = "v1.19b"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1221,7 +1221,7 @@ class yeekee_bot(object):
             sleep(2)
             js = js_code.bet_number_movewinbet(room,betListJsonStringify)
             sleep(2)
-            self.driver.get('https://%s.live/member/affiliate')
+            self.driver.get('https://%s/member/affiliate')
             sleep(2)
         
         elif this_host == 'chudjenbet':
