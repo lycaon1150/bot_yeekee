@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.19"
+version_yeekee = "v1.19a"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -368,7 +368,7 @@ class yeekee_bot(object):
     def room_264_movewinbet(self):
         now = datetime.datetime.now()
         time_in_minute = (now.hour*60 + now.minute)
-        state = int((time_in_minute+1)/5)
+        state = int((time_in_minute)/5)
     
         
         return state
