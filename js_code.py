@@ -254,7 +254,7 @@ def get_rank_ltobet(code,room,page,bet_type):
     
     return js
 
-def bet_number_movewinbet(room,betList):
+def bet_number_movewinbet(room,betList,bet_url):
     
 
 
@@ -291,10 +291,10 @@ def bet_number_movewinbet(room,betList):
     redirect: 'follow'
     };
 
-    fetch( betUrl , requestOptions)
+    fetch( '%s' , requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
-    .catch(error => console.log('error', error));""" % (str(room),str(betList))
+    .catch(error => console.log('error', error));""" % (str(room),str(betList) , str(bet_url))
     
     return js
 
