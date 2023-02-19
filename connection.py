@@ -1150,13 +1150,15 @@ class yeekee_bot(object):
                 num = str(0) + str(n)
             else:
                 num = str(n)
-                
+            
+        
+            
             if this_host == 'jetsada' or this_host == 'thailotto':
                 betListJsonStringify = betListJsonStringify + str(r'{\"type\":3,\"slug\":\"bet_two_top\",\"number\":\"%s\",\"price\":2},' % (str(num)))
             
             elif this_host == 'movewinbet':
                 price = 2
-                betListJsonStringify = betListJsonStringify + str('{"s":"bet_two_top","n":"%s","p":%s,"r":90},' % (str(num) , str(price)))
+                betListJsonStringify = betListJsonStringify + str('{"s":"bet_two_top","n":"%s","p":"%s","r":90},' % (str(num) , str(price)))
                 
                 
             elif this_host == 'chudjenbet':
@@ -1218,10 +1220,11 @@ class yeekee_bot(object):
             
             
             self.driver.get(movewinbet_url_bet)
-            sleep(2)
+            sleep(3)
+            print('bet web : ' + str(movewinbet_url_bet))
             js = js_code.bet_number_movewinbet(room,betListJsonStringify)
             sleep(2)
-            self.driver.get('https://%s/member/affiliate')
+            self.driver.get('https://%s/member/affiliate' % str(self.movewinbet_url))
             sleep(2)
         
         elif this_host == 'chudjenbet':
@@ -1262,7 +1265,8 @@ class yeekee_bot(object):
             sleep(2)
             self.driver.get('https://www.ltobet.com/member/affiliate')
             sleep(2)
-            
+        
+        self.driver.save_screenshot('bet_number.png')
         self.driver.execute_script(js)
     
        

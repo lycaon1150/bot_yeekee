@@ -291,7 +291,7 @@ def bet_number_movewinbet(room,betList):
     redirect: 'follow'
     };
 
-    fetch(betUrl, requestOptions)
+    fetch( betUrl , requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));""" % (str(room),str(betList))
