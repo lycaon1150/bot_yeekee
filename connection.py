@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.22c"
+version_yeekee = "v1.23"
 print(datetime.datetime.now())
 
 print(version_yeekee)
