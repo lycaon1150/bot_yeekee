@@ -28,7 +28,7 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 import undetected_chromedriver as uc
 from pyvirtualdisplay import Display
- 
+from selenium.webdriver.common.by import By
 
 import js_code
 
@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.20b"
+version_yeekee = "v1.21"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -62,7 +62,7 @@ class yeekee_bot(object):
         self.bonus = 0
         self.display = Display(visible=0, size=(800, 800)) 
         self.movewinbet_url = ""
-        
+        self.mungmeelt_uid = ""
         
         print('success created')
         
@@ -226,7 +226,7 @@ class yeekee_bot(object):
         print(self.driver.execute_script('return navigator.webdriver'))
         
         
-        if host in [ 'jetsada' , 'huay' , 'thailotto' , 'ruay' , 'lottovip']:
+        if host in [ 'jetsada' , 'huay' , 'thailotto' , 'ruay' , 'lottovip' ]:
             
             if host == 'jetsada':
                 self.driver.execute_script("document.getElementsByClassName('btn btn-bar btn-border btn-login-modal')[0].click();")
@@ -256,6 +256,39 @@ class yeekee_bot(object):
                 print(r)
             print('done login')
         
+        
+        elif host == 'lotto88':
+            sleep(1)
+            self.driver.find_element_by_xpath('//input[@type="text"]').send_keys(str(id))
+            self.driver.find_element_by_xpath('//input[@type="password"]').send_keys(str(pwd))
+            sleep(1)
+             
+             
+            self.driver.execute_script("document.getElementsByClassName('v-btn__content')[1].click()")
+        
+            sleep(5)
+            r = self.driver.execute_script("return window.localStorage['ACCESS_TOKEN']")
+
+        
+
+        elif host == 'mungmeelt':
+            
+            sleep(1)
+            self.driver.find_element(By.ID ,"username-login").send_keys(str(id))
+            self.driver.find_element(By.ID ,"pw-login").send_keys(str(pwd))
+            sleep(1)
+             
+            
+            self.driver.execute_script("document.getElementsByClassName('mdc-button__label')[0].click()")
+        
+            sleep(2)
+            
+            # r = self.driver.execute_script("return window.localStorage['ACCESS_TOKEN']")
+            self.mungmeelt_uid = self.driver.execute_script("return JSON.parse(window.localStorage[Object.keys(window.localStorage)[0]]).UserAttributes.at(3).Value")
+            r = self.driver.execute_script("return window.localStorage[Object.keys(window.localStorage)[1]]")
+
+            
+
         elif host == 'ltobet':
             
             sleep(2)
@@ -1144,7 +1177,8 @@ class yeekee_bot(object):
         # this_host == 'jetsada' or this_host == 'thailotto' or this_host == 'chudjenbet':
         betListJsonStringify = '['
 
-        for n in list_number:
+        # for n in list_number:
+        for count, n in enumerate(list_number):
             num = ""
             if n < 10 and bet_type != 'zodiac':
                 num = str(0) + str(n)
@@ -1157,8 +1191,15 @@ class yeekee_bot(object):
                 betListJsonStringify = betListJsonStringify + str(r'{\"type\":3,\"slug\":\"bet_two_top\",\"number\":\"%s\",\"price\":2},' % (str(num)))
             
             elif this_host == 'movewinbet':
-                price = 2
-                betListJsonStringify = betListJsonStringify + str('{"s":"bet_two_top","n":"%s","p":"%s","r":90},' % (str(num) , str(price)))
+                price = n
+                number_bet = ""
+                if count < 10:
+                    number_bet = str(0) + str(count)
+                else:
+                    number_bet = str(count)
+                
+                if price > 0:
+                    betListJsonStringify = betListJsonStringify + str('{"s":"bet_two_top","n":"%s","p":"%s","r":90},' % (str(num) , str(price)))
                 
                 
             elif this_host == 'chudjenbet':
@@ -1282,7 +1323,7 @@ class yeekee_bot(object):
         
         this_host = self.session_data[user]['host']
         code = self.session_data[user]['authorization']
-        
+        point = 0
         if this_host == 'thailotto' or this_host == 'jetsada':
             _url = 'https://thailotto.io/member/clear-credit-cache/' + str(self.session_data[user]['ID'])
             self.driver.get(_url)
@@ -1290,6 +1331,15 @@ class yeekee_bot(object):
             # self.driver.save_screenshot('11111.png')
 
             balance = self.driver.execute_script("return document.body.innerText")
+
+            sleep(2)
+
+            self.driver.get('https://thailotto.io/member/game')
+
+            sleep(2)
+            
+            point = self.driver.execute_script("return document.getElementsByClassName('font-xl text-success')[0].innerText")
+            
             
         if this_host == 'movewinbet':
             _url = 'https://%s/member/get-credit?auto_update_credit=0' % str(self.movewinbet_url) 
@@ -1318,7 +1368,7 @@ class yeekee_bot(object):
                 balance = 0.00
                 
                 
-        return balance
+        return balance , point
 
     def stop_display(self):
         self.display.stop()
@@ -1392,7 +1442,7 @@ if __name__ == "__main__":
             
             
             if get_af > 100 and data[codename]['host'] == 'thailotto':
-                balance = class_obj.get_balance(codename)
+                balance , point = class_obj.get_balance(codename)
                 class_obj.get_af_thailotto(codename,balance)
                 sleep(10) 
                 class_obj.go_shoot_number(codename, time_delay,test_process,bet_type,get_af)
@@ -1402,7 +1452,18 @@ if __name__ == "__main__":
             else : 
                 
                 #### เลือกเลข ####
-                l = [i for i in range(start,end)]
+                if data[codename]['host'] == 'movewinbet':
+                    n_bet = random.randint(50, 55)
+                    l = []
+                    for i in range(100):
+                        l.append(0)
+                    for i in range(n_bet):
+                        _n = random.randint(0, 99)
+                        l[_n] = l[_n] + 2
+                
+                else:
+                    l = [i for i in range(start,end)]
+                    
                 if data[codename]['use_money'] == 'yes':
                     class_obj.select_number(codename,l,bet_type=bet_type)
 
@@ -1418,7 +1479,7 @@ if __name__ == "__main__":
             
             
             
-            balance = class_obj.get_balance(codename)
+            balance , point = class_obj.get_balance(codename)
         
             sleep(5)
             
@@ -1460,7 +1521,8 @@ if __name__ == "__main__":
                         'version' : version_yeekee ,
                         'bonus' : bonus ,
                         'number_shot' : number_shot ,
-                        'get_af' : get_af
+                        'get_af' : get_af ,
+                        'point' : point
                         }
             print(data_json)
         
