@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.22"
+version_yeekee = "v1.22b"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1199,7 +1199,7 @@ class yeekee_bot(object):
                     number_bet = str(count)
                 
                 if price > 0:
-                    betListJsonStringify = betListJsonStringify + str('{"s":"bet_two_top","n":"%s","p":"%s","r":90},' % (str(num) , str(price)))
+                    betListJsonStringify = betListJsonStringify + str('{"s":"bet_two_top","n":"%s","p":"%s","r":90},' % (str(count) , str(price)))
                 
                 
             elif this_host == 'chudjenbet':
