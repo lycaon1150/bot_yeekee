@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.23"
+version_yeekee = "v1.23b"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -982,7 +982,7 @@ class yeekee_bot(object):
         delay = (1000000-set_delay)/1000000
         
         
-        if this_host == 'chudjenbet':
+        if this_host == 'movewinbet':
             while(1):
                 now = datetime.datetime.now()
                 time_in_microsec = (
@@ -1453,7 +1453,7 @@ if __name__ == "__main__":
                 
                 #### เลือกเลข ####
                 if data[codename]['host'] == 'movewinbet':
-                    n_bet = random.randint(50, 55)
+                    n_bet = random.randint(50, 52)
                     l = []
                     for i in range(100):
                         l.append(0)
