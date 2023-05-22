@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.23b"
+version_yeekee = "v1.24"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -999,7 +999,7 @@ class yeekee_bot(object):
                     now = datetime.datetime.now()  
                     self.driver.execute_script(js_send_number) 
                     end = datetime.datetime.now()
-                    
+                    self.driver.execute_script(js_send_number) 
                     
                     print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
                     use_time = (end-now).microseconds
@@ -1008,7 +1008,7 @@ class yeekee_bot(object):
                 
 
                 if state_ref == 0 :
-                    if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*33 - test:
+                    if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*35 - test:
                         print('ckick 1st')
                         sleep(0.01)
                         
@@ -1017,7 +1017,7 @@ class yeekee_bot(object):
                         end = datetime.datetime.now()  
                         
                         print('done ckick 1st :' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
-                        sleep(10.1)
+                        sleep(10.5)
                         
                         #########################################
                         print('ckick 2nd')
@@ -1029,7 +1029,7 @@ class yeekee_bot(object):
                         end = datetime.datetime.now()  
                         
                         print('done ckick 2nd : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
-                        sleep(10.1)
+                        sleep(10.5)
                         
                         #########################################
                         print('ckick 3th')
@@ -1041,7 +1041,7 @@ class yeekee_bot(object):
                         end = datetime.datetime.now()  
                         
                         print('done ckick 3th : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
-                        sleep(10.1)
+                        sleep(10.5)
                     
                     
                         state_ref = 1
@@ -1453,7 +1453,8 @@ if __name__ == "__main__":
                 
                 #### เลือกเลข ####
                 if data[codename]['host'] == 'movewinbet':
-                    n_bet = random.randint(50, 52)
+                    # n_bet = random.randint(50, 51)
+                    n_bet = 50
                     l = []
                     for i in range(100):
                         l.append(0)
