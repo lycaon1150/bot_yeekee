@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.24b"
+version_yeekee = "v1.25"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -470,8 +470,27 @@ class yeekee_bot(object):
                     secret_name = str(secret_name) + str(c) 
                 n = n + 1
             print(secret_name)
-        
-        
+
+            try:
+                self.bonus = 0
+                js = "return document.getElementsByClassName('username').length"
+                length_bonus = int(self.driver.execute_script(js))
+                
+                for i in range(length_bonus):
+                    js = "return document.getElementsByClassName('username')[%s]" % str(i+1)
+                    find_name = self.driver.execute_script(js).split('\n')[1]
+                    if find_name == name or find_name == secret_name:
+                        if bet_type == 'special':
+                        
+                            self.bonus = self.bonus + 300
+                        else:
+                            self.bonus = self.bonus + 500
+                    
+            except:
+
+                pass
+            
+            
             for i in range(20):
                 js = "return document.getElementsByClassName('item-col col-4 col-xl-4')[%s].innerText" % str(i*3+1)
                 find_name = self.driver.execute_script(js).split('\n')[1]
@@ -1008,7 +1027,7 @@ class yeekee_bot(object):
                 
 
                 if state_ref == 0 :
-                    if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*47 - test:
+                    if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*45 - test:
                         print('ckick 1st')
                         sleep(0.01)
                         
