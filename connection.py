@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.25b"
+version_yeekee = "v1.25c"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1027,7 +1027,12 @@ class yeekee_bot(object):
                 
 
                 if state_ref == 0 :
-                    if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*45 - test:
+                    if bet_type == 'normal':
+                        time_delay_movewin = 45.5
+                    else:
+                        time_delay_movewin = 46
+                        
+                    if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*time_delay_movewin - test:
                         print('ckick 1st')
                         sleep(0.01)
                         
