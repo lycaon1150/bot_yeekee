@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.25"
+version_yeekee = "v1.25b"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1221,17 +1221,29 @@ class yeekee_bot(object):
             if this_host == 'jetsada' or this_host == 'thailotto':
                 betListJsonStringify = betListJsonStringify + str(r'{\"type\":3,\"slug\":\"bet_two_top\",\"number\":\"%s\",\"price\":2},' % (str(num)))
             
+            # elif this_host == 'movewinbet':
+            #     price = n
+            #     number_bet = ""
+            #     if count < 10:
+            #         number_bet = str(0) + str(count)
+            #     else:
+            #         number_bet = str(count)
+                
+            #     if price > 0:
+            #         betListJsonStringify = betListJsonStringify + str('{"s":"bet_two_top","n":"%s","p":"%s","r":90},' % (str(number_bet) , str(price)))
+            
+            
             elif this_host == 'movewinbet':
-                price = n
+                price = 2
                 number_bet = ""
-                if count < 10:
-                    number_bet = str(0) + str(count)
+                if n < 10:
+                    number_bet = str(0) + str(n)
                 else:
-                    number_bet = str(count)
+                    number_bet = str(n)
                 
                 if price > 0:
                     betListJsonStringify = betListJsonStringify + str('{"s":"bet_two_top","n":"%s","p":"%s","r":90},' % (str(number_bet) , str(price)))
-                
+                    
                 
             elif this_host == 'chudjenbet':
                 price = 2
@@ -1483,7 +1495,8 @@ if __name__ == "__main__":
             else : 
                 
                 #### เลือกเลข ####
-                if data[codename]['host'] == 'movewinbet':
+                # if data[codename]['host'] == 'movewinbet':
+                if data[codename]['host'] == 'bra bra bra':
                     # n_bet = random.randint(50, 51)
                     n_bet = 50
                     l = []
