@@ -1098,12 +1098,12 @@ class yeekee_bot(object):
 
                     if this_host == 'thailotto':
                         self.driver.execute_script(js_send_number) 
-                        sleep(0.005)
+                        sleep(0.0001)
                     now = datetime.datetime.now()  
                     self.driver.execute_script(js_send_number) 
                     end = datetime.datetime.now()
                     if this_host == 'thailotto':
-                        sleep(0.005)
+                        sleep(0.0001)
                         self.driver.execute_script(js_send_number) 
                     
                     print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
