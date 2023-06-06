@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.25d"
+version_yeekee = "v1.26"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1577,7 +1577,8 @@ if __name__ == "__main__":
                         'point' : point
                         }
             print(data_json)
-        
+            time_num = random.randint(0, 80)/10
+            time.sleep(time_num)
             r = requests.post('http://128.199.236.187:8888/jesadabet/send_history',data=data_json)
             print(r.status_code)
             class_obj.driver.quit()
