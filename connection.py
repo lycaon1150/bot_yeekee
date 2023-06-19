@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.26"
+version_yeekee = "v1.27"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -445,7 +445,7 @@ class yeekee_bot(object):
                 if find_name == name or find_name == secret_name:
                     return i+1
             
-            sleep(2)
+            sleep(1)
             new_url = self.room_url + '?page=2'    
             self.driver.get(new_url)
         
@@ -1013,72 +1013,77 @@ class yeekee_bot(object):
                     if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000 - test and state_ref == 1:
                         print('ckick to win')
                         sleep(delay)
-
-                        self.driver.execute_script(js_send_number) 
-                        now = datetime.datetime.now()  
-                        self.driver.execute_script(js_send_number) 
-                        end = datetime.datetime.now()
-                        self.driver.execute_script(js_send_number) 
-                        
-                        print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
-                        use_time = (end-now).microseconds
-                        self.use_time = use_time
+                        try:
+                            self.driver.execute_script(js_send_number) 
+                            now = datetime.datetime.now()  
+                            self.driver.execute_script(js_send_number) 
+                            end = datetime.datetime.now()
+                            self.driver.execute_script(js_send_number) 
+                            
+                            print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
+                            use_time = (end-now).microseconds
+                            self.use_time = use_time
+                            
+                        except:
+                            pass
                         break
                     
 
                     if state_ref == 0 :
-                        if bet_type == 'normal':
-                            time_delay_movewin = 45.5
-                        else:
-                            time_delay_movewin = 46
+            
+                        time_delay_movewin = 50
                             
                         if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*time_delay_movewin - test:
-                            print('ckick 1st')
-                            sleep(0.01)
                             
-                            now = datetime.datetime.now()  
-                            self.driver.execute_script(js_send_number) 
-                            end = datetime.datetime.now()  
+                            try:
+                                print('ckick 1st')
+                                sleep(0.01)
+                                
+                                now = datetime.datetime.now()  
+                                self.driver.execute_script(js_send_number) 
+                                end = datetime.datetime.now()  
+                                
+                                print('done ckick 1st :' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
+                                sleep(11)
+                                
+                                #########################################
+                                print('ckick 2nd')
+                                sleep(0.01)
+                                
+                                
+                                now = datetime.datetime.now()  
+                                self.driver.execute_script(js_send_number) 
+                                end = datetime.datetime.now()  
+                                
+                                print('done ckick 2nd : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
+                                sleep(11)
+                                
+                                #########################################
+                                print('ckick 3th')
+                                sleep(0.01)
+                                
+                                
+                                now = datetime.datetime.now()  
+                                self.driver.execute_script(js_send_number) 
+                                end = datetime.datetime.now()  
+                                
+                                print('done ckick 3th : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
+                                sleep(11)
                             
-                            print('done ckick 1st :' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
-                            sleep(11)
-                            
-                            #########################################
-                            print('ckick 2nd')
-                            sleep(0.01)
-                            
-                            
-                            now = datetime.datetime.now()  
-                            self.driver.execute_script(js_send_number) 
-                            end = datetime.datetime.now()  
-                            
-                            print('done ckick 2nd : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
-                            sleep(11)
-                            
-                            #########################################
-                            print('ckick 3th')
-                            sleep(0.01)
-                            
-                            
-                            now = datetime.datetime.now()  
-                            self.driver.execute_script(js_send_number) 
-                            end = datetime.datetime.now()  
-                            
-                            print('done ckick 3th : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
-                            sleep(11)
-                        
-                            #########################################
-                            print('ckick 4th')
-                            sleep(0.01)
-                            
-                            
-                            now = datetime.datetime.now()  
-                            self.driver.execute_script(js_send_number) 
-                            end = datetime.datetime.now()  
-                            
-                            print('done ckick 4th : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
-                            # sleep(11)
-                            
+                                #########################################
+                                print('ckick 4th')
+                                sleep(0.01)
+                                
+                                
+                                now = datetime.datetime.now()  
+                                self.driver.execute_script(js_send_number) 
+                                end = datetime.datetime.now()  
+                                
+                                print('done ckick 4th : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
+                                # sleep(11)
+                                
+                            except:
+                                pass
                             
                             state_ref = 1
             
@@ -1114,22 +1119,24 @@ class yeekee_bot(object):
 
                     if state_ref == 0 :
                         if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*rand_time - test:
-                            print('ckick 1st')
-                            sleep(delay)
-                            self.driver.refresh()
-                            sleep(1.5)
-                            # self.driver.save_screenshot('1150.png')
+                            try:
+                                print('ckick 1st')
+                                sleep(delay)
+                                self.driver.refresh()
+                                sleep(1.5)
+                                # self.driver.save_screenshot('1150.png')
+                                    
+                                sleep(0.5)
                                 
-                            sleep(0.5)
-                            
-                            ######### ยิงเลขครั้งแรก ##############
-                            
-                            self.driver.execute_script(js_send_number) 
-                            print('done ckick 1st')
-                            sleep(15.5)
-                            
-                            self.driver.refresh()
-                        
+                                ######### ยิงเลขครั้งแรก ##############
+                                
+                                self.driver.execute_script(js_send_number) 
+                                print('done ckick 1st')
+                                sleep(1)
+                                
+                                self.driver.refresh()
+                            except:
+                                pass
                         
                             state_ref = 1
         except:
@@ -1453,7 +1460,7 @@ if __name__ == "__main__":
             # exit()
         
         data_json = {'ip': external_ip , 'host' : 'jetsada'  ,'process' : 'get_user' }
-        
+        sleep(random.randint(0, 100)/10)
         data_get = json.loads(requests.post('http://128.199.236.187:8888/jesadabet/get_id',data=data_json ,timeout=60).text)
         # json_user = json.dumps(data.text)
         
@@ -1467,7 +1474,7 @@ if __name__ == "__main__":
         username = data[codename]['ID']
         
         bet_type = data[codename]['bet_type'] 
-   
+        
         
         if data[codename]['test'] == 'yes':
             test_process = True
@@ -1524,8 +1531,12 @@ if __name__ == "__main__":
 
                 #### ยิงเลข ####
                 class_obj.go_shoot_number(codename, time_delay,test_process,bet_type,get_af)
-                sleep(30)
-                class_obj.get_bonus_vip(codename,data[codename]['host'])
+                sleep(10)
+                try:
+                    class_obj.get_bonus_vip(codename,data[codename]['host'])
+                except:
+                    pass
+                
                 sleep(10)
             
             
@@ -1538,7 +1549,7 @@ if __name__ == "__main__":
             sleep(5)
             
             print('balance  :' + str(balance) )
-            sleep(1)
+            sleep(10)
             if get_af > 100:
                 rank = 0
                 number_shot = 99999
@@ -1576,11 +1587,16 @@ if __name__ == "__main__":
                         'bonus' : bonus ,
                         'number_shot' : number_shot ,
                         'get_af' : get_af ,
-                        'point' : point
+                        'point' : point , 
+                        'server_delay' : data[codename]['server_delay'] 
                         }
             print(data_json)
-            time_num = random.randint(0, 80)/10
+            time_num = random.randint(0, 30)/10
+            
+            if int(rank) == 0:
+                time_num = time_num + 5
             time.sleep(time_num)
+            
             r = requests.post('http://128.199.236.187:8888/jesadabet/send_history',data=data_json)
             print(r.status_code)
             class_obj.driver.quit()
