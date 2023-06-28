@@ -39,14 +39,14 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.27"
+version_yeekee = "v1.28"
 print(datetime.datetime.now())
 
 print(version_yeekee)
-external_ip = requests.get('https://api.ipify.org').text
-print(external_ip)
+# external_ip = requests.get('https://api.ipify.org').text
+# print(external_ip)
 
-
+external_ip = "You know who am I"
 
 
 class yeekee_bot(object):
@@ -585,7 +585,7 @@ class yeekee_bot(object):
             for i in range(1,max_room):
                 _r = list(self.driver.execute_script(str(js_code.get_rank_ltobet(code,room,i,bet_type)))['records'])
                 # print(_r)
-                random.randint(1, 3)
+                # random.randint(1, 3)
                 for data in _r:
                     number.append(data['number'])
                     result.append(data['username'])
@@ -1460,7 +1460,7 @@ if __name__ == "__main__":
             # exit()
         
         data_json = {'ip': external_ip , 'host' : 'jetsada'  ,'process' : 'get_user' }
-        sleep(random.randint(0, 100)/10)
+        sleep(random.randint(0, 30)/10)
         data_get = json.loads(requests.post('http://128.199.236.187:8888/jesadabet/get_id',data=data_json ,timeout=60).text)
         # json_user = json.dumps(data.text)
         
@@ -1591,10 +1591,11 @@ if __name__ == "__main__":
                         'server_delay' : data[codename]['server_delay'] 
                         }
             print(data_json)
-            time_num = random.randint(0, 30)/10
+            time_num = random.randint(0, 10)/10
             
             if int(rank) == 0:
-                time_num = time_num + 5
+                time_num = time_num + 8
+                
             time.sleep(time_num)
             
             r = requests.post('http://128.199.236.187:8888/jesadabet/send_history',data=data_json)
