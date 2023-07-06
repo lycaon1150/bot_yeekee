@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.29"
+version_yeekee = "v1.29a"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1460,7 +1460,7 @@ if __name__ == "__main__":
             # exit()
         
         data_json = {'ip': external_ip , 'host' : 'jetsada'  ,'process' : 'get_user' }
-        sleep(random.randint(0, 30)/10)
+        sleep(random.randint(0, 30)/100)
         data_get = json.loads(requests.post('http://128.199.236.187:8888/jesadabet/get_id',data=data_json ,timeout=60).text)
         # json_user = json.dumps(data.text)
         
@@ -1537,7 +1537,7 @@ if __name__ == "__main__":
                 except:
                     pass
                 
-                sleep(10)
+                sleep(2)
             
             
             #### เช็ค balance ล่าสุด ####
@@ -1546,10 +1546,10 @@ if __name__ == "__main__":
             
             balance , point = class_obj.get_balance(codename)
         
-            sleep(5)
+            sleep(0.5)
             
             print('balance  :' + str(balance) )
-            sleep(10)
+            sleep(0.5)
             if get_af > 100:
                 rank = 0
                 number_shot = 99999
@@ -1559,7 +1559,7 @@ if __name__ == "__main__":
                 rank = class_obj.get_result(codename,bet_type)
                 number_shot = class_obj.number_send
                 bonus = class_obj.bonus
-            sleep(2)
+            sleep(0.5)
             print('rank :' + str(rank))
             
             
