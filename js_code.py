@@ -1,5 +1,5 @@
-def login_chudjenbet(username,password):
-    js = """return await fetch('https://chudjenbet.com/auth/login', {
+def login_nakee(username,password):
+    js = """return await fetch('https://nakee.com/auth/login', {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -15,8 +15,8 @@ def login_chudjenbet(username,password):
 
 
 
-def get_room_chudjenbet(code):
-    js = """return await fetch('https://chudjenbet.com/api/member/lotto', {
+def get_room_nakee(code):
+    js = """return await fetch('https://nakee.com/api/member/lotto', {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -49,8 +49,8 @@ def get_room_ltobet(tpye,code):
 
 
 
-def post_number_chudjenbet(code,room,num):
-    js = """fetch('https://chudjenbet.com/api/member/lotto/shoot/number/%s', {
+def post_number_nakee(code,room,num):
+    js = """fetch('https://nakee.com/api/member/lotto/shoot/number/%s', {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -95,8 +95,8 @@ def post_number_ltobet(code,room,num,bet_type):
     return js
 
 
-def bet_number_chudjenbet(code,link,bet_text):
-    js = """fetch('https://chudjenbet.com/api/game/lotto/%s', {
+def bet_number_nakee(code,link,bet_text):
+    js = """fetch('https://nakee.com/api/game/lotto/%s', {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -135,8 +135,8 @@ def bet_number_ltobet(code,link,bet_text):
    
     return js
 
-def get_balance_chudjenbet(code):
-    js = """return await fetch('https://chudjenbet.com/auth/me', {
+def get_balance_nakee(code):
+    js = """return await fetch('https://nakee.com/auth/me', {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -167,8 +167,8 @@ def get_balance_ltobet(code):
     
     return js
 
-def create_minigame_chudjenbet(code):
-    js = """fetch('https://chudjenbet.com/api/game/minigame/lucky/paoyingchub/creator', {
+def create_minigame_nakee(code):
+    js = """fetch('https://nakee.com/api/game/minigame/lucky/paoyingchub/creator', {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -183,8 +183,8 @@ def create_minigame_chudjenbet(code):
 })""" % (str(code))
     return js
 
-def challenger_minigame_chudjenbet(code,room):
-    js = """fetch('https://chudjenbet.com/api/game/minigame/lucky/paoyingchub/challenger', {
+def challenger_minigame_nakee(code,room):
+    js = """fetch('https://nakee.com/api/game/minigame/lucky/paoyingchub/challenger', {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -200,8 +200,8 @@ def challenger_minigame_chudjenbet(code,room):
     return js
 
 
-def get_rank_chudjenbet(code,room,page):
-    js = """return await fetch('https://chudjenbet.com/api/member/lotto/shoot/number/%s?page=%s', {
+def get_rank_nakee(code,room,page):
+    js = """return await fetch('https://nakee.com/api/member/lotto/shoot/number/%s?page=%s', {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -216,8 +216,8 @@ def get_rank_chudjenbet(code,room,page):
     
     return js
 
-def get_bonus_chudjenbet(code,room):
-    js = """return await fetch('https://chudjenbet.com/api/member/lotto/shoot/number/%s?uniqueId=rand_3', {
+def get_bonus_nakee(code,room):
+    js = """return await fetch('https://nakee.com/api/member/lotto/shoot/number/%s?uniqueId=rand_3', {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -482,8 +482,8 @@ def check_vip_ltobet(code):
     
     return js
 
-def get_vip_chudjenbet(code,vip):
-    js = """ await fetch('https://chudjenbet.com/api/member/privilege/bonus', {
+def get_vip_nakee(code,vip):
+    js = """ await fetch('https://nakee.com/api/member/privilege/bonus', {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -502,8 +502,8 @@ def get_vip_chudjenbet(code,vip):
     return js
 
 
-def check_vip_chudjenbet(code):
-    js = """ return await fetch('https://chudjenbet.com/api/member/privilege/bonus', {
+def check_vip_nakee(code):
+    js = """ return await fetch('https://nakee.com/api/member/privilege/bonus', {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

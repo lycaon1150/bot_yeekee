@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.28"
+version_yeekee = "v1.29"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -71,11 +71,11 @@ class yeekee_bot(object):
         try:
             state = 0
             code = self.session_data[user]['authorization']
-            if host == "chudjenbet" :
+            if host == "nakee" :
                 
                 
                 print('check VIP level')
-                data_vip = self.driver.execute_script(js_code.check_vip_chudjenbet(code))
+                data_vip = self.driver.execute_script(js_code.check_vip_nakee(code))
 
                 
                 
@@ -95,7 +95,7 @@ class yeekee_bot(object):
                     
                 else:
                     print("Get Bonus  " + str(state))
-                    data_vip = self.driver.execute_script(js_code.get_vip_chudjenbet(code,state))
+                    data_vip = self.driver.execute_script(js_code.get_vip_nakee(code,state))
                     
                     
             elif host == "ltobet":
@@ -154,7 +154,7 @@ class yeekee_bot(object):
         options.add_argument("--incognito")
         
         if server == "aws":
-            if host == 'chudjenbet':
+            if host == 'nakee':
                 self.display.start()
             else:
                 options.add_argument("--headless")
@@ -307,7 +307,7 @@ class yeekee_bot(object):
             
             
         
-        elif host == 'chudjenbet':
+        elif host == 'nakee':
             
             for i in range(3):
                 try:
@@ -327,7 +327,7 @@ class yeekee_bot(object):
                     r = self.driver.execute_script("return window.localStorage['auth._token.local']")
                     
                     print('key == ',len(str(r)))
-                    # key = self.driver.execute_script(js_code.login_chudjenbet(id,pwd))
+                    # key = self.driver.execute_script(js_code.login_nakee(id,pwd))
                     # print(key)
                     # r = str('Bearer ') + str(key['data']['token'])
                     
@@ -599,7 +599,7 @@ class yeekee_bot(object):
             
             
                 
-        elif this_host == 'chudjenbet':
+        elif this_host == 'nakee':
             z = len(name)
             n = 0
             
@@ -633,7 +633,7 @@ class yeekee_bot(object):
             bonus_reward = []
             
             
-            _bonus_data = list(self.driver.execute_script(str(js_code.get_bonus_chudjenbet(code,room)))['userRewards'])
+            _bonus_data = list(self.driver.execute_script(str(js_code.get_bonus_nakee(code,room)))['userRewards'])
             
             print(_bonus_data)
             
@@ -649,7 +649,7 @@ class yeekee_bot(object):
             
             
             for i in range(1,7):
-                _r = list(self.driver.execute_script(str(js_code.get_rank_chudjenbet(code,room,i)))['records'])
+                _r = list(self.driver.execute_script(str(js_code.get_rank_nakee(code,room,i)))['records'])
                 # print(_r)
                 sleep(0.3)
                 for data in _r:
@@ -715,38 +715,38 @@ class yeekee_bot(object):
             
             room = start_number+state
             
-        elif this_host == 'chudjenbet':
+        elif this_host == 'nakee':
             
-            data_room_chudjenbet = ""
+            data_room_nakee = ""
             attempts = 0
             while attempts < 3:
                 try:
                     print('get_room_by_js : ',attempts)
                     sleep(3)
-                    data_room_chudjenbet = self.driver.execute_script(js_code.get_room_chudjenbet(code))
+                    data_room_nakee = self.driver.execute_script(js_code.get_room_nakee(code))
                 
                     break
                 except:
                     attempts = attempts + 1
                
-            # print(data_room_chudjenbet)
+            # print(data_room_nakee)
 
             if bet_type == 'special':
-                for item in data_room_chudjenbet['records']:
+                for item in data_room_nakee['records']:
                     if item['category_id'] == 1401:
                         start_number = int(item['id'])
                         break
                 state = self.room_264()
 
             elif bet_type == 'vip_264':
-                for item in data_room_chudjenbet['records']:
+                for item in data_room_nakee['records']:
                     if item['category_id'] == 1701:
                         start_number = int(item['id'])
                         break
                 state = self.room_264()
                 
             elif bet_type == 'normal':
-                for item in data_room_chudjenbet['records']:
+                for item in data_room_nakee['records']:
                     if item['category_id'] == 101:
                         start_number = int(item['id'])
                         break
@@ -754,7 +754,7 @@ class yeekee_bot(object):
                 state = self.room_88()
             
             elif bet_type == 'vip_88':
-                for item in data_room_chudjenbet['records']:
+                for item in data_room_nakee['records']:
                     if item['category_id'] == 201:
                         start_number = int(item['id'])
                         break
@@ -765,35 +765,35 @@ class yeekee_bot(object):
             
         elif this_host == 'ltobet':
             
-            data_room_chudjenbet = ""
+            data_room_nakee = ""
             attempts = 0
       
             if bet_type == 'special':
-                data_room_chudjenbet = self.driver.execute_script(js_code.get_room_ltobet('speed',code))
+                data_room_nakee = self.driver.execute_script(js_code.get_room_ltobet('speed',code))
                 state = self.room_264()
-                room = data_room_chudjenbet['records'][state]['id']
+                room = data_room_nakee['records'][state]['id']
                     
               
             elif bet_type == 'vip_264':
-                data_room_chudjenbet = self.driver.execute_script(js_code.get_room_ltobet('speed_vip',code))
+                data_room_nakee = self.driver.execute_script(js_code.get_room_ltobet('speed_vip',code))
                 state = self.room_264()
-                room = data_room_chudjenbet['records'][state]['id']
+                room = data_room_nakee['records'][state]['id']
                 
             elif bet_type == 'normal':
-                data_room_chudjenbet = self.driver.execute_script(js_code.get_room_ltobet('yeekee',code))
+                data_room_nakee = self.driver.execute_script(js_code.get_room_ltobet('yeekee',code))
                 state = self.room_88()
-                room = data_room_chudjenbet['records'][state]['id']
+                room = data_room_nakee['records'][state]['id']
                 
           
             elif bet_type == 'vip_88':
-                data_room_chudjenbet = self.driver.execute_script(js_code.get_room_ltobet('yeekee_vip',code))
+                data_room_nakee = self.driver.execute_script(js_code.get_room_ltobet('yeekee_vip',code))
                 state = self.room_88()
-                room = data_room_chudjenbet['records'][state]['id']
+                room = data_room_nakee['records'][state]['id']
                 
             elif bet_type == 'zodiac':
-                data_room_chudjenbet = self.driver.execute_script(js_code.get_room_ltobet('zodiac',code))
+                data_room_nakee = self.driver.execute_script(js_code.get_room_ltobet('zodiac',code))
                 state = self.room_88()
-                room = data_room_chudjenbet['records'][state]['id']
+                room = data_room_nakee['records'][state]['id']
             
         elif this_host == 'movewinbet':
             if bet_type == 'special':
@@ -878,7 +878,7 @@ class yeekee_bot(object):
                 set_time_start = (21600 + 2*60) * 1000000
                 time_par_round = 15*60*1000000
                 
-        elif this_host == 'chudjenbet' or this_host == 'ltobet' :
+        elif this_host == 'nakee' or this_host == 'ltobet' :
             if bet_type == 'special' or bet_type == 'vip_264' :
                 time_to_click = state*5+361
                 set_time_start = (21600 + 1*60) * 1000000
@@ -947,10 +947,10 @@ class yeekee_bot(object):
             js_send_number = str(js_code.post_number_jesadabet(code,room,number_send))
             self.driver.get('https://thailotto.io/member/affiliate')
             
-        elif this_host == 'chudjenbet':
+        elif this_host == 'nakee':
             state_ref = 0
-            _url = str('https://chudjenbet.com/member/lotto/%s' % (room))
-            js_send_number = str(js_code.post_number_chudjenbet(code,room,number_send))
+            _url = str('https://nakee.com/member/lotto/%s' % (room))
+            js_send_number = str(js_code.post_number_nakee(code,room,number_send))
         
         elif this_host in ['ruay','lottovip']:
             state_ref = 0
@@ -966,7 +966,7 @@ class yeekee_bot(object):
         
         elif this_host == 'ltobet':
             state_ref = 0
-            _url = str('https://chudjenbet.com/member/lotto/%s' % (room))
+            _url = str('https://nakee.com/member/lotto/%s' % (room))
             js_send_number = str(js_code.post_number_ltobet(code,room,number_send,bet_type))        
         
         elif this_host == 'movewinbet':
@@ -1221,7 +1221,7 @@ class yeekee_bot(object):
         sleep(2)
 
 
-        # this_host == 'jetsada' or this_host == 'thailotto' or this_host == 'chudjenbet':
+        # this_host == 'jetsada' or this_host == 'thailotto' or this_host == 'nakee':
         betListJsonStringify = '['
 
         # for n in list_number:
@@ -1261,7 +1261,7 @@ class yeekee_bot(object):
                     betListJsonStringify = betListJsonStringify + str('{"s":"bet_two_top","n":"%s","p":"%s","r":90},' % (str(number_bet) , str(price)))
                     
                 
-            elif this_host == 'chudjenbet':
+            elif this_host == 'nakee':
                 price = 2
 
                 if bet_type == 'special':
@@ -1329,7 +1329,7 @@ class yeekee_bot(object):
             self.driver.get('https://%s/member/affiliate' % str(self.movewinbet_url))
             sleep(2)
         
-        elif this_host == 'chudjenbet':
+        elif this_host == 'nakee':
             hash = random.getrandbits(128)
             link = ''
             if bet_type == 'special':
@@ -1343,9 +1343,9 @@ class yeekee_bot(object):
             
                 
             bet_text = '{"lotto_id":%s,"stakes":"%s","hashed":"%s"}' % (str(room),betListJsonStringify,str(hash))
-            js = js_code.bet_number_chudjenbet(code,link,bet_text)
+            js = js_code.bet_number_nakee(code,link,bet_text)
             sleep(2)
-            self.driver.get('https://chudjenbet.com/member/affiliate')
+            self.driver.get('https://nakee.com/member/affiliate')
             sleep(2)
         
         elif this_host == 'ltobet':
@@ -1408,8 +1408,8 @@ class yeekee_bot(object):
 
             balance = self.driver.execute_script("return document.body.innerText")
         
-        elif this_host == 'chudjenbet':
-            balance = self.driver.execute_script(str(js_code.get_balance_chudjenbet(code)))['data']['real_credit']
+        elif this_host == 'nakee':
+            balance = self.driver.execute_script(str(js_code.get_balance_nakee(code)))['data']['real_credit']
         
         elif this_host == 'lottovip':
             self.driver.get('https://www.lottovip.com/member/credit_balance')
@@ -1482,7 +1482,7 @@ if __name__ == "__main__":
             test_process = False
             
 
-        # if data[codename]['host'] in ['jetsada' , 'thailotto' , 'chudjenbet', 'ruay' , 'lottovip' ] : 
+        # if data[codename]['host'] in ['jetsada' , 'thailotto' , 'nakee', 'ruay' , 'lottovip' ] : 
         if 1 == 1 :
             class_obj = yeekee_bot(data)
             
