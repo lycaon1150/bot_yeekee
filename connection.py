@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.29b"
+version_yeekee = "v1.29c"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1014,11 +1014,11 @@ class yeekee_bot(object):
                         print('ckick to win')
                         sleep(delay)
                         try:
-                            # self.driver.execute_script(js_send_number) 
+                            self.driver.execute_script(js_send_number) 
                             now = datetime.datetime.now()  
                             self.driver.execute_script(js_send_number) 
                             end = datetime.datetime.now()
-                            # self.driver.execute_script(js_send_number) 
+                            self.driver.execute_script(js_send_number) 
                             
                             print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
                             use_time = (end-now).microseconds
@@ -1071,16 +1071,7 @@ class yeekee_bot(object):
                                 sleep(11)
                             
                                 #########################################
-                                print('ckick 4th')
-                                sleep(0.01)
-                                
-                                
-                                now = datetime.datetime.now()  
-                                self.driver.execute_script(js_send_number) 
-                                end = datetime.datetime.now()  
-                                
-                                print('done ckick 4th : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
-                                # sleep(11)
+                               
                                 
                             except:
                                 pass
