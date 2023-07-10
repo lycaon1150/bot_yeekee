@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.29c"
+version_yeekee = "v1.29d"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1031,7 +1031,7 @@ class yeekee_bot(object):
 
                     if state_ref == 0 :
             
-                        time_delay_movewin = 50
+                        time_delay_movewin = 55
                             
                         if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*time_delay_movewin - test:
                             
@@ -1071,7 +1071,17 @@ class yeekee_bot(object):
                                 sleep(11)
                             
                                 #########################################
-                               
+                                print('ckick 4th')
+                                sleep(0.01)
+                                
+                                
+                                now = datetime.datetime.now()  
+                                self.driver.execute_script(js_send_number) 
+                                end = datetime.datetime.now()  
+                                
+                                print('done ckick 4th : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
+                                sleep(11)
+                                self.driver.refresh()
                                 
                             except:
                                 pass
