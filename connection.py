@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.29d"
+version_yeekee = "v1.29e"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1015,9 +1015,11 @@ class yeekee_bot(object):
                         sleep(delay)
                         try:
                             self.driver.execute_script(js_send_number) 
+                            self.driver.execute_script(js_send_number) 
                             now = datetime.datetime.now()  
                             self.driver.execute_script(js_send_number) 
                             end = datetime.datetime.now()
+                            self.driver.execute_script(js_send_number) 
                             self.driver.execute_script(js_send_number) 
                             
                             print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
