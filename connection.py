@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.29f"
+version_yeekee = "v1.30"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -760,6 +760,13 @@ class yeekee_bot(object):
                         break
                     
                 state = self.room_88()
+            
+            elif bet_type == 'speed_double':
+                for item in data_room_nakee['records']:
+                    if item['category_id'] == 3501:
+                        start_number = int(item['id'])
+                        break
+                state = self.room_264()
                 
             room = start_number+state 
             
@@ -879,7 +886,7 @@ class yeekee_bot(object):
                 time_par_round = 15*60*1000000
                 
         elif this_host == 'nakee' or this_host == 'ltobet' :
-            if bet_type == 'special' or bet_type == 'vip_264' :
+            if bet_type == 'special' or bet_type == 'vip_264' or bet_type ==  'speed_double':
                 time_to_click = state*5+361
                 set_time_start = (21600 + 1*60) * 1000000
                 time_par_round = 5*60*1000000
@@ -1275,6 +1282,8 @@ class yeekee_bot(object):
                     rate = 90
                 elif bet_type == 'vip_264':
                     rate = 90
+                elif bet_type == 'speed_double':
+                    rate = 99
                 elif bet_type == 'normal':
                     rate = 90
                 elif bet_type == 'vip_88':
@@ -1343,6 +1352,8 @@ class yeekee_bot(object):
                 link = 'speed'
             elif bet_type == 'vip_264':
                 link = 'speed_vip'
+            elif bet_type == 'speed_double':
+                link = 'speed_double'
             elif bet_type == 'vip_88':
                 link = 'yeekee_vip'
             elif bet_type == 'normal':
@@ -1531,7 +1542,20 @@ if __name__ == "__main__":
                 
                 else:
                     l = [i for i in range(start,end)]
-                    
+                
+                if data[codename]['host'] == 'nakee' and bet_type == 'speed_double':
+                    if start == 0:
+                        for _n in range (5):
+                            l.remove(_n*11)
+                        for _n in range (50,55):
+                            l.append(_n)
+                    elif start == 50:
+                        for _n in range (5):
+                            l.remove((_n+5)*11)
+                        for _n in range (45,50):
+                            l.append(_n)
+                                                
+                
                 if data[codename]['use_money'] == 'yes':
                     class_obj.select_number(codename,l,bet_type=bet_type)
 
