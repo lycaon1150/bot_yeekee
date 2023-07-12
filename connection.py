@@ -39,7 +39,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.30"
+version_yeekee = "v1.30a"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1113,17 +1113,17 @@ class yeekee_bot(object):
                         print('ckick to win')
                         sleep(delay)
 
-                        if this_host == 'thailotto':
-                            self.driver.execute_script(js_send_number) 
-                            self.driver.execute_script(js_send_number) 
-                            # sleep(0.000001)
+                        # if this_host == 'thailotto':
+                        #     self.driver.execute_script(js_send_number) 
+                        #     self.driver.execute_script(js_send_number) 
+                        #     # sleep(0.000001)
                         now = datetime.datetime.now()  
                         self.driver.execute_script(js_send_number) 
                         end = datetime.datetime.now()
                         if this_host == 'thailotto':
                             # sleep(0.000001)
                             self.driver.execute_script(js_send_number) 
-                            self.driver.execute_script(js_send_number) 
+                            # self.driver.execute_script(js_send_number) 
                         
                         print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
                         use_time = (end-now).microseconds
