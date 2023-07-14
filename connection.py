@@ -16,6 +16,7 @@ from typing import Tuple
 from webbrowser import get
 import requests
 import json
+import threading
 
 # from multiprocessing import Process , Queue
 # from re import I
@@ -39,7 +40,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.30a"
+version_yeekee = "v1.31"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -842,6 +843,9 @@ class yeekee_bot(object):
         return room , state
     
     
+    def send_js_to_server(self,js):
+        self.driver.execute_script(js)
+    
     def go_shoot_number(self, user, set_delay,test_setting,bet_type,get_af):   # 225k no.16-25
         code = self.session_data[user]['authorization']
         this_host = self.session_data[user]['host']
@@ -997,7 +1001,11 @@ class yeekee_bot(object):
         self.state = state
         sleep(1)
         
-        
+        t1 = threading.Thread(target=self.send_js_to_server, args=(js_send_number,))
+        t2 = threading.Thread(target=self.send_js_to_server, args=(js_send_number,))
+        t3 = threading.Thread(target=self.send_js_to_server, args=(js_send_number,))
+        t4 = threading.Thread(target=self.send_js_to_server, args=(js_send_number,))
+        t5 = threading.Thread(target=self.send_js_to_server, args=(js_send_number,))
         
         if get_af > 100:
             js_send_number = ''
@@ -1021,15 +1029,13 @@ class yeekee_bot(object):
                         print('ckick to win')
                         sleep(delay)
                         try:
-                            self.driver.execute_script(js_send_number) 
-                            self.driver.execute_script(js_send_number) 
-                            self.driver.execute_script(js_send_number) 
+                            t1.start() 
+                            t2.start() 
                             now = datetime.datetime.now()  
-                            self.driver.execute_script(js_send_number) 
+                            t3.start()  
                             end = datetime.datetime.now()
-                            self.driver.execute_script(js_send_number) 
-                            self.driver.execute_script(js_send_number) 
-                            self.driver.execute_script(js_send_number) 
+                            t4.start() 
+                            t5.start() 
                             
                             print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
                             use_time = (end-now).microseconds
@@ -1117,12 +1123,17 @@ class yeekee_bot(object):
                         #     self.driver.execute_script(js_send_number) 
                         #     self.driver.execute_script(js_send_number) 
                         #     # sleep(0.000001)
+                        
                         now = datetime.datetime.now()  
-                        self.driver.execute_script(js_send_number) 
+                        t1.start()
                         end = datetime.datetime.now()
                         if this_host == 'thailotto':
+                            t2.start()
+                            t3.start()
+                            t4.start()
+                            t5.start()
                             # sleep(0.000001)
-                            self.driver.execute_script(js_send_number) 
+                            # self.driver.execute_script(js_send_number) 
                             # self.driver.execute_script(js_send_number) 
                         
                         print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
