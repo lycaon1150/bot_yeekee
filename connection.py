@@ -1129,7 +1129,7 @@ class yeekee_bot(object):
 
                         if this_host == 'thailotto':
                             self.driver.execute_script(js_send_number) 
-                            sleep(0.000001)
+                            
         
                         
                         now = datetime.datetime.now()  
@@ -1145,7 +1145,7 @@ class yeekee_bot(object):
                             # sleep(0.000001)
                         
                             sleep(0.000001)
-                            self.driver.execute_script(js_send_number) 
+                            # self.driver.execute_script(js_send_number) 
                         
                         print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
                         use_time = (end-now).microseconds
