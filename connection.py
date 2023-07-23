@@ -40,7 +40,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.31c"
+version_yeekee = "v1.31d"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1130,13 +1130,12 @@ class yeekee_bot(object):
                         if this_host == 'thailotto':
                             self.driver.execute_script(js_send_number) 
                             sleep(0.000001)
-                            self.driver.execute_script(js_send_number) 
-                            sleep(0.000001)
+        
                         
                         now = datetime.datetime.now()  
+                        
                         self.driver.execute_script(js_send_number) 
-                        self.driver.execute_script(js_send_number) 
-                        self.driver.execute_script(js_send_number) 
+                      
                         end = datetime.datetime.now()
                         if this_host == 'thailotto':
                             # t2.start()
@@ -1144,7 +1143,7 @@ class yeekee_bot(object):
                             # t4.start()
                             # t5.start()
                             # sleep(0.000001)
-                            self.driver.execute_script(js_send_number) 
+                        
                             sleep(0.000001)
                             self.driver.execute_script(js_send_number) 
                         
