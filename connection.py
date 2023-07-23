@@ -40,7 +40,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.31"
+version_yeekee = "v1.31b"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1017,6 +1017,9 @@ class yeekee_bot(object):
         
         try:
             if this_host == 'movewinbet':
+                
+                server_delay_sec = int(server_delay*1000000)
+                time_set_round = time_par_round - 1000000 - test
                 while(1):
                     now = datetime.datetime.now()
                     time_in_microsec = (
@@ -1025,17 +1028,20 @@ class yeekee_bot(object):
                     
                     
                         
-                    if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000 - test and state_ref == 1:
+                    if (loop_time - server_delay_sec) % time_par_round > time_set_round and state_ref == 1:
                         print('ckick to win')
                         sleep(delay)
                         try:
-                            t1.start() 
-                            t2.start() 
+                            # t1.start() 
+                            # t2.start() 
+                            self.driver.execute_script(js_send_number) 
                             now = datetime.datetime.now()  
-                            t3.start()  
+                            # t3.start()  
+                            self.driver.execute_script(js_send_number) 
                             end = datetime.datetime.now()
-                            t4.start() 
-                            t5.start() 
+                            self.driver.execute_script(js_send_number) 
+                            # t4.start() 
+                            # t5.start() 
                             
                             print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
                             use_time = (end-now).microseconds
@@ -1051,7 +1057,7 @@ class yeekee_bot(object):
                         time_delay_movewin = 55
                             
                         if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*time_delay_movewin - test:
-                            
+                            state_ref = 1
                             try:
                                 print('ckick 1st')
                                 sleep(0.01)
@@ -1103,10 +1109,12 @@ class yeekee_bot(object):
                             except:
                                 pass
                             
-                            state_ref = 1
+                            
             
             else:
-            
+                
+                server_delay_sec = int(server_delay*1000000)
+                time_set_round = time_par_round - 1000000 - test
                 while(1):
                     now = datetime.datetime.now()
                     time_in_microsec = (
@@ -1115,26 +1123,28 @@ class yeekee_bot(object):
                     
                     
                         
-                    if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000 - test and state_ref == 1:
+                    if (loop_time - server_delay_sec) % time_par_round > time_set_round and state_ref == 1:
                         print('ckick to win')
                         sleep(delay)
 
-                        # if this_host == 'thailotto':
-                        #     self.driver.execute_script(js_send_number) 
-                        #     self.driver.execute_script(js_send_number) 
-                        #     # sleep(0.000001)
+                        if this_host == 'thailotto':
+                            self.driver.execute_script(js_send_number) 
+                            sleep(0.000001)
+                            self.driver.execute_script(js_send_number) 
+                            sleep(0.000001)
                         
                         now = datetime.datetime.now()  
                         t1.start()
                         end = datetime.datetime.now()
                         if this_host == 'thailotto':
-                            t2.start()
-                            t3.start()
-                            t4.start()
-                            t5.start()
+                            # t2.start()
+                            # t3.start()
+                            # t4.start()
+                            # t5.start()
                             # sleep(0.000001)
-                            # self.driver.execute_script(js_send_number) 
-                            # self.driver.execute_script(js_send_number) 
+                            self.driver.execute_script(js_send_number) 
+                            sleep(0.000001)
+                            self.driver.execute_script(js_send_number) 
                         
                         print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
                         use_time = (end-now).microseconds
