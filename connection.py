@@ -40,7 +40,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.31f"
+version_yeekee = "v1.32"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -407,7 +407,7 @@ class yeekee_bot(object):
         
         return state
 
-    def get_result(self,user,bet_type):
+    def get_result(self,user,bet_type,movewin_t):
         print('do process get_result')
         print('get rank')
         print(self.room_url)
@@ -462,8 +462,25 @@ class yeekee_bot(object):
         
         if this_host == 'movewinbet':
             n = 0
+            room_bet = self.room_number
             
-            self.driver.get(self.room_url)
+            if movewin_t == 1:
+                if bet_type == 'special':
+                    room_bet = (((self.room_number-1)*3)+(6*12))%288
+            
+            print('room_bet :' + str(room_bet))
+            
+            
+            if bet_type == 'special': 
+                bet_type_text = 'yeekee-vip'
+            else:
+                bet_type_text = 'yeekee'
+                
+                
+            movewinbet_url_bet = movewinbet_url_bet = "https://%s/member/%s/%s" % (str(self.movewinbet_url) , str(bet_type_text) , str(room_bet) )
+            print('url_bet :' + str(movewinbet_url_bet))
+            sleep(10)
+            self.driver.get(movewinbet_url_bet)
             for c in name:
                 if n == 1 or n == 2:
                     secret_name = str(secret_name) + str('*')
@@ -500,8 +517,8 @@ class yeekee_bot(object):
                 if find_name == name or find_name == secret_name:
                     return i+1
             
-            sleep(2)
-            new_url = self.room_url + '?page=2'    
+            sleep(1)
+            new_url = movewinbet_url_bet + '?page=2'    
             self.driver.get(new_url)
         
         
@@ -514,8 +531,8 @@ class yeekee_bot(object):
                     return i+1+20
             
             
-            sleep(2)
-            new_url = self.room_url + '?page=3'    
+            sleep(1)
+            new_url = movewinbet_url_bet + '?page=3'    
             self.driver.get(new_url)
         
         
@@ -527,8 +544,9 @@ class yeekee_bot(object):
                 if find_name == name or find_name == secret_name:
                     return i+1+40
             
-            sleep(2)
-            new_url = self.room_url + '?page=4'    
+            sleep(1)
+            
+            new_url = movewinbet_url_bet + '?page=4'    
             self.driver.get(new_url)
         
         
@@ -539,6 +557,25 @@ class yeekee_bot(object):
                 
                 if find_name == name or find_name == secret_name:
                     return i+1+60 
+            
+            sleep(1)
+            
+            new_url = movewinbet_url_bet + '?page=5'    
+            self.driver.get(new_url)
+        
+        
+            for i in range(20):
+                js = "return document.getElementsByClassName('item-col col-4 col-xl-4')[%s].innerText" % str(i*3+1)
+                find_name = self.driver.execute_script(js).split('\n')[1]
+                # print(find_name)
+                
+                if find_name == name or find_name == secret_name:
+                    return i+1+80 
+            
+            
+            
+            
+            
             
         elif this_host == 'ltobet':
             z = len(name)
@@ -846,7 +883,7 @@ class yeekee_bot(object):
     def send_js_to_server(self,js):
         self.driver.execute_script(js)
     
-    def go_shoot_number(self, user, set_delay,test_setting,bet_type,get_af):   # 225k no.16-25
+    def go_shoot_number(self, user, set_delay,test_setting,bet_type,get_af,movewinbet_t):   # 225k no.16-25
         code = self.session_data[user]['authorization']
         this_host = self.session_data[user]['host']
         set_time_start = (21600 + 2*60) * 1000000
@@ -867,6 +904,10 @@ class yeekee_bot(object):
         
         room , state = self.get_room(user)
         
+        if movewinbet_t == 1 and bet_type == 'normal':
+            state = self.room_88()
+            room = state + 1
+                
         
         ##### set time to click number #########
         
@@ -1054,7 +1095,7 @@ class yeekee_bot(object):
 
                     if state_ref == 0 :
             
-                        time_delay_movewin = 55
+                        time_delay_movewin = 34
                             
                         if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*time_delay_movewin - test:
                             state_ref = 1
@@ -1082,29 +1123,29 @@ class yeekee_bot(object):
                                 sleep(11)
                                 
                                 #########################################
-                                print('ckick 3th')
-                                sleep(0.01)
+                                # print('ckick 3th')
+                                # sleep(0.01)
                                 
                                 
-                                now = datetime.datetime.now()  
-                                self.driver.execute_script(js_send_number) 
-                                end = datetime.datetime.now()  
+                                # now = datetime.datetime.now()  
+                                # self.driver.execute_script(js_send_number) 
+                                # end = datetime.datetime.now()  
                                 
-                                print('done ckick 3th : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
-                                sleep(11)
+                                # print('done ckick 3th : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
+                                # sleep(11)
                             
-                                #########################################
-                                print('ckick 4th')
-                                sleep(0.01)
+                                # #########################################
+                                # print('ckick 4th')
+                                # sleep(0.01)
                                 
                                 
-                                now = datetime.datetime.now()  
-                                self.driver.execute_script(js_send_number) 
-                                end = datetime.datetime.now()  
+                                # now = datetime.datetime.now()  
+                                # self.driver.execute_script(js_send_number) 
+                                # end = datetime.datetime.now()  
                                 
-                                print('done ckick 4th : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
-                                sleep(11)
-                                self.driver.refresh()
+                                # print('done ckick 4th : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
+                                # sleep(11)
+                                # self.driver.refresh()
                                 
                             except:
                                 pass
@@ -1237,7 +1278,7 @@ class yeekee_bot(object):
 
 
 
-    def select_number(self,user,list_number,bet_type):
+    def select_number(self,user,list_number,bet_type,movewin_t):
         print('select_number_process',datetime.datetime.now())
         
         this_host = self.session_data[user]['host']
@@ -1354,6 +1395,12 @@ class yeekee_bot(object):
             else:
                 type_url = 'yeekee-vip'
             
+            if movewin_t == 1 and bet_type == 'normal':
+                
+                state = self.room_88()
+                room = state + 1
+                    
+                    
             movewinbet_url_bet = "https://%s/member/%s/%s" % (str(self.movewinbet_url) , str(type_url) , str(room) )
             
             
@@ -1488,7 +1535,7 @@ if __name__ == "__main__":
     a = subprocess.call("pkill chrome", shell=True)
     a = subprocess.call("pkill Xvfb", shell=True)
     # sleep(random.randint(0,150)/10)
-    
+    movewinbet_twin = 0
     try:
         now = datetime.datetime.now()
         time_in_minute = (now.hour*60 + now.minute)
@@ -1579,12 +1626,51 @@ if __name__ == "__main__":
                                                 
                 
                 if data[codename]['use_money'] == 'yes':
-                    class_obj.select_number(codename,l,bet_type=bet_type)
+                    
 
+                    if data[codename]['host'] == 'movewinbet' and (time_in_minute > 355 or time_in_minute < 240) and bet_type == 'special':
+                        now = datetime.datetime.now()
+                        time_in_minute = (now.hour*60 + now.minute)
+                        if time_in_minute < 240:
+                            state_n = int((time_in_minute-347+1440)/15)
+                            
+                        else:
+                            state_n = int((time_in_minute-347)/15)
+                        
+                        
+                        
+                        now = datetime.datetime.now()
+                        time_in_minute = (now.hour*60 + now.minute)
+                        state = int((time_in_minute)/5)
+                        
+                        if ((state_n)*3 + 6*12)%288 == state+1:
+                            movewinbet_twin = 1
+                            class_obj.select_number(codename,l,bet_type=bet_type,movewin_t=movewinbet_twin)
+                            sleep(5)
+                            class_obj.select_number(codename,l,bet_type='normal',movewin_t=movewinbet_twin)
+                            
+                        else:
+                            class_obj.select_number(codename,l,bet_type=bet_type,movewin_t=movewinbet_twin)  
+                        
+                    else:
+                        
+                        class_obj.select_number(codename,l,bet_type=bet_type,movewin_t=movewinbet_twin)
+                
 
                 #### ยิงเลข ####
-                class_obj.go_shoot_number(codename, time_delay,test_process,bet_type,get_af)
-                sleep(10)
+                
+                if movewinbet_twin == 1:
+                    class_obj.go_shoot_number(codename, time_delay,test_process,bet_type,get_af,movewinbet_twin)
+                    sleep(5)
+                    class_obj.go_shoot_number(codename, time_delay,test_process,'normal',get_af,movewinbet_twin)
+                
+                
+                else:
+                    class_obj.go_shoot_number(codename, time_delay,test_process,bet_type,get_af,movewinbet_twin)
+                    sleep(10)
+                    
+               
+                
                 try:
                     class_obj.get_bonus_vip(codename,data[codename]['host'])
                 except:
@@ -1600,7 +1686,8 @@ if __name__ == "__main__":
             balance , point = class_obj.get_balance(codename)
         
             sleep(0.5)
-            
+            rank_normal = 0
+            rank = 0
             print('balance  :' + str(balance) )
             sleep(0.5)
             if get_af > 100:
@@ -1609,10 +1696,17 @@ if __name__ == "__main__":
                 bonus = 0
                
             else:
-                rank = class_obj.get_result(codename,bet_type)
+                if movewinbet_twin == 1:
+                    rank = class_obj.get_result(codename,bet_type,movewinbet_twin)
+                    rank_normal = class_obj.get_result(codename,'normal',movewinbet_twin)
+                
+                else:
+                    
+                    rank = class_obj.get_result(codename,bet_type,movewinbet_twin)
+                    
                 number_shot = class_obj.number_send
                 bonus = class_obj.bonus
-            sleep(0.5)
+            # sleep(0.5)
             print('rank :' + str(rank))
             
             
@@ -1621,6 +1715,11 @@ if __name__ == "__main__":
             
           
             room_number = int(class_obj.state) + 1
+            
+            if movewinbet_twin == 1:
+                room_number_normal = room_number
+                room_number = (((room_number-1)*3)+(6*12))%288
+            
             
             day_start_bet = (datetime.datetime.now() - datetime.timedelta(hours=5)).date()
             
@@ -1647,12 +1746,47 @@ if __name__ == "__main__":
             time_num = random.randint(0, 10)/10
             
             if int(rank) == 0:
-                time_num = time_num + 8
+                time_num = time_num + 5
                 
             time.sleep(time_num)
             
             r = requests.post('http://128.199.236.187:8888/jesadabet/send_history',data=data_json)
             print(r.status_code)
+            
+            
+            
+            
+            ################# แทงรอบ 2 ############################
+            
+            if movewinbet_twin == 1:
+                data_json = {'username' : username ,
+                        'host' : data[codename]['host'] , 
+                        'bet_type' : 'normal' ,
+                        'delay_use' : time_delay ,
+                        'time_use' : class_obj.use_time,
+                        'date' : day_start_bet , 
+                        'bet_round' : room_number_normal , 
+                        'rank' : rank_normal , 
+                        'balance' : balance ,
+                        'version' : version_yeekee ,
+                        'bonus' : bonus ,
+                        'number_shot' : number_shot ,
+                        'get_af' : get_af ,
+                        'point' : point , 
+                        'server_delay' : data[codename]['server_delay'] 
+                        }
+                print(data_json)
+                time_num = random.randint(0, 10)/10
+                
+                if int(rank) == 0:
+                    time_num = time_num + 5
+                    
+                time.sleep(time_num)
+                
+                r = requests.post('http://128.199.236.187:8888/jesadabet/send_history',data=data_json)
+                print(r.status_code)
+            
+            
             class_obj.driver.quit()
             class_obj.stop_display()
                 
