@@ -40,7 +40,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.32a"
+version_yeekee = "v1.32b"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -891,7 +891,7 @@ class yeekee_bot(object):
         server_delay = float(self.session_data[user]['server_delay'])
         
         if movewinbet_t == 1 and bet_type == 'normal':
-            server_delay = float(self.session_data[user]['server_delay_nromal'])
+            server_delay = float(self.session_data[user]['server_delay_normal'])
        
        
         number_send = 0
@@ -1778,7 +1778,7 @@ if __name__ == "__main__":
                         'number_shot' : number_shot ,
                         'get_af' : get_af ,
                         'point' : point , 
-                        'server_delay' : data[codename]['server_delay'] 
+                        'server_delay' : data[codename]['server_delay_normal'] 
                         }
                 print(data_json)
                 time_num = random.randint(0, 10)/10
