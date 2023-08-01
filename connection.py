@@ -40,7 +40,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.32"
+version_yeekee = "v1.32a"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -889,6 +889,11 @@ class yeekee_bot(object):
         set_time_start = (21600 + 2*60) * 1000000
         
         server_delay = float(self.session_data[user]['server_delay'])
+        
+        if movewinbet_t == 1 and bet_type == 'normal':
+            server_delay = float(self.session_data[user]['server_delay_nromal'])
+       
+       
         number_send = 0
         
         	
@@ -1095,7 +1100,7 @@ class yeekee_bot(object):
 
                     if state_ref == 0 :
             
-                        time_delay_movewin = 34
+                        time_delay_movewin = 35
                             
                         if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*time_delay_movewin - test:
                             state_ref = 1
@@ -1123,15 +1128,15 @@ class yeekee_bot(object):
                                 sleep(11)
                                 
                                 #########################################
-                                # print('ckick 3th')
-                                # sleep(0.01)
+                                print('ckick 3th')
+                                sleep(0.01)
                                 
                                 
-                                # now = datetime.datetime.now()  
-                                # self.driver.execute_script(js_send_number) 
-                                # end = datetime.datetime.now()  
+                                now = datetime.datetime.now()  
+                                self.driver.execute_script(js_send_number) 
+                                end = datetime.datetime.now()  
                                 
-                                # print('done ckick 3th : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
+                                print('done ckick 3th : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now))
                                 # sleep(11)
                             
                                 # #########################################
