@@ -40,7 +40,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.32b"
+version_yeekee = "v1.32c"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1351,7 +1351,7 @@ class yeekee_bot(object):
                 elif bet_type == 'vip_264':
                     rate = 90
                 elif bet_type == 'speed_double':
-                    rate = 99
+                    rate = 97
                 elif bet_type == 'normal':
                     rate = 90
                 elif bet_type == 'vip_88':
