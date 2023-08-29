@@ -40,7 +40,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.32c"
+version_yeekee = "v1.32d"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1540,6 +1540,7 @@ if __name__ == "__main__":
     a = subprocess.call("pkill chrome", shell=True)
     a = subprocess.call("pkill Xvfb", shell=True)
     # sleep(random.randint(0,150)/10)
+    sleep(15)
     movewinbet_twin = 0
     try:
         now = datetime.datetime.now()
