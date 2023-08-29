@@ -446,10 +446,10 @@ class yeekee_bot(object):
                 if find_name == name or find_name == secret_name:
                     return i+1
             
-            sleep(1)
+            sleep(2)
             new_url = self.room_url + '?page=2'    
             self.driver.get(new_url)
-        
+            sleep(2)
         
             for i in range(50):
                 js = "return document.getElementsByClassName('username')[%s].innerText" %i
@@ -458,6 +458,19 @@ class yeekee_bot(object):
                 
                 if find_name == name or find_name == secret_name:
                     return i+51
+                
+                
+            new_url = self.room_url + '?page=3'    
+            self.driver.get(new_url)
+            sleep(2)
+        
+            for i in range(50):
+                js = "return document.getElementsByClassName('username')[%s].innerText" %i
+                find_name = self.driver.execute_script(js)
+                # print(find_name)
+                
+                if find_name == name or find_name == secret_name:
+                    return i+101
         
         
         if this_host == 'movewinbet':
@@ -1540,7 +1553,7 @@ if __name__ == "__main__":
     a = subprocess.call("pkill chrome", shell=True)
     a = subprocess.call("pkill Xvfb", shell=True)
     # sleep(random.randint(0,150)/10)
-    sleep(15)
+    sleep(5)
     movewinbet_twin = 0
     try:
         now = datetime.datetime.now()
