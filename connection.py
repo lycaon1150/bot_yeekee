@@ -40,7 +40,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.32d"
+version_yeekee = "v1.32e"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1489,20 +1489,31 @@ class yeekee_bot(object):
         code = self.session_data[user]['authorization']
         point = 0
         if this_host == 'thailotto' or this_host == 'jetsada':
-            _url = 'https://thailotto.io/member/clear-credit-cache/' + str(self.session_data[user]['ID'])
-            self.driver.get(_url)
-            sleep(1)
-            # self.driver.save_screenshot('11111.png')
-
-            balance = self.driver.execute_script("return document.body.innerText")
-
-            sleep(2)
-
-            self.driver.get('https://thailotto.io/member/game')
-
-            sleep(2)
             
-            point = self.driver.execute_script("return document.getElementsByClassName('font-xl text-success')[0].innerText")
+            for i in range(5):
+                try:
+                    sleep(0.3) 
+                    _url = 'https://thailotto.io/member/clear-credit-cache/' + str(self.session_data[user]['ID'])
+                    self.driver.get(_url)
+                    sleep(1)
+                    # self.driver.save_screenshot('11111.png')
+
+                    balance = self.driver.execute_script("return document.body.innerText")
+
+                    sleep(2)
+
+                    self.driver.get('https://thailotto.io/member/game')
+
+                    sleep(2)
+                    
+                    point = self.driver.execute_script("return document.getElementsByClassName('font-xl text-success')[0].innerText")
+                    break
+                
+                except Exception:
+                    continue
+                
+                
+            
             
             
         if this_host == 'movewinbet':
@@ -1531,7 +1542,7 @@ class yeekee_bot(object):
             if balance == "not have wallet":
                 balance = 0.00
                 
-                
+        print('done get balance')        
         return balance , point
 
     def stop_display(self):
