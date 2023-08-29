@@ -1499,7 +1499,7 @@ class yeekee_bot(object):
                     # self.driver.save_screenshot('11111.png')
 
                     balance = self.driver.execute_script("return document.body.innerText")
-
+                    print('thai lotto balance is  ',balance)
                     sleep(2)
 
                     self.driver.get('https://thailotto.io/member/game')
