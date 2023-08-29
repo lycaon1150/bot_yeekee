@@ -40,7 +40,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.32e"
+version_yeekee = "v1.32f"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1490,30 +1490,33 @@ class yeekee_bot(object):
         point = 0
         if this_host == 'thailotto' or this_host == 'jetsada':
             
-            for i in range(5):
-                try:
-                    sleep(0.3) 
-                    _url = 'https://thailotto.io/member/clear-credit-cache/' + str(self.session_data[user]['ID'])
-                    self.driver.get(_url)
-                    sleep(1)
-                    # self.driver.save_screenshot('11111.png')
+            # for i in range(5):
+            #     try:
+            #         sleep(0.3) 
+            #         _url = 'https://thailotto.io/member/clear-credit-cache/' + str(self.session_data[user]['ID'])
+            #         self.driver.get(_url)
+            #         sleep(1)
+            #         # self.driver.save_screenshot('11111.png')
 
-                    balance = self.driver.execute_script("return document.body.innerText")
-                    print('thai lotto balance is  ',balance)
-                    sleep(2)
+            #         balance = self.driver.execute_script("return document.body.innerText")
+            #         print('thai lotto balance is  ',balance)
+            #         sleep(2)
 
-                    self.driver.get('https://thailotto.io/member/game')
+            #         self.driver.get('https://thailotto.io/member/game')
 
-                    sleep(2)
+            #         sleep(2)
                     
-                    point = self.driver.execute_script("return document.getElementsByClassName('font-xl text-success')[0].innerText")
-                    break
+            #         point = self.driver.execute_script("return document.getElementsByClassName('font-xl text-success')[0].innerText")
+            #         break
                 
-                except Exception:
-                    continue
-                
-                
+            #     except Exception:
+            #         continue
             
+            _url = "https://thailotto.io/member/credit"
+            self.driver.get(_url)
+            sleep(1)
+            balance = self.driver.execute_script("return document.getElementsByClassName('font-xl float-right')[0].textContent")    
+            # sleep(2)
             
             
         if this_host == 'movewinbet':
