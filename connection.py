@@ -40,7 +40,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.32f"
+version_yeekee = "v1.32g"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1820,7 +1820,7 @@ if __name__ == "__main__":
                 print(r.status_code)
             
             
-            class_obj.driver.quit()
+            # class_obj.driver.quit()
             class_obj.stop_display()
                 
                 
