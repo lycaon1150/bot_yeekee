@@ -1820,7 +1820,7 @@ if __name__ == "__main__":
                 print(r.status_code)
             
             
-            # class_obj.driver.quit()
+            class_obj.driver.quit()
             class_obj.stop_display()
                 
                 
@@ -1832,6 +1832,8 @@ if __name__ == "__main__":
         
     sleep(2)    
     a = subprocess.call("pkill chrome", shell=True)
+    class_obj.driver.quit()
+    class_obj.stop_display()
     print('done')
     sleep(2)
     exit()
