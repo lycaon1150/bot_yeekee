@@ -40,7 +40,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.32h"
+version_yeekee = "v1.32i"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1821,19 +1821,27 @@ if __name__ == "__main__":
             
             
             class_obj.driver.quit()
-            class_obj.stop_display()
+            if data[codename]['host'] == 'nakee':
+                class_obj.stop_display()
                 
                 
                 
                 
     except Exception as e :
         print(e)
+        try:
+            class_obj.driver.quit()
+            if data[codename]['host'] == 'nakee':
+                class_obj.stop_display()
+        
+        except:
+            pass
         
         
     sleep(2)    
     a = subprocess.call("pkill chrome", shell=True)
-    class_obj.driver.quit()
-    class_obj.stop_display()
+    # class_obj.driver.quit()
+    # class_obj.stop_display()
     print('done')
     sleep(2)
     exit()
