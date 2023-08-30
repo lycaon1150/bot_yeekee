@@ -40,7 +40,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.32g"
+version_yeekee = "v1.32h"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -424,7 +424,7 @@ class yeekee_bot(object):
         name = user.split("_")[1]
         print(name)
         secret_name = ""
-        
+        print(datetime.datetime.now())
         if this_host == 'jetsada' or this_host == 'thailotto':
             n = 0
             
@@ -1820,7 +1820,7 @@ if __name__ == "__main__":
                 print(r.status_code)
             
             
-            # class_obj.driver.quit()
+            class_obj.driver.quit()
             class_obj.stop_display()
                 
                 
