@@ -40,7 +40,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.32i"
+version_yeekee = "v1.33"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -190,9 +190,9 @@ class yeekee_bot(object):
 
             json_data = data_id
             
-            self.driver.get('https://api.ipify.org')
-            sleep(1)
-            self.driver.save_screenshot('pic_ip.png')
+            # self.driver.get('https://api.ipify.org')
+            # sleep(1)
+            # self.driver.save_screenshot('pic_ip.png')
             # json_data['driver'] = driver
             json_data['authorization']  = ''
             self.driver.delete_all_cookies()
@@ -414,7 +414,19 @@ class yeekee_bot(object):
         print(self.room_number)
         # _url = str('https://www.jetsada.net/member/lottery/yeekee/%s' %(start_number+state))
 
-        self.driver.get(self.room_url)
+        tries = 5
+        for it in range(tries):
+            try:
+                self.driver.get(self.room_url)
+            except KeyError as e:
+                if it < tries - 1: # i is zero indexed
+                    continue
+                else:
+                    raise
+            break
+        
+        
+        
         this_host = self.session_data[user]['host']
         code = self.session_data[user]['authorization']
         sleep(3)
@@ -1513,8 +1525,19 @@ class yeekee_bot(object):
             #         continue
             
             _url = "https://thailotto.io/member/credit"
-            self.driver.get(_url)
+            # self.driver.get(_url)
+            tries = 5
+            for it in range(tries):
+                try:
+                    self.driver.get(_url)
+                except KeyError as e:
+                    if it < tries - 1: # i is zero indexed
+                        continue
+                    else:
+                        raise
+                break
             sleep(1)
+            
             balance = self.driver.execute_script("return document.getElementsByClassName('font-xl float-right')[0].textContent")    
             # sleep(2)
             
@@ -1528,7 +1551,18 @@ class yeekee_bot(object):
             balance = self.driver.execute_script("return document.body.innerText")
         
         elif this_host == 'nakee':
-            balance = self.driver.execute_script(str(js_code.get_balance_nakee(code)))['data']['real_credit']
+            tries = 5
+            for it in range(tries):
+                try:
+                    balance = self.driver.execute_script(str(js_code.get_balance_nakee(code)))['data']['real_credit']
+                except KeyError as e:
+                    if it < tries - 1: # i is zero indexed
+                        continue
+                    else:
+                        raise
+                break
+           
+            # balance = self.driver.execute_script(str(js_code.get_balance_nakee(code)))['data']['real_credit']
         
         elif this_host == 'lottovip':
             self.driver.get('https://www.lottovip.com/member/credit_balance')
