@@ -40,7 +40,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.33"
+version_yeekee = "v1.33b"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1078,8 +1078,8 @@ class yeekee_bot(object):
         t4 = threading.Thread(target=self.send_js_to_server, args=(js_send_number,))
         t5 = threading.Thread(target=self.send_js_to_server, args=(js_send_number,))
         
-        if get_af > 100:
-            js_send_number = ''
+        # if get_af > 100:
+        #     js_send_number = ''
             
         use_time = 0
         rand_time = (30 + random.randint(0, 4))
@@ -1306,6 +1306,55 @@ class yeekee_bot(object):
     
         print('done bet number for get AF')
 
+
+    def get_af_nakee(self,user,balance):
+        if ',' in balance:
+            balance = balance.replace(",", "")
+            
+            
+        price = int(int(int(float(balance))/100) - 2)
+        
+        print('bet price :'  + str(price))
+        code = self.session_data[user]['authorization']
+
+        room , state = self.get_room(user)
+        
+        if state < 0:
+            print('can not bet yet')
+            return False
+        else:
+            print('start___select')
+            
+        sleep(2)
+
+        betListJsonStringify = '['
+        for n in range(100):
+            
+            num = ""
+            if n < 10 :
+                num = str(0) + str(n)
+            else:
+                num = str(n)
+                
+            betListJsonStringify = betListJsonStringify + str(r'{\"slug\":\"two_top\",\"number\":\"%s\",\"price\":\"%s\",\"rate\":\"%s\"},' % (str(num),str(price),str(90)))
+            
+            
+        count_n = len(betListJsonStringify)
+        betListJsonStringify = list(betListJsonStringify)
+        betListJsonStringify[count_n-1] = ']' 
+        betListJsonStringify = ''.join(betListJsonStringify)   
+        hash = random.getrandbits(128)
+
+        bet_text = '{"lotto_id":%s,"stakes":"%s","hashed":"%s"}' % (str(room),betListJsonStringify,str(hash))
+        js = js_code.bet_number_nakee(code,'speed',bet_text)
+        sleep(2)
+        self.driver.get('https://nakee.com/member/affiliate')
+        sleep(2)
+    
+
+        self.driver.execute_script(js)
+    
+        print('done bet number for get AF')
 
 
     def select_number(self,user,list_number,bet_type,movewin_t):
@@ -1661,7 +1710,13 @@ if __name__ == "__main__":
                 class_obj.go_shoot_number(codename, time_delay,test_process,bet_type,get_af)
                 sleep(40)
               
-            
+            elif get_af > 100 and data[codename]['host'] == 'nakee':
+                balance , point = class_obj.get_balance(codename)
+                class_obj.get_af_nakee(codename,balance)
+                sleep(10) 
+                class_obj.go_shoot_number(codename, time_delay,test_process,bet_type,get_af)
+                sleep(40)
+
             else : 
                 
                 #### เลือกเลข ####
