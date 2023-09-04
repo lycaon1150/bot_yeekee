@@ -1310,9 +1310,12 @@ class yeekee_bot(object):
     def get_af_nakee(self,user,balance):
         if ',' in balance:
             balance = balance.replace(",", "")
-            
+
+        if ' ' in balance:
+            balance = balance.replace(" ", "")
+
         print('balance AF = ' , balance)    
-        price = int(int(int(int(balance))/100) - 0)
+        price = int(int(int(int(balance/100))) - 0)
         
         print('bet price :'  + str(price))
         code = self.session_data[user]['authorization']
