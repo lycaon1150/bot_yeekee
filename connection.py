@@ -1315,8 +1315,8 @@ class yeekee_bot(object):
             balance = balance.replace(" ", "")
 
         print('balance AF = ' , balance)    
-        price = int(int(int(int(balance/100))) - 0)
-        
+        # price = int(int(int(int(balance/100))) - 0)
+        price = round(balance/100)
         print('bet price :'  + str(price))
         code = self.session_data[user]['authorization']
 
