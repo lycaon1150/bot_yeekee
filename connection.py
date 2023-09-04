@@ -40,7 +40,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.33b"
+version_yeekee = "v1.33c"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1628,7 +1628,8 @@ class yeekee_bot(object):
             if balance == "not have wallet":
                 balance = 0.00
                 
-        print('done get balance')        
+        print('done get balance')   
+        print(balance)     
         return balance , point
 
     def stop_display(self):
