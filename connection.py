@@ -1313,7 +1313,7 @@ class yeekee_bot(object):
 
         # if ' ' in balance:
         #     balance = balance.replace(" ", "")
-
+        print('get_af_nakee')
         print('balance AF = ' , balance)    
         # price = int(int(int(int(balance/100))) - 0)
         price = round(balance/100)
