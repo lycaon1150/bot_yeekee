@@ -1715,7 +1715,7 @@ if __name__ == "__main__":
                 balance , point = class_obj.get_balance(codename)
                 class_obj.get_af_thailotto(codename,balance)
                 sleep(10) 
-                class_obj.go_shoot_number(codename, time_delay,test_process,bet_type,get_af)
+                class_obj.go_shoot_number(codename, time_delay,test_process,bet_type,get_af,0)
                 sleep(40)
               
             elif get_af > 100 and data[codename]['host'] == 'nakee':
@@ -1723,7 +1723,7 @@ if __name__ == "__main__":
                 balance , point = class_obj.get_balance(codename)
                 class_obj.get_af_nakee(codename,balance)
                 sleep(10) 
-                class_obj.go_shoot_number(codename, time_delay,test_process,bet_type,get_af)
+                class_obj.go_shoot_number(codename, time_delay,test_process,bet_type,get_af,0)
                 sleep(40)
 
             else : 
