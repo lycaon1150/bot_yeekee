@@ -1318,6 +1318,8 @@ class yeekee_bot(object):
         # price = int(int(int(int(balance/100))) - 0)
         price = round(balance/100)
         print('bet price :'  + str(price))
+
+        
         code = self.session_data[user]['authorization']
 
         room , state = self.get_room(user)
@@ -1682,6 +1684,7 @@ if __name__ == "__main__":
 
 
         if int(data[codename]['get_af']) > 100 and data[codename]['host'] == 'nakee':
+            data[codename]['bet_type']  = 'special'
             bet_type = 'special'
         else:
             bet_type = data[codename]['bet_type'] 
