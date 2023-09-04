@@ -17,6 +17,7 @@ from webbrowser import get
 import requests
 import json
 import threading
+import math
 
 # from multiprocessing import Process , Queue
 # from re import I
@@ -40,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.33c"
+version_yeekee = "v1.33d"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1316,7 +1317,7 @@ class yeekee_bot(object):
         print('get_af_nakee')
         print('balance AF = ' , balance)    
         # price = int(int(int(int(balance/100))) - 0)
-        price = round(balance/100)
+        price = math.floor(balance/100)
         print('bet price :'  + str(price))
 
         
