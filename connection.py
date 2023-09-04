@@ -1311,8 +1311,8 @@ class yeekee_bot(object):
         if ',' in balance:
             balance = balance.replace(",", "")
             
-            
-        price = int(int(int(float(balance))/100) - 2)
+        print('balance AF = ' , balance)    
+        price = int(int(int(int(balance))/100) - 0)
         
         print('bet price :'  + str(price))
         code = self.session_data[user]['authorization']
@@ -1675,8 +1675,12 @@ if __name__ == "__main__":
         codename = str(list(data.keys())[0])
         time_delay = int(data[codename]['time_delay'])
         username = data[codename]['ID']
-        
-        bet_type = data[codename]['bet_type'] 
+
+
+        if int(data[codename]['get_af']) > 100 and data[codename]['host'] == 'nakee':
+            bet_type = 'special'
+        else:
+            bet_type = data[codename]['bet_type'] 
         
         
         if data[codename]['test'] == 'yes':
@@ -1711,6 +1715,7 @@ if __name__ == "__main__":
                 sleep(40)
               
             elif get_af > 100 and data[codename]['host'] == 'nakee':
+                
                 balance , point = class_obj.get_balance(codename)
                 class_obj.get_af_nakee(codename,balance)
                 sleep(10) 
