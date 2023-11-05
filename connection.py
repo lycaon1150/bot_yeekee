@@ -41,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.33d"
+version_yeekee = "v1.34b"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1105,14 +1105,14 @@ class yeekee_bot(object):
                         sleep(delay)
                         try:
                             t1.start() 
-                            t2.start() 
+                            # t2.start() 
                             # self.driver.execute_script(js_send_number) 
                             now = datetime.datetime.now()  
                             t3.start()  
                             # self.driver.execute_script(js_send_number) 
                             end = datetime.datetime.now()
                             # self.driver.execute_script(js_send_number) 
-                            t4.start() 
+                            # t4.start() 
                             t5.start() 
                             
                             print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
@@ -1200,13 +1200,17 @@ class yeekee_bot(object):
                         sleep(delay)
 
                         if this_host == 'thailotto':
-                            self.driver.execute_script(js_send_number) 
-                            
+                            # self.driver.execute_script(js_send_number) 
+                            t2.start()
+                            t3.start()
+                            #     # t4.start()
+                            #     # t5.start()
         
                         
                         now = datetime.datetime.now()  
                         
-                        self.driver.execute_script(js_send_number) 
+                        # self.driver.execute_script(js_send_number) 
+                        t4.start()
                       
                         end = datetime.datetime.now()
                         if this_host == 'thailotto':
