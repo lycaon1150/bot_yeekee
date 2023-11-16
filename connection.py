@@ -41,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.34d"
+version_yeekee = "v1.35"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -65,7 +65,7 @@ class yeekee_bot(object):
         self.display = Display(visible=0, size=(800, 800)) 
         self.movewinbet_url = ""
         self.mungmeelt_uid = ""
-        
+        self.last_rank = 0
         print('success created')
         
     def get_bonus_vip(self,user,host):
@@ -438,6 +438,12 @@ class yeekee_bot(object):
         print(name)
         secret_name = ""
         print(datetime.datetime.now())
+        past_time = list(str(datetime.datetime.now()- datetime.timedelta(0,60)).split(".")[0])
+        past_time[17] = "5"
+        past_time[18] = "9"
+        time_rank = "".join(past_time)
+
+
         if this_host == 'jetsada' or this_host == 'thailotto':
             n = 0
             
@@ -452,7 +458,15 @@ class yeekee_bot(object):
         
         
             for i in range(50):
-                js = "return document.getElementsByClassName('username')[%s].innerText" %i
+                js = "return document.getElementsByClassName('username')[%s].innerText" %i 
+                js_time = "return document.getElementsByClassName('date')[%s].innerText" %i 
+                
+                last_rank_js = self.driver.execute_script(js_time)
+
+                if time_rank == last_rank_js:
+                    self.last_rank = i+1
+
+
                 find_name = self.driver.execute_script(js)
                 # print(find_name)
                 
@@ -466,6 +480,13 @@ class yeekee_bot(object):
         
             for i in range(50):
                 js = "return document.getElementsByClassName('username')[%s].innerText" %i
+                js_time = "return document.getElementsByClassName('date')[%s].innerText" %i 
+                
+                last_rank_js = self.driver.execute_script(js_time)
+
+                if time_rank == last_rank_js:
+                    self.last_rank = i+51
+
                 find_name = self.driver.execute_script(js)
                 # print(find_name)
                 
@@ -479,11 +500,39 @@ class yeekee_bot(object):
         
             for i in range(50):
                 js = "return document.getElementsByClassName('username')[%s].innerText" %i
+
+                js_time = "return document.getElementsByClassName('date')[%s].innerText" %i 
+                
+                last_rank_js = self.driver.execute_script(js_time)
+
+                if time_rank == last_rank_js:
+                    self.last_rank = i+101
+                    
                 find_name = self.driver.execute_script(js)
                 # print(find_name)
                 
                 if find_name == name or find_name == secret_name:
                     return i+101
+            
+            new_url = self.room_url + '?page=4'    
+            self.driver.get(new_url)
+            sleep(2)
+        
+            for i in range(50):
+                js = "return document.getElementsByClassName('username')[%s].innerText" %i
+
+                js_time = "return document.getElementsByClassName('date')[%s].innerText" %i 
+                
+                last_rank_js = self.driver.execute_script(js_time)
+
+                if time_rank == last_rank_js:
+                    self.last_rank = i+151
+                    
+                find_name = self.driver.execute_script(js)
+                # print(find_name)
+                
+                if find_name == name or find_name == secret_name:
+                    return i+151
         
         
         if this_host == 'movewinbet':
@@ -1104,16 +1153,19 @@ class yeekee_bot(object):
                         print('ckick to win')
                         sleep(delay)
                         try:
-                            t1.start() 
+                            # t1.start() 
                             # t2.start() 
-                            # self.driver.execute_script(js_send_number) 
+                            self.driver.execute_script(js_send_number) 
+                            self.driver.execute_script(js_send_number) 
                             now = datetime.datetime.now()  
-                            t3.start()  
-                            # self.driver.execute_script(js_send_number) 
+                            # t3.start()  
+                            self.driver.execute_script(js_send_number) 
+                            self.driver.execute_script(js_send_number)
                             end = datetime.datetime.now()
-                            # self.driver.execute_script(js_send_number) 
+                            self.driver.execute_script(js_send_number) 
+                            self.driver.execute_script(js_send_number)
                             # t4.start() 
-                            t5.start() 
+                            # t5.start() 
                             
                             print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
                             use_time = (end-now).microseconds
@@ -1832,6 +1884,8 @@ if __name__ == "__main__":
             rank = 0
             print('balance  :' + str(balance) )
             sleep(0.5)
+
+
             if get_af > 100:
                 rank = 0
                 number_shot = 99999
@@ -1848,6 +1902,9 @@ if __name__ == "__main__":
                     
                 number_shot = class_obj.number_send
                 bonus = class_obj.bonus
+
+                last_rank_59 = class_obj.last_rank
+
             # sleep(0.5)
             print('rank :' + str(rank))
             
@@ -1876,6 +1933,7 @@ if __name__ == "__main__":
                         'date' : day_start_bet , 
                         'bet_round' : room_number , 
                         'rank' : rank , 
+                        'last_rank' : last_rank_59 ,
                         'balance' : balance ,
                         'version' : version_yeekee ,
                         'bonus' : bonus ,
