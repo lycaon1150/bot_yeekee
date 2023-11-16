@@ -441,8 +441,8 @@ class yeekee_bot(object):
         past_time = list(str(datetime.datetime.now()- datetime.timedelta(0,60)).split(".")[0])
         past_time[17] = "5"
         past_time[18] = "9"
-        time_rank = "".join(past_time)
-
+        time_rank = str("".join(past_time)).split(" ")[1]
+        print(time_rank)
 
         if this_host == 'jetsada' or this_host == 'thailotto':
             n = 0
@@ -461,8 +461,8 @@ class yeekee_bot(object):
                 js = "return document.getElementsByClassName('username')[%s].innerText" %i 
                 js_time = "return document.getElementsByClassName('date')[%s].innerText" %i 
                 
-                last_rank_js = self.driver.execute_script(js_time)
-
+                last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
+                
                 if time_rank == last_rank_js:
                     self.last_rank = i+1
 
