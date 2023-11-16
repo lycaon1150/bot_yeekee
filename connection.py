@@ -482,7 +482,7 @@ class yeekee_bot(object):
                 js = "return document.getElementsByClassName('username')[%s].innerText" %i
                 js_time = "return document.getElementsByClassName('date')[%s].innerText" %i 
                 
-                last_rank_js = self.driver.execute_script(js_time)
+                last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
 
                 if time_rank == last_rank_js:
                     self.last_rank = i+51
@@ -503,7 +503,7 @@ class yeekee_bot(object):
 
                 js_time = "return document.getElementsByClassName('date')[%s].innerText" %i 
                 
-                last_rank_js = self.driver.execute_script(js_time)
+                last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
 
                 if time_rank == last_rank_js:
                     self.last_rank = i+101
@@ -523,7 +523,7 @@ class yeekee_bot(object):
 
                 js_time = "return document.getElementsByClassName('date')[%s].innerText" %i 
                 
-                last_rank_js = self.driver.execute_script(js_time)
+                last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
 
                 if time_rank == last_rank_js:
                     self.last_rank = i+151
