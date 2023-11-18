@@ -41,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.35"
+version_yeekee = "v1.35b"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -430,7 +430,7 @@ class yeekee_bot(object):
         
         this_host = self.session_data[user]['host']
         code = self.session_data[user]['authorization']
-        sleep(3)
+        sleep(1)
         self.driver.save_screenshot('rank.png')
         # print(self.room_url)
         
@@ -473,10 +473,10 @@ class yeekee_bot(object):
                 if find_name == name or find_name == secret_name:
                     return i+1
             
-            sleep(2)
+            sleep(0.5)
             new_url = self.room_url + '?page=2'    
             self.driver.get(new_url)
-            sleep(2)
+            sleep(0.5)
         
             for i in range(50):
                 js = "return document.getElementsByClassName('username')[%s].innerText" %i
@@ -496,11 +496,10 @@ class yeekee_bot(object):
                 
             new_url = self.room_url + '?page=3'    
             self.driver.get(new_url)
-            sleep(2)
+            sleep(0.5)
         
             for i in range(50):
                 js = "return document.getElementsByClassName('username')[%s].innerText" %i
-
                 js_time = "return document.getElementsByClassName('date')[%s].innerText" %i 
                 
                 last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
@@ -516,11 +515,10 @@ class yeekee_bot(object):
             
             new_url = self.room_url + '?page=4'    
             self.driver.get(new_url)
-            sleep(2)
+            sleep(0.5)
         
             for i in range(50):
                 js = "return document.getElementsByClassName('username')[%s].innerText" %i
-
                 js_time = "return document.getElementsByClassName('date')[%s].innerText" %i 
                 
                 last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
@@ -1253,12 +1251,12 @@ class yeekee_bot(object):
 
                         if this_host == 'thailotto':
                             # self.driver.execute_script(js_send_number) 
-                            # t2.start()
+                            t2.start()
                             # t3.start()
                             #     # t4.start()
                             #     # t5.start()
-                            self.driver.execute_script(js_send_number) 
-                            self.driver.execute_script(js_send_number) 
+                            # self.driver.execute_script(js_send_number) 
+                            # self.driver.execute_script(js_send_number) 
         
                         
                         now = datetime.datetime.now()  
@@ -1269,12 +1267,12 @@ class yeekee_bot(object):
                         end = datetime.datetime.now()
                         if this_host == 'thailotto':
                             # t2.start()
-                            # t3.start()
+                            t3.start()
                         #     # t4.start()
                         #     # t5.start()
                         #     # sleep(0.000001)
                             self.driver.execute_script(js_send_number) 
-                            self.driver.execute_script(js_send_number) 
+                            # self.driver.execute_script(js_send_number) 
                         #     sleep(0.000001)
                             # self.driver.execute_script(js_send_number) 
                         
