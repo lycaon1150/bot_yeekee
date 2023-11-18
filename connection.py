@@ -41,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.35d"
+version_yeekee = "v1.36"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -2005,6 +2005,9 @@ if __name__ == "__main__":
         
     sleep(2)    
     a = subprocess.call("pkill chrome", shell=True)
+    
+    if room_number%3 == 0:
+        a = subprocess.call("sudo reboot now", shell=True)
     # class_obj.driver.quit()
     # class_obj.stop_display()
     print('done')
