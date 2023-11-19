@@ -2009,7 +2009,7 @@ if __name__ == "__main__":
     sleep(2)    
     a = subprocess.call("pkill chrome", shell=True)
     t = datetime.datetime.now()
-    if t.minute > 1 and t.minute  < 3:
+    if (t.minute > 1 and t.minute  < 3) or (t.minute > 31 and t.minute  < 33):
         a = subprocess.call("sudo reboot now", shell=True)
     # class_obj.driver.quit()
     # class_obj.stop_display()
