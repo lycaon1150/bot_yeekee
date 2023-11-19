@@ -357,7 +357,7 @@ def post_multitime_thailotto(code,room,num):
                 
         var code = getCookie('XSRF-TOKEN')
         
-        for (let i = 0; i < cars.length; i++) {
+        for (let i = 0; i < 5; i++) {
 
             fetch('https://thailotto.io/member/lottery/yeekee', {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
