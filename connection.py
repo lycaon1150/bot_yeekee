@@ -41,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.37"
+version_yeekee = "v1.37a"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -430,7 +430,7 @@ class yeekee_bot(object):
         
         this_host = self.session_data[user]['host']
         code = self.session_data[user]['authorization']
-        sleep(1)
+        sleep(3)
         self.driver.save_screenshot('rank.png')
         # print(self.room_url)
         
@@ -461,10 +461,10 @@ class yeekee_bot(object):
                 js = "return document.getElementsByClassName('username')[%s].innerText" %i 
                 js_time = "return document.getElementsByClassName('date')[%s].innerText" %i 
                 
-                last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
+                # last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
                 
-                if time_rank == last_rank_js:
-                    self.last_rank = i+1
+                # if time_rank == last_rank_js:
+                #     self.last_rank = i+1
 
 
                 find_name = self.driver.execute_script(js)
@@ -482,10 +482,10 @@ class yeekee_bot(object):
                 js = "return document.getElementsByClassName('username')[%s].innerText" %i
                 js_time = "return document.getElementsByClassName('date')[%s].innerText" %i 
                 
-                last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
+                # last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
 
-                if time_rank == last_rank_js:
-                    self.last_rank = i+51
+                # if time_rank == last_rank_js:
+                #     self.last_rank = i+51
 
                 find_name = self.driver.execute_script(js)
                 # print(find_name)
@@ -502,10 +502,10 @@ class yeekee_bot(object):
                 js = "return document.getElementsByClassName('username')[%s].innerText" %i
                 js_time = "return document.getElementsByClassName('date')[%s].innerText" %i 
                 
-                last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
+                # last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
 
-                if time_rank == last_rank_js:
-                    self.last_rank = i+101
+                # if time_rank == last_rank_js:
+                #     self.last_rank = i+101
                     
                 find_name = self.driver.execute_script(js)
                 # print(find_name)
@@ -521,10 +521,10 @@ class yeekee_bot(object):
                 js = "return document.getElementsByClassName('username')[%s].innerText" %i
                 js_time = "return document.getElementsByClassName('date')[%s].innerText" %i 
                 
-                last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
+                # last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
 
-                if time_rank == last_rank_js:
-                    self.last_rank = i+151
+                # if time_rank == last_rank_js:
+                #     self.last_rank = i+151
                     
                 find_name = self.driver.execute_script(js)
                 # print(find_name)
