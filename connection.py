@@ -41,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.36b"
+version_yeekee = "v1.37"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1074,7 +1074,10 @@ class yeekee_bot(object):
             _url = str('https://thailotto.io/member/lottery/yeekee/%s' % (room))
             
             # js_send_number = 'axios.post("/member/lottery/yeekee", {number: "%s", bet_category_id: %s, yeekee_special: ""});' % (str(number_send),str(room))
-            js_send_number = str(js_code.post_number_jesadabet(code,room,number_send))
+            # js_send_number = str(js_code.post_number_jesadabet(code,room,number_send))
+            
+            js_send_number = str(js_code.post_multitime_thailotto(code,room,number_send))
+            
             self.driver.get('https://thailotto.io/member/affiliate')
             
         elif this_host == 'nakee':
@@ -1249,14 +1252,14 @@ class yeekee_bot(object):
                         print('ckick to win')
                         sleep(delay)
 
-                        if this_host == 'thailotto':
-                            # self.driver.execute_script(js_send_number) 
-                            # t2.start()
-                            # t3.start()
-                            #     # t4.start()
-                            #     # t5.start()
-                            self.driver.execute_script(js_send_number) 
-                            self.driver.execute_script(js_send_number) 
+                        # if this_host == 'thailotto':
+                        #     # self.driver.execute_script(js_send_number) 
+                        #     # t2.start()
+                        #     # t3.start()
+                        #     #     # t4.start()
+                        #     #     # t5.start()
+                        #     self.driver.execute_script(js_send_number) 
+                        #     self.driver.execute_script(js_send_number) 
         
                         
                         now = datetime.datetime.now()  
@@ -1265,16 +1268,16 @@ class yeekee_bot(object):
                         # t4.start()
                       
                         end = datetime.datetime.now()
-                        if this_host == 'thailotto':
-                            # t2.start()
-                        #     t3.start()
-                        # #     # t4.start()
-                        #     t5.start()
-                        #     # sleep(0.000001)
-                            self.driver.execute_script(js_send_number) 
-                            self.driver.execute_script(js_send_number) 
-                        #     sleep(0.000001)
-                            # self.driver.execute_script(js_send_number) 
+                        # if this_host == 'thailotto':
+                        #     # t2.start()
+                        # #     t3.start()
+                        # # #     # t4.start()
+                        # #     t5.start()
+                        # #     # sleep(0.000001)
+                        #     self.driver.execute_script(js_send_number) 
+                        #     self.driver.execute_script(js_send_number) 
+                        # #     sleep(0.000001)
+                        #     # self.driver.execute_script(js_send_number) 
                         
                         print('done : ' + str(user.split('_')[1]) + '\tnow : ' + str(now) + '\tuse time = ' + str(end-now) )
                         use_time = (end-now).microseconds

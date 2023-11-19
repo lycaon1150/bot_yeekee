@@ -346,8 +346,38 @@ def post_number_movewinbet(room,num,domain_name,type_bet):
     
     return js
 
+def post_multitime_thailotto(code,room,num):
+    js = """
+        
+        function getCookie(name) {
+                    const value = `; ${document.cookie}`;
+                    const parts = value.split(`; ${name}=`);
+                    if (parts.length === 2) return parts.pop().split(';').shift();
+                    }
+                
+        var code = getCookie('XSRF-TOKEN')
+        
+        for (let i = 0; i < 5; i++) {
 
-
+            fetch('https://thailotto.io/member/lottery/yeekee', {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json'
+                    // 'Content-Type': 'application/x-www-form-urlencoded', 
+                    ,
+                    // 'x-xsrf-token': '%s'
+                
+                'x-xsrf-token': code
+            },
+            'body': JSON.stringify({
+                "number":"%s","bet_category_id":%s,"yeekee_special":""
+            })
+        }
+    })""" % (str(code),str(num),str(room))
+    return js
 
 def post_number_jesadabet(code,room,num):
     js = """
