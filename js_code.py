@@ -357,7 +357,7 @@ def post_multitime_thailotto(code,room,num):
                 
         var code = getCookie('XSRF-TOKEN')
         
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < cars.length; i++) {
 
             fetch('https://thailotto.io/member/lottery/yeekee', {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -374,9 +374,8 @@ def post_multitime_thailotto(code,room,num):
             },
             'body': JSON.stringify({
                 "number":"%s","bet_category_id":%s,"yeekee_special":""
-            })
-        }
-    })""" % (str(code),str(num),str(room))
+            })   
+    })}""" % (str(code),str(num),str(room))
     return js
 
 def post_number_jesadabet(code,room,num):
