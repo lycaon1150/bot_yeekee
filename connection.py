@@ -584,6 +584,14 @@ class yeekee_bot(object):
             
             for i in range(20):
                 js = "return document.getElementsByClassName('item-col col-4 col-xl-4')[%s].innerText" % str(i*3+1)
+                js_time = "return document.getElementsByClassName('number')[%s].innerText" % str(i*3+9) 
+                
+                last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
+                
+                if time_rank == last_rank_js:
+                    self.last_rank = i+1
+                    
+                    
                 find_name = self.driver.execute_script(js).split('\n')[1]
                 # print(find_name)
                 
@@ -597,7 +605,17 @@ class yeekee_bot(object):
         
             for i in range(20):
                 js = "return document.getElementsByClassName('item-col col-4 col-xl-4')[%s].innerText" % str(i*3+1)
+                js_time = "return document.getElementsByClassName('number')[%s].innerText" % str(i*3+9) 
+                
+                last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
+                
+                if time_rank == last_rank_js:
+                    self.last_rank = i+21
+                    
+                
                 find_name = self.driver.execute_script(js).split('\n')[1]
+                
+                
                 # print(find_name)
                 
                 if find_name == name or find_name == secret_name:
@@ -611,7 +629,17 @@ class yeekee_bot(object):
         
             for i in range(20):
                 js = "return document.getElementsByClassName('item-col col-4 col-xl-4')[%s].innerText" % str(i*3+1)
+                js_time = "return document.getElementsByClassName('number')[%s].innerText" % str(i*3+9) 
+                
+                last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
+                
+                if time_rank == last_rank_js:
+                    self.last_rank = i+41
+                    
+                    
                 find_name = self.driver.execute_script(js).split('\n')[1]
+                
+                
                 # print(find_name)
                 
                 if find_name == name or find_name == secret_name:
@@ -625,6 +653,14 @@ class yeekee_bot(object):
         
             for i in range(20):
                 js = "return document.getElementsByClassName('item-col col-4 col-xl-4')[%s].innerText" % str(i*3+1)
+                js_time = "return document.getElementsByClassName('number')[%s].innerText" % str(i*3+9) 
+                
+                last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
+                
+                if time_rank == last_rank_js:
+                    self.last_rank = i+61
+                    
+                    
                 find_name = self.driver.execute_script(js).split('\n')[1]
                 # print(find_name)
                 
@@ -639,6 +675,14 @@ class yeekee_bot(object):
         
             for i in range(20):
                 js = "return document.getElementsByClassName('item-col col-4 col-xl-4')[%s].innerText" % str(i*3+1)
+                js_time = "return document.getElementsByClassName('number')[%s].innerText" % str(i*3+9) 
+                
+                last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
+                
+                if time_rank == last_rank_js:
+                    self.last_rank = i+81
+                    
+                    
                 find_name = self.driver.execute_script(js).split('\n')[1]
                 # print(find_name)
                 
