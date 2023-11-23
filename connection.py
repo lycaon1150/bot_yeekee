@@ -1194,6 +1194,7 @@ class yeekee_bot(object):
                     if state_ref == 1 and now.second == 59:
                     # if (loop_time - server_delay_sec) % time_par_round > time_set_round and state_ref == 1:
                         print('ckick to win')
+                        print(delay)
                         sleep(delay)
                         try:
                             # t1.start() 
