@@ -41,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.37b"
+version_yeekee = "v1.38"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1242,14 +1242,13 @@ class yeekee_bot(object):
                 time_set_round = time_par_round - 1000000 - test
                 while(1):
                     now = datetime.datetime.now()
-                    time_in_microsec = (
-                        (now.hour*3600 + now.minute*60 + now.second)*1000000 + now.microsecond)
-                    loop_time = (time_in_microsec - set_time_start)
                     
                     
-                        
-                    if (loop_time - server_delay_sec) % time_par_round > time_set_round and state_ref == 1:
+                    
+                    if state_ref == 1 and now.second == 59:
+                    # if (loop_time - server_delay_sec) % time_par_round > time_set_round and state_ref == 1:
                         print('ckick to win')
+                        print(delay)
                         sleep(delay)
 
                         # if this_host == 'thailotto':
@@ -1284,7 +1283,10 @@ class yeekee_bot(object):
                         self.use_time = use_time
                         break
                     
-
+                    time_in_microsec = (
+                        (now.hour*3600 + now.minute*60 + now.second)*1000000 + now.microsecond)
+                    loop_time = (time_in_microsec - set_time_start)
+                    
                     if state_ref == 0 :
                         if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*rand_time - test:
                             try:
