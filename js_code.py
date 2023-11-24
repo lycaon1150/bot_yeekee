@@ -298,6 +298,51 @@ def bet_number_movewinbet(room,betList,bet_url):
     
     return js
 
+def post_multitime_number_movewinbet(room,num,domain_name,type_bet):
+    
+    if type_bet == 'normal':
+        type_url = 'yeekee'
+    else:
+        type_url = 'yeekee-vip'
+
+
+    js = """
+    
+    function getMeta(metaName) {
+    const metas = document.getElementsByTagName('meta');
+
+    for (let i = 0; i < metas.length; i++) {
+        if (metas[i].getAttribute('name') === metaName) {
+        return metas[i].getAttribute('content');
+        }
+    }
+
+    return '';
+    }
+            
+    var code = getMeta('csrf-token')
+    
+    
+    var myHeaders = new Headers();
+    myHeaders.append("x-csrf-token", code);
+
+
+    var formdata = new FormData();
+    formdata.append("number", "%s");
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: formdata,
+    redirect: 'follow'
+    };
+    for (let i = 0; i < 5; i++) {
+        fetch("https://%s/member/%s/%s/bet-number", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error)); }""" % (str(num),str(domain_name),str(type_url),str(room))
+    
+    return js
 
 
 def post_number_movewinbet(room,num,domain_name,type_bet):

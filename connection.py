@@ -41,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.38a"
+version_yeekee = "v1.39"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1156,8 +1156,9 @@ class yeekee_bot(object):
                 
                 
             _url = str('https://%s/member/%s/%s' % (str(self.movewinbet_url) ,str(type_url) , str(room) ))
-            js_send_number = str(js_code.post_number_movewinbet(room,number_send,self.movewinbet_url,bet_type))  
-        
+            
+            # js_send_number = str(js_code.post_number_movewinbet(room,number_send,self.movewinbet_url,bet_type))  
+            js_send_number = str(js_code.post_multitime_number_movewinbet(room,number_send,self.movewinbet_url,bet_type)) 
         # print(js_send_number)
         # self.driver.get(_url)
         sleep(2)
