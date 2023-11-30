@@ -41,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.39"
+version_yeekee = "v1.39a"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1896,7 +1896,7 @@ if __name__ == "__main__":
                             class_obj.select_number(codename,l,bet_type=bet_type,movewin_t=movewinbet_twin)  
                         
                     else:
-                        
+                        movewinbet_twin = 1
                         class_obj.select_number(codename,l,bet_type=bet_type,movewin_t=movewinbet_twin)
                 
 
@@ -1905,7 +1905,7 @@ if __name__ == "__main__":
                 if movewinbet_twin == 1:
                     class_obj.go_shoot_number(codename, time_delay,test_process,bet_type,get_af,movewinbet_twin)
                     sleep(5)
-                    class_obj.go_shoot_number(codename, time_delay,test_process,'normal',get_af,movewinbet_twin)
+                    class_obj.go_shoot_number(codename, int(data[codename]['delay_normal']),test_process,'normal',get_af,movewinbet_twin)
                 
                 
                 else:
