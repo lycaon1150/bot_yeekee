@@ -41,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.39c"
+version_yeekee = "v1.39d"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -65,7 +65,9 @@ class yeekee_bot(object):
         self.display = Display(visible=0, size=(800, 800)) 
         self.movewinbet_url = ""
         self.mungmeelt_uid = ""
-        self.last_rank = 0
+        self.last_rank = 150
+        self.last_rank_b = 150
+        
         print('success created')
         
     def get_bonus_vip(self,user,host):
@@ -589,7 +591,13 @@ class yeekee_bot(object):
                 last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
                 
                 if time_rank == last_rank_js:
-                    self.last_rank = i+1
+                    if bet_type == "special":
+                        
+                        self.last_rank = i+1
+                    else:
+                        self.last_rank_b = i+1
+                    
+                    
                     
                     
                 find_name = self.driver.execute_script(js).split('\n')[1]
@@ -610,7 +618,11 @@ class yeekee_bot(object):
                 last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
                 
                 if time_rank == last_rank_js:
-                    self.last_rank = i+21
+                    if bet_type == "special":
+                        
+                        self.last_rank = i+21
+                    else:
+                        self.last_rank_b = i+21
                     
                 
                 find_name = self.driver.execute_script(js).split('\n')[1]
@@ -634,7 +646,11 @@ class yeekee_bot(object):
                 last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
                 
                 if time_rank == last_rank_js:
-                    self.last_rank = i+41
+                    if bet_type == "special":
+                        
+                        self.last_rank = i+41
+                    else:
+                        self.last_rank_b = i+41
                     
                     
                 find_name = self.driver.execute_script(js).split('\n')[1]
@@ -658,7 +674,11 @@ class yeekee_bot(object):
                 last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
                 
                 if time_rank == last_rank_js:
-                    self.last_rank = i+61
+                    if bet_type == "special":
+                        
+                        self.last_rank = i+61
+                    else:
+                        self.last_rank_b = i+61
                     
                     
                 find_name = self.driver.execute_script(js).split('\n')[1]
@@ -680,7 +700,11 @@ class yeekee_bot(object):
                 last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
                 
                 if time_rank == last_rank_js:
-                    self.last_rank = i+81
+                    if bet_type == "special":
+                        
+                        self.last_rank = i+81
+                    else:
+                        self.last_rank_b = i+81
                     
                     
                 find_name = self.driver.execute_script(js).split('\n')[1]
@@ -689,7 +713,31 @@ class yeekee_bot(object):
                 if find_name == name or find_name == secret_name:
                     return i+1+80 
             
+            sleep(1)
             
+            new_url = movewinbet_url_bet + '?page=6'    
+            self.driver.get(new_url)
+        
+        
+            for i in range(20):
+                js = "return document.getElementsByClassName('item-col col-4 col-xl-4')[%s].innerText" % str(i*3+1)
+                js_time = "return document.getElementsByClassName('number')[%s].innerText" % str(i*3+9) 
+                
+                last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
+                
+                if time_rank == last_rank_js:
+                    if bet_type == "special":
+                        
+                        self.last_rank = i+101
+                    else:
+                        self.last_rank_b = i+101
+                    
+                    
+                find_name = self.driver.execute_script(js).split('\n')[1]
+                # print(find_name)
+                
+                if find_name == name or find_name == secret_name:
+                    return i+1+101 
             
             
             
@@ -1922,7 +1970,7 @@ if __name__ == "__main__":
                 
                 if movewinbet_twin == 1:
                     class_obj.go_shoot_number(codename, time_delay,test_process,bet_type,get_af,movewinbet_twin)
-                    sleep(5)
+                    sleep(2)
                     class_obj.go_shoot_number(codename, int(data[codename]['delay_normal']),test_process,'normal',get_af,movewinbet_twin)
                 
                 
@@ -1971,7 +2019,7 @@ if __name__ == "__main__":
                 bonus = class_obj.bonus
 
                 last_rank_59 = class_obj.last_rank
-
+                last_rank_59_b = class_obj.last_rank_b
             # sleep(0.5)
             print('rank :' + str(rank))
             
@@ -2023,17 +2071,18 @@ if __name__ == "__main__":
             
             
             
-            ################# แทงรอบ 2 ############################
+            ################# แทงรอบ 2 ############################ 
             
             if movewinbet_twin == 1:
                 data_json = {'username' : username ,
                         'host' : data[codename]['host'] , 
                         'bet_type' : 'normal' ,
-                        'delay_use' : time_delay ,
+                        'delay_use' : int(data[codename]['delay_normal']) ,
                         'time_use' : class_obj.use_time,
                         'date' : day_start_bet , 
-                        'bet_round' :  int(data[codename]['delay_normal']) , 
+                        'bet_round' :  room_number_normal , 
                         'rank' : rank_normal , 
+                        'last_rank' : last_rank_59_b ,
                         'balance' : balance ,
                         'version' : version_yeekee ,
                         'bonus' : bonus ,
