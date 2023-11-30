@@ -1200,7 +1200,7 @@ class yeekee_bot(object):
                         try:
                             # t1.start() 
                             # t2.start() 
-                            self.driver.execute_script(js_send_number) 
+                            # self.driver.execute_script(js_send_number) 
                             # self.driver.execute_script(js_send_number) 
                             now = datetime.datetime.now()  
                             # t3.start()  
@@ -1208,7 +1208,7 @@ class yeekee_bot(object):
                             self.driver.execute_script(js_send_number)
                             end = datetime.datetime.now()
                             # self.driver.execute_script(js_send_number) 
-                            self.driver.execute_script(js_send_number)
+                            # self.driver.execute_script(js_send_number)
                             # t4.start() 
                             # t5.start() 
                             
