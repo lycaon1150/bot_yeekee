@@ -41,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.39b"
+version_yeekee = "v1.39c"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1898,9 +1898,26 @@ if __name__ == "__main__":
                     else:
                         
                         class_obj.select_number(codename,l,bet_type=bet_type,movewin_t=movewinbet_twin)
-                        movewinbet_twin = 1
-                
-
+                        
+                else:
+                    if data[codename]['host'] == 'movewinbet' and (time_in_minute > 355 or time_in_minute < 240) and bet_type == 'special':
+                        now = datetime.datetime.now()
+                        time_in_minute = (now.hour*60 + now.minute)
+                        if time_in_minute < 240:
+                            state_n = int((time_in_minute-347+1440)/15)
+                            
+                        else:
+                            state_n = int((time_in_minute-347)/15)
+                        
+                        
+                        
+                        now = datetime.datetime.now()
+                        time_in_minute = (now.hour*60 + now.minute)
+                        state = int((time_in_minute)/5)
+                        
+                        if ((state_n)*3 + 6*12)%288 == state+1:
+                            movewinbet_twin = 1
+                            
                 #### ยิงเลข ####
                 
                 if movewinbet_twin == 1:
