@@ -65,7 +65,7 @@ class yeekee_bot(object):
         self.display = Display(visible=0, size=(800, 800)) 
         self.movewinbet_url = ""
         self.mungmeelt_uid = ""
-        self.last_rank = 150
+        self.last_rank = 0
         self.last_rank_b = 150
         
         print('success created')
@@ -2010,7 +2010,7 @@ if __name__ == "__main__":
                 if movewinbet_twin == 1:
                     rank = class_obj.get_result(codename,bet_type,movewinbet_twin)
                     rank_normal = class_obj.get_result(codename,'normal',movewinbet_twin)
-                
+                    last_rank_59_b = class_obj.last_rank_b
                 else:
                     
                     rank = class_obj.get_result(codename,bet_type,movewinbet_twin)
@@ -2019,7 +2019,7 @@ if __name__ == "__main__":
                 bonus = class_obj.bonus
 
                 last_rank_59 = class_obj.last_rank
-                last_rank_59_b = class_obj.last_rank_b
+                
             # sleep(0.5)
             print('rank :' + str(rank))
             
