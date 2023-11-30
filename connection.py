@@ -1898,6 +1898,7 @@ if __name__ == "__main__":
                     else:
                         
                         class_obj.select_number(codename,l,bet_type=bet_type,movewin_t=movewinbet_twin)
+                        movewinbet_twin = 1
                 
 
                 #### ยิงเลข ####
