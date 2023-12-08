@@ -41,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.40"
+version_yeekee = "v1.40a"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1142,9 +1142,9 @@ class yeekee_bot(object):
             _url = str('https://thailotto.net/member/lottery/yeekee/%s' % (room))
             
             # js_send_number = 'axios.post("/member/lottery/yeekee", {number: "%s", bet_category_id: %s, yeekee_special: ""});' % (str(number_send),str(room))
-            # js_send_number = str(js_code.post_number_jesadabet(code,room,number_send))
+            js_send_number = str(js_code.post_number_jesadabet(code,room,number_send))
             
-            js_send_number = str(js_code.post_multitime_thailotto(code,room,number_send))
+            # js_send_number = str(js_code.post_multitime_thailotto(code,room,number_send))
             
             self.driver.get('https://thailotto.net/member/affiliate')
             
