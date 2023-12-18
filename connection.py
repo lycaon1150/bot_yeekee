@@ -41,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.40a"
+version_yeekee = "v1.40b"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -440,7 +440,10 @@ class yeekee_bot(object):
         print(name)
         secret_name = ""
         print(datetime.datetime.now())
-        past_time = list(str(datetime.datetime.now()- datetime.timedelta(0,60)).split(".")[0])
+        if movewin_t == 1 and bet_type == 'special' and this_host == 'movewinbet':
+            past_time = list(str(datetime.datetime.now()- datetime.timedelta(0,120)).split(".")[0])
+        else:
+            past_time = list(str(datetime.datetime.now()- datetime.timedelta(0,60)).split(".")[0])
         past_time[17] = "5"
         past_time[18] = "9"
         time_rank = str("".join(past_time)).split(" ")[1]
