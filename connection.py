@@ -41,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.40b"
+version_yeekee = "v1.40c"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -670,27 +670,7 @@ class yeekee_bot(object):
             self.driver.get(new_url)
         
         
-            for i in range(20):
-                js = "return document.getElementsByClassName('item-col col-4 col-xl-4')[%s].innerText" % str(i*3+1)
-                js_time = "return document.getElementsByClassName('number')[%s].innerText" % str(i*3+9) 
-                
-                last_rank_js = str(self.driver.execute_script(js_time)).split(" ")[1]
-                
-                if time_rank == last_rank_js:
-                    if bet_type == "special":
-                        
-                        self.last_rank = i+61
-                    else:
-                        self.last_rank_b = i+61
-                    
-                    
-                find_name = self.driver.execute_script(js).split('\n')[1]
-                # print(find_name)
-                
-                if find_name == name or find_name == secret_name:
-                    return i+1+60 
-            
-            sleep(0.5)
+           
             
            
           
@@ -2048,12 +2028,12 @@ if __name__ == "__main__":
                         'server_delay' : data[codename]['server_delay_normal'] 
                         }
                 print(data_json)
-                time_num = random.randint(0, 10)/10
+                # time_num = random.randint(0, 10)/10
                 
-                if int(rank) == 0:
-                    time_num = time_num + 5
+                # if int(rank) == 0:
+                #     time_num = time_num + 5
                     
-                time.sleep(time_num)
+                # time.sleep(time_num)
                 
                 r = requests.post('http://128.199.236.187:8888/jesadabet/send_history',data=data_json)
                 print(r.status_code)
