@@ -41,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.40c"
+version_yeekee = "v1.40d"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -237,8 +237,8 @@ class yeekee_bot(object):
                 class_username = 'username'
                 sleep(1)
             elif host == 'thailotto':
-                self.driver.execute_script("document.getElementsByClassName('btn btn-bar btn-login-modal')[0].click();")
-                sleep(1)
+                # self.driver.execute_script("document.getElementsByClassName('btn btn-bar btn-login-modal')[0].click();")
+                sleep(0.5)
                 
             
             self.driver.execute_script("document.getElementsByName('username')[0].value='%s';" % str(id))
