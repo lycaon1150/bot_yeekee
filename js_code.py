@@ -404,7 +404,7 @@ def post_multitime_thailotto(code,room,num):
         
         for (let i = 0; i < 5; i++) {
 
-            fetch('https://thailotto.net/member/lottery/yeekee', {
+            fetch('https://lotto5555.com/member/lottery/yeekee', {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -435,7 +435,7 @@ def post_number_jesadabet(code,room,num):
     var code = getCookie('XSRF-TOKEN')
     
     
-    fetch('https://thailotto.net/member/lottery/yeekee', {
+    fetch('https://lotto5555.com/member/lottery/yeekee', {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -457,7 +457,7 @@ def post_number_jesadabet(code,room,num):
 
 
 def bet_number_jesadabet(code,bet_text):
-    js = """fetch('https://thailotto.net/member/lottery', {
+    js = """fetch('https://lotto5555.com/member/lottery', {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
                 mode: 'cors', // no-cors, *cors, same-origin
                 cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -483,7 +483,7 @@ def post_bonus_thailotto():
         var code = getCookie('XSRF-TOKEN')
         
         
-        fetch('https://thailotto.net/member/game/lucky-box', {
+        fetch('https://lotto5555.com/member/game/lucky-box', {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

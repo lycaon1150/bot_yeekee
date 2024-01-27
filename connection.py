@@ -41,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.40e"
+version_yeekee = "v1.41"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1099,14 +1099,14 @@ class yeekee_bot(object):
         
         elif this_host == 'thailotto':
             state_ref = 0
-            _url = str('https://thailotto.net/member/lottery/yeekee/%s' % (room))
+            _url = str('https://lotto5555.com/member/lottery/yeekee/%s' % (room))
             
             # js_send_number = 'axios.post("/member/lottery/yeekee", {number: "%s", bet_category_id: %s, yeekee_special: ""});' % (str(number_send),str(room))
             js_send_number = str(js_code.post_number_jesadabet(code,room,number_send))
             
             # js_send_number = str(js_code.post_multitime_thailotto(code,room,number_send))
             
-            self.driver.get('https://thailotto.net/member/affiliate')
+            self.driver.get('https://lotto5555.com/member/affiliate')
             
         elif this_host == 'nakee':
             state_ref = 0
@@ -1392,7 +1392,7 @@ class yeekee_bot(object):
         bet_text = '{"stake_method":2,"bet_category_id":%s,"betListJsonStringify":"%s","thaistock20checklist":[]}' % (str(room),betListJsonStringify)
         js = js_code.bet_number_jesadabet(code,bet_text)
         sleep(2)
-        self.driver.get('https://thailotto.net/member/affiliate')
+        self.driver.get('https://lotto5555.com/member/affiliate')
         sleep(2)
 
         self.driver.execute_script(js)
@@ -1563,7 +1563,7 @@ class yeekee_bot(object):
             bet_text = '{"stake_method":2,"bet_category_id":%s,"betListJsonStringify":"%s","thaistock20checklist":[]}' % (str(room),betListJsonStringify)
             js = js_code.bet_number_jesadabet(code,bet_text)
             sleep(2)
-            self.driver.get('https://thailotto.net/member/affiliate')
+            self.driver.get('https://lotto5555.com/member/affiliate')
             sleep(2)
             
         elif this_host == 'movewinbet':
@@ -1652,7 +1652,7 @@ class yeekee_bot(object):
             # for i in range(5):
             #     try:
             #         sleep(0.3) 
-            #         _url = 'https://thailotto.net/member/clear-credit-cache/' + str(self.session_data[user]['ID'])
+            #         _url = 'https://lotto5555.com/member/clear-credit-cache/' + str(self.session_data[user]['ID'])
             #         self.driver.get(_url)
             #         sleep(1)
             #         # self.driver.save_screenshot('11111.png')
@@ -1661,7 +1661,7 @@ class yeekee_bot(object):
             #         print('thai lotto balance is  ',balance)
             #         sleep(2)
 
-            #         self.driver.get('https://thailotto.net/member/game')
+            #         self.driver.get('https://lotto5555.com/member/game')
 
             #         sleep(2)
                     
@@ -1671,7 +1671,7 @@ class yeekee_bot(object):
             #     except Exception:
             #         continue
             
-            _url = "https://thailotto.net/member/credit"
+            _url = "https://lotto5555.com/member/credit"
             # self.driver.get(_url)
             tries = 5
             for it in range(tries):
