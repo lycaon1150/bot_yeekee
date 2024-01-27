@@ -336,7 +336,7 @@ def post_multitime_number_movewinbet(room,num,domain_name,type_bet):
     body: formdata,
     redirect: 'follow'
     };
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 10; i++) {
         fetch("https://%s/member/%s/%s/bet-number", requestOptions)
         .then(response => response.text())
         .then(result => console.log(result))
