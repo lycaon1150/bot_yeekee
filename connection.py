@@ -41,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.41"
+version_yeekee = "v1.41b"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1317,28 +1317,27 @@ class yeekee_bot(object):
                         (now.hour*3600 + now.minute*60 + now.second)*1000000 + now.microsecond)
                     loop_time = (time_in_microsec - set_time_start)
                     
-                    if state_ref == 0 :
-                        if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*rand_time - test:
-                            try:
-                                print('ckick 1st')
-                                sleep(delay)
-                                self.driver.refresh()
-                                sleep(1.5)
-                                # self.driver.save_screenshot('1150.png')
-                                    
-                                sleep(0.5)
+                    if state_ref == 0 and now.second == 43 and (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*rand_time - test:
+                        try:
+                            print('ckick 1st')
+                            sleep(delay)
+                            self.driver.refresh()
+                            sleep(1.5)
+                            # self.driver.save_screenshot('1150.png')
                                 
-                                ######### ยิงเลขครั้งแรก ##############
-                                
-                                self.driver.execute_script(js_send_number) 
-                                print('done ckick 1st')
-                                sleep(1)
-                                
-                                self.driver.refresh()
-                            except:
-                                pass
-                        
-                            state_ref = 1
+                            sleep(0.5)
+                            
+                            ######### ยิงเลขครั้งแรก ##############
+                            
+                            self.driver.execute_script(js_send_number) 
+                            print('done ckick 1st')
+                            sleep(1)
+                            
+                            self.driver.refresh()
+                        except:
+                            pass
+                    
+                        state_ref = 1
         except:
             pass
                 
