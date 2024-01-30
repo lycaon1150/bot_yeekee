@@ -1162,7 +1162,7 @@ class yeekee_bot(object):
         #     js_send_number = ''
             
         use_time = 0
-        rand_time = (16 + random.randint(0, 4))
+        rand_time = (20 + random.randint(0, 4))
 
         delay = (1000000-set_delay)/1000000
         
@@ -1323,7 +1323,7 @@ class yeekee_bot(object):
                                 print('ckick 1st')
                                 sleep(delay)
                                 self.driver.refresh()
-                                sleep(1.5)
+                                # sleep(1.5)
                                 # self.driver.save_screenshot('1150.png')
                                     
                                 sleep(0.5)
