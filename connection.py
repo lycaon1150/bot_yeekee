@@ -41,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.41c"
+version_yeekee = "v1.42"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -1162,7 +1162,7 @@ class yeekee_bot(object):
         #     js_send_number = ''
             
         use_time = 0
-        rand_time = (20 + random.randint(0, 4))
+        rand_time = (17 + random.randint(0, 200)/100)
 
         delay = (1000000-set_delay)/1000000
         
