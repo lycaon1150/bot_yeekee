@@ -41,7 +41,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.42b"
+version_yeekee = "v1.42c"
 print(datetime.datetime.now())
 
 print(version_yeekee)
@@ -801,7 +801,7 @@ class yeekee_bot(object):
            
             for rank , username in enumerate(result):
                 if time_rank == created_at[rank].split(" ")[1]:
-                    self.last_rank = i+1
+                    self.last_rank = rank+1
                 
                 if str(secret_name) == str(username) and str(number_send) == str(number[rank]):
                     return rank+1
