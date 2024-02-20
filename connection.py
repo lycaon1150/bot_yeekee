@@ -18,6 +18,8 @@ import requests
 import json
 import threading
 import math
+import sys 
+import shutil
 
 # from multiprocessing import Process , Queue
 # from re import I
@@ -41,8 +43,10 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.42c"
+version_yeekee = "v1.43"
 print(datetime.datetime.now())
+target_F = ""
+log_out = ""
 
 print(version_yeekee)
 # external_ip = requests.get('https://api.ipify.org').text
@@ -2047,10 +2051,24 @@ if __name__ == "__main__":
             class_obj.driver.quit()
             if data[codename]['host'] == 'nakee':
                 class_obj.stop_display()
+        
+        
+        ################# add file ##################
+         
+        if data[codename]['host'] == "movewinbet" :
+            today = datetime.datetime.now() + datetime.timedelta(minutes=3)
+        else:
+            today = datetime.datetime.now() - datetime.timedelta(hours=5)
+            
+        target_F = "/home/bitnami/project/xpsoft/log_data/"+ str(today.year) + "_" + str(today.month) + "_" + str(today.day)
+        
+        if not os.path.isdir("/home/bitnami/project/xpsoft/log_data"): 
+            os.makedirs("/home/bitnami/project/xpsoft/log_data")   
+               
+        if not os.path.isdir(target_F): 
+            os.makedirs(target_F)         
                 
-                
-                
-                
+        log_out = str(room_number)+".txt"       
     except Exception as e :
         print(e)
         try:
@@ -2065,11 +2083,16 @@ if __name__ == "__main__":
     sleep(2)    
     a = subprocess.call("pkill chrome", shell=True)
     t = datetime.datetime.now()
+    
     if (t.minute > 1 and t.minute  < 3) or (t.minute > 31 and t.minute  < 33):
         a = subprocess.call("sudo reboot now", shell=True)
     # class_obj.driver.quit()
-    # class_obj.stop_display()
+    # class_obj.stop_display() 
+    
+    
     print('done')
+    sys.stdout.close()
+    shutil.copyfile("/home/bitnami/project/xpsoft/outputfile.txt", target_F+"/"+log_out)
     sleep(2)
     exit()
 
