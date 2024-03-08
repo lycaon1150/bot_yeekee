@@ -43,7 +43,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.43a"
+version_yeekee = "v1.44"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -1670,15 +1670,16 @@ class yeekee_bot(object):
             #         print('thai lotto balance is  ',balance)
             #         sleep(2)
 
-            #         self.driver.get('https://lotto5555.com/member/game')
+            try:
+                self.driver.get('https://lotto5555.com/member/game')
 
-            #         sleep(2)
-                    
-            #         point = self.driver.execute_script("return document.getElementsByClassName('font-xl text-success')[0].innerText")
-            #         break
+                sleep(1)
                 
-            #     except Exception:
-            #         continue
+                point = int(self.driver.execute_script("return document.getElementsByClassName('font-xl text-success')[0].innerText"))
+           
+                
+            except:
+                pass
             
             _url = "https://lotto5555.com/member/credit"
             # self.driver.get(_url)
