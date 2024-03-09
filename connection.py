@@ -43,7 +43,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.44"
+version_yeekee = "v1.44b"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -1675,8 +1675,13 @@ class yeekee_bot(object):
 
                 sleep(1)
                 
-                point = int(self.driver.execute_script("return document.getElementsByClassName('font-xl text-success')[0].innerText"))
-           
+                point = str(self.driver.execute_script("return document.getElementsByClassName('font-xl text-success')[0].innerText"))
+                if ',' in point:
+                    point = point.replace(",", "")
+                
+                point = int(point)
+                
+                sleep(1)
                 
             except:
                 pass
@@ -1738,6 +1743,7 @@ class yeekee_bot(object):
                 
         print('done get balance')   
         print(balance)     
+        print('point : ' + str(point))
         return balance , point
 
     def stop_display(self):
