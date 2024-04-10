@@ -426,16 +426,16 @@ def post_multitime_thailotto(code,room,num):
 def post_number_jesadabet(code,room,num):
     js = """
     
-    function getCookie(name) {
+    async function getCookie(name) {
                 const value = `; ${document.cookie}`;
                 const parts = value.split(`; ${name}=`);
                 if (parts.length === 2) return parts.pop().split(';').shift();
                 }
             
-    var code = getCookie('XSRF-TOKEN')
+    var code = await getCookie('XSRF-TOKEN')
     
     
-    fetch('https://lotto5555.com/member/lottery/yeekee', {
+    return await fetch('https://lotto5555.com/member/lottery/yeekee', {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -451,7 +451,7 @@ def post_number_jesadabet(code,room,num):
     'body': JSON.stringify({
         "number":"%s","bet_category_id":%s,"yeekee_special":""
     })
-})""" % (str(code),str(num),str(room))
+}).then(response => { return response.json() } );""" % (str(code),str(num),str(room))
     return js
 
 

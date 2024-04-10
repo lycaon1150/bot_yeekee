@@ -43,7 +43,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.45"
+version_yeekee = "v1.46"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -1302,10 +1302,11 @@ class yeekee_bot(object):
                         
                         now = datetime.datetime.now()  
                         
-                        self.driver.execute_script(js_send_number) 
+                        res = self.driver.execute_script(js_send_number) 
                         # t4.start()
                       
                         end = datetime.datetime.now()
+                        print(res)
                         # if this_host == 'thailotto':
                         #     # t2.start()
                         # #     t3.start()
@@ -1344,12 +1345,14 @@ class yeekee_bot(object):
                                 sleep(1)
                                 
                                 self.driver.refresh()
-                            except:
-                                pass
+                            except Exception as e:
+                                print('error shot number ckick 1st')
+                                print(e)
                         
                             state_ref = 1
-        except:
-            pass
+        except Exception as e:
+            print('error shot number')
+            print(e)
                 
             
                 
