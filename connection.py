@@ -43,7 +43,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.46b"
+version_yeekee = "v1.46c"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -1171,7 +1171,7 @@ class yeekee_bot(object):
         #     js_send_number = ''
             
         use_time = 0
-        rand_time = (18 + random.randint(0, 200)/100)
+        rand_time = (20 + random.randint(50, 200)/100)
 
         delay = (1000000-set_delay)/1000000
         
@@ -1342,6 +1342,7 @@ class yeekee_bot(object):
                                 
                                 self.driver.execute_script(js_send_number) 
                                 print('done ckick 1st')
+                                print(now)
                                 sleep(1)
                                 
                                 self.driver.refresh()
