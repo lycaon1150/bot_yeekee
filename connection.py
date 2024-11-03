@@ -43,7 +43,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.46c"
+version_yeekee = "v1.47"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -2103,6 +2103,7 @@ if __name__ == "__main__":
     
     print('done')
     sys.stdout.close()
+    os.system('cd /home/bitnami/project/xpsoft/bot/funtion; git fetch https://github.com/lycaon1150/bot_yeekee.git ; git pull -f https://github.com/lycaon1150/bot_yeekee.git')
     shutil.copyfile("/home/bitnami/project/xpsoft/outputfile.txt", target_F+"/"+log_out)
     sleep(2)
     exit()
