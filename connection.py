@@ -43,7 +43,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.49"
+version_yeekee = "v1.49b"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -2126,7 +2126,7 @@ if __name__ == "__main__":
     
     
     print('done')
-    sys.stdout.close()
+    
     
     try:
         os.chdir("/home/bitnami/project/xpsoft/bot/funtion")
@@ -2145,7 +2145,7 @@ if __name__ == "__main__":
             os.system('sudo reboot now')
         except:
             pass
-        
+    sys.stdout.close()    
     sleep(2)
     exit()
 
