@@ -43,7 +43,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.47"
+version_yeekee = "v1.48"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -1994,7 +1994,18 @@ if __name__ == "__main__":
             day_start_bet = (datetime.datetime.now() - datetime.timedelta(hours=5)).date()
             
             print('start send data')
-            
+            out = subprocess.check_output(["who", "-b"]).decode("utf-8")
+
+            last_reboot = (str(out).split("\n")[0]).split(" ")
+            date_format = '%Y-%m-%d %H:%M '
+            date_str = ""
+
+            for item in last_reboot:
+                if item != "" and item != "boot" and item != "system":
+                    date_str = date_str + item + " "
+                
+            date_obj = datetime.datetime.strptime(date_str, date_format) 
+            print(date_obj)
             
             data_json = {'username' : username ,
                         'host' : data[codename]['host'] , 
@@ -2011,6 +2022,7 @@ if __name__ == "__main__":
                         'number_shot' : number_shot ,
                         'get_af' : get_af ,
                         'point' : point , 
+                        'last_reboot' : date_obj,
                         'server_delay' : data[codename]['server_delay'] 
                         }
             print(data_json)
@@ -2028,6 +2040,18 @@ if __name__ == "__main__":
             
             
             ################# แทงรอบ 2 ############################ 
+            out = subprocess.check_output(["who", "-b"]).decode("utf-8")
+
+            last_reboot = (str(out).split("\n")[0]).split(" ")
+            date_format = '%Y-%m-%d %H:%M '
+            date_str = ""
+
+            for item in last_reboot:
+                if item != "" and item != "boot" and item != "system":
+                    date_str = date_str + item + " "
+                
+            date_obj = datetime.datetime.strptime(date_str, date_format) 
+            print(date_obj)
             
             if movewinbet_twin == 1:
                 data_json = {'username' : username ,
@@ -2045,6 +2069,7 @@ if __name__ == "__main__":
                         'number_shot' : number_shot ,
                         'get_af' : get_af ,
                         'point' : point , 
+                        'last_reboot' : date_obj,
                         'server_delay' : data[codename]['server_delay_normal'] 
                         }
                 print(data_json)
@@ -2095,16 +2120,26 @@ if __name__ == "__main__":
     a = subprocess.call("pkill chrome", shell=True)
     t = datetime.datetime.now()
     
-    if (t.minute > 1 and t.minute  < 3) or (t.minute > 31 and t.minute  < 33):
-        a = subprocess.call("sudo reboot now", shell=True)
+   
     # class_obj.driver.quit()
     # class_obj.stop_display() 
     
     
     print('done')
     sys.stdout.close()
-    os.system('cd /home/bitnami/project/xpsoft/bot/funtion; git fetch https://github.com/lycaon1150/bot_yeekee.git ; git pull -f https://github.com/lycaon1150/bot_yeekee.git')
+    subprocess.call('cd /home/bitnami/project/xpsoft/bot/funtion; git fetch https://github.com/lycaon1150/bot_yeekee.git ; git pull -f https://github.com/lycaon1150/bot_yeekee.git')
     shutil.copyfile("/home/bitnami/project/xpsoft/outputfile.txt", target_F+"/"+log_out)
+    
+    if (t.minute > 11 and t.minute  < 13) or (t.minute > 41 and t.minute  < 43):
+        try:
+            a = subprocess.call("sudo reboot now", shell=True)
+        except:
+            pass
+        try:
+            os.system('sudo reboot now')
+        except:
+            pass
+        
     sleep(2)
     exit()
 
