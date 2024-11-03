@@ -43,7 +43,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.48"
+version_yeekee = "v1.48c"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -2127,9 +2127,11 @@ if __name__ == "__main__":
     
     print('done')
     sys.stdout.close()
-    subprocess.call('cd /home/bitnami/project/xpsoft/bot/funtion; git fetch https://github.com/lycaon1150/bot_yeekee.git ; git pull -f https://github.com/lycaon1150/bot_yeekee.git')
-    shutil.copyfile("/home/bitnami/project/xpsoft/outputfile.txt", target_F+"/"+log_out)
+    os.chdir("/home/bitnami/project/xpsoft/bot/funtion")
+    os.system("git fetch https://github.com/lycaon1150/bot_yeekee.git ; git pull -f https://github.com/lycaon1150/bot_yeekee.git")
     
+    shutil.copyfile("/home/bitnami/project/xpsoft/outputfile.txt", target_F+"/"+log_out)
+    sleep(2)
     if (t.minute > 11 and t.minute  < 13) or (t.minute > 41 and t.minute  < 43):
         try:
             a = subprocess.call("sudo reboot now", shell=True)
