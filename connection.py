@@ -43,7 +43,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.49c fix error"
+version_yeekee = "v1.49d"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
