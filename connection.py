@@ -1532,13 +1532,13 @@ class yeekee_bot(object):
                 price = 2
 
                 if bet_type == 'special':
-                    rate = 95
+                    rate = 90
                 elif bet_type == 'vip_264':
-                    rate = 95
+                    rate = 90
                 elif bet_type == 'speed_double':
-                    rate = 95
+                    rate = 90
                 elif bet_type == 'normal':
-                    rate = 95
+                    rate = 90
                 elif bet_type == 'vip_88':
                     rate = 95
                     price = 10
