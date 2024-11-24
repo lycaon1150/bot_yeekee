@@ -43,7 +43,7 @@ import os
 
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v1.49d"
+version_yeekee = "v1.49e"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -1536,11 +1536,11 @@ class yeekee_bot(object):
                 elif bet_type == 'vip_264':
                     rate = 90
                 elif bet_type == 'speed_double':
-                    rate = 90
+                    rate = 95
                 elif bet_type == 'normal':
                     rate = 90
                 elif bet_type == 'vip_88':
-                    rate = 95
+                    rate = 90
                     price = 10
                     
                 betListJsonStringify = betListJsonStringify + str(r'{\"slug\":\"two_top\",\"number\":\"%s\",\"price\":\"%s\",\"rate\":\"%s\"},' % (str(num),str(price),str(rate)))
