@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.00a"
+version_yeekee = "v2.00b"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -1593,7 +1593,8 @@ if __name__ == "__main__":
                           
                     class_obj.go_shoot_number(codename, int(data[codename]['time_delay']) ,test_process,bet_type,room=class_obj.room_number_special,state=class_obj.state_special)
                     sleep(5)
-                    if now.minute in [15,16,30,31,45,46,0,1]:
+                    
+                    if now.minute in [13,14,15,16,28,29,30,31,43,44,45,46,58,59,0,1]:
                         resend_normal = 1
                         class_obj.go_shoot_number(codename, int(data[codename]['time_delay_normal']) ,test_process,bet_type="normal",room=class_obj.room_number_normal,state=class_obj.state_normal)
                         
