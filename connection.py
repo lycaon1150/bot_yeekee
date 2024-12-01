@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.00b"
+version_yeekee = "v2.00c"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -1729,7 +1729,7 @@ if __name__ == "__main__":
                     'time_use' : class_obj.use_time_normal,
                     'date' : day_start_bet , 
                     'bet_round' :  class_obj.state_normal+1, 
-                    'rank' : rank_normal , 
+                    'rank' : class_obj.rank_normal , 
                     'last_rank' : class_obj.last_rank_normal ,
                     'balance' : balance ,
                     'version' : version_yeekee ,
