@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.00"
+version_yeekee = "v2.00a"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -932,9 +932,9 @@ class yeekee_bot(object):
 
                 if time_rank == last_rank_js:
                     if bet_type == "normal":
-                        self.last_rank_normal = i+1
+                        self.last_rank_normal = i+51
                     else:
-                        self.last_rank_special = i+1
+                        self.last_rank_special = i+51
 
                 find_name = self.driver.execute_script(js)
                 # print(find_name)
@@ -955,9 +955,9 @@ class yeekee_bot(object):
 
                 if time_rank == last_rank_js:
                     if bet_type == "normal":
-                        self.last_rank_normal = i+1
+                        self.last_rank_normal = i+101
                     else:
-                        self.last_rank_special = i+1
+                        self.last_rank_special = i+101
                     
                 find_name = self.driver.execute_script(js)
                 # print(find_name)
@@ -977,9 +977,9 @@ class yeekee_bot(object):
 
                 if time_rank == last_rank_js:
                     if bet_type == "normal":
-                        self.last_rank_normal = i+1
+                        self.last_rank_normal = i+151
                     else:
-                        self.last_rank_special = i+1
+                        self.last_rank_special = i+151
                     
                 find_name = self.driver.execute_script(js)
                 # print(find_name)
