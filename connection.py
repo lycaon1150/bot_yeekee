@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.00c"
+version_yeekee = "v2.00d"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -872,12 +872,12 @@ class yeekee_bot(object):
         sleep(1)
         self.driver.save_screenshot('rank.png')
         
-        
+        now = datetime.datetime.now()
         name = user.split("_")[1]
         print(name)
         secret_name = ""
         print(datetime.datetime.now())
-        if bet_type == 'special' and this_host == 'movewinbet':
+        if bet_type == 'special' and now.minute in [2,17,32,47]:
             past_time = list(str(datetime.datetime.now()- datetime.timedelta(0,120)).split(".")[0])
         else:
             past_time = list(str(datetime.datetime.now()- datetime.timedelta(0,60)).split(".")[0])
@@ -1648,8 +1648,10 @@ if __name__ == "__main__":
                         print("class_obj.rank_normal",class_obj.rank_normal)
                         
                 elif (time_in_minute > 355 or time_in_minute < 240) and bet_type == 'normal':
+                    
                     class_obj.rank_normal = class_obj.get_result(codename,bet_type="normal")
                     print("class_obj.rank_normal",class_obj.rank_normal)
+                    
                 else:
                     class_obj.rank_special = class_obj.get_result(codename,bet_type=bet_type)
                     print("class_obj.rank_special",class_obj.rank_special)
