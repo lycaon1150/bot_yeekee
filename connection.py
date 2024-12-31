@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.02
+version_yeekee = "v2.02"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
