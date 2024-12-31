@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.00d"
+version_yeekee = "v2.01"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -536,7 +536,7 @@ class yeekee_bot(object):
             else:
                 type_url = 'yeekee-vip'
                  
-            movewinbet_url_bet = "https://%s/member/%s/%s" % (str(self.movewinbet_url) , str(type_url) , str(room) )
+            movewinbet_url_bet = "https://%s/member/%s/%s/bet?userId=1150" % (str(self.movewinbet_url) , str(type_url) , str(room) )
             
             
             self.driver.get(movewinbet_url_bet)
