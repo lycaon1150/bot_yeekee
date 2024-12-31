@@ -471,7 +471,7 @@ class yeekee_bot(object):
             
             elif this_host == 'movewinbet':
                 if bet_type == "special":
-                    price = 2
+                    price = 0
                 else:
                     price = 2
                 
