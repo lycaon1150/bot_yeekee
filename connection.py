@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.01"
+version_yeekee = "v2.01b"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -535,14 +535,16 @@ class yeekee_bot(object):
                 type_url = 'yeekee'
             else:
                 type_url = 'yeekee-vip'
-                 
-            movewinbet_url_bet = "https://%s/member/%s/%s/bet?userId=1150" % (str(self.movewinbet_url) , str(type_url) , str(room) )
+            
+            
+            
+            movewinbet_url_bet = "https://%s/member/%s/%s" % (str(self.movewinbet_url) , str(type_url) , str(room) )
             
             
             self.driver.get(movewinbet_url_bet)
             sleep(3)
             print('bet web : ' + str(movewinbet_url_bet))
-            bet_url = self.driver.execute_script('return betUrl')
+            bet_url = "https://%s/member/%s/%s/bet?userId=1150" % (str(self.movewinbet_url) , str(type_url) , str(room) )
             print(bet_url)
             js = js_code.bet_number_movewinbet(room,betListJsonStringify,bet_url)
             sleep(2)
