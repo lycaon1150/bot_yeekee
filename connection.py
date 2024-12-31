@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.01c"
+version_yeekee = "v2.02
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -471,7 +471,7 @@ class yeekee_bot(object):
             
             elif this_host == 'movewinbet':
                 if bet_type == "special":
-                    price = 0
+                    price = 2
                 else:
                     price = 2
                 
