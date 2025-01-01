@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.02b"
+version_yeekee = "v2.03"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -772,7 +772,10 @@ class yeekee_bot(object):
         #     js_send_number = ''
             
         use_time = 0
-        rand_time = (20 + random.randint(50, 200)/100)
+        if this_host == 'movewinbet':
+            rand_time = (50 + random.randint(50, 200)/100)
+        else:
+            rand_time = (20 + random.randint(50, 200)/100)
 
         delay = (1000000-set_delay)/1000000
         
@@ -823,7 +826,27 @@ class yeekee_bot(object):
                             print(now)
                             sleep(1)
                             
+                            ######### ยิงเลขครั้ง 2 movewin ##############
+                            if this_host == 'movewinbet':
+                                sleep(10.2)
+                                self.driver.execute_script(js_send_number) 
+                                print('done ckick 2nd')
+                                print(now)
+                                sleep(1)
+                            
+                            ######### ยิงเลขครั้ง 3 movewin ##############
+                            if this_host == 'movewinbet':
+                                sleep(10.2)
+                                self.driver.execute_script(js_send_number) 
+                                print('done ckick 2nd')
+                                print(now)
+                                sleep(1)
+                            
                             self.driver.refresh()
+                            
+                            
+                            
+                            
                         except Exception as e:
                             print('error shot number ckick 1st')
                             print(e)
@@ -1597,7 +1620,7 @@ if __name__ == "__main__":
                     time_in_minute = (now.hour*60 + now.minute)
                           
                     class_obj.go_shoot_number(codename, int(data[codename]['time_delay']) ,test_process,bet_type,room=class_obj.room_number_special,state=class_obj.state_special)
-                    sleep(5)
+                    sleep(3)
                     
                     if now.minute in [13,14,15,16,28,29,30,31,43,44,45,46,58,59,0,1]:
                         resend_normal = 1
