@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.03"
+version_yeekee = "v2.03b"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -773,7 +773,7 @@ class yeekee_bot(object):
             
         use_time = 0
         if this_host == 'movewinbet':
-            rand_time = (52 + random.randint(50, 200)/100)
+            rand_time = (72 + random.randint(50, 200)/100)
         else:
             rand_time = (20 + random.randint(50, 200)/100)
 
@@ -843,6 +843,22 @@ class yeekee_bot(object):
                                 sleep(1)
                             
                             ######### ยิงเลขครั้ง 4 movewin ##############
+                            if this_host == 'movewinbet':
+                                sleep(10.2)
+                                self.driver.execute_script(js_send_number) 
+                                print('done ckick 2nd')
+                                print(now)
+                                sleep(1)
+                            
+                            ######### ยิงเลขครั้ง 5 movewin ##############
+                            if this_host == 'movewinbet':
+                                sleep(10.2)
+                                self.driver.execute_script(js_send_number) 
+                                print('done ckick 2nd')
+                                print(now)
+                                sleep(1)
+                                
+                            ######### ยิงเลขครั้ง 6 movewin ##############
                             if this_host == 'movewinbet':
                                 sleep(10.2)
                                 self.driver.execute_script(js_send_number) 
@@ -1626,8 +1642,12 @@ if __name__ == "__main__":
                 if (time_in_minute > 355 or time_in_minute < 240) and bet_type != 'normal':
                     now = datetime.datetime.now()
                     time_in_minute = (now.hour*60 + now.minute)
-                          
-                    class_obj.go_shoot_number(codename, int(data[codename]['time_delay']) ,test_process,bet_type,room=class_obj.room_number_special,state=class_obj.state_special)
+                    
+                    if now.minute in [13,14,15,16,28,29,30,31,43,44,45,46,58,59,0,1] and data[codename]['host'] == 'movewinbet':
+                        pass
+                    else:
+                        class_obj.go_shoot_number(codename, int(data[codename]['time_delay']) ,test_process,bet_type,room=class_obj.room_number_special,state=class_obj.state_special)
+                    
                     sleep(3)
                     
                     if now.minute in [13,14,15,16,28,29,30,31,43,44,45,46,58,59,0,1]:
