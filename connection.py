@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.03b"
+version_yeekee = "v2.03c"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -785,6 +785,11 @@ class yeekee_bot(object):
             time_set_round = time_par_round - 1000000 - test
             while(1):
                 now = datetime.datetime.now()
+                
+                if now.minute in [13,14,15,16,28,29,30,31,43,44,45,46,58,59,0,1] and data[codename]['host'] == 'movewinbet' and bet_type != 'normal':
+                    self.use_time_special = 0
+                    break
+                        
                 if state_ref == 1 and now.second == 59:
                 # if (loop_time - server_delay_sec) % time_par_round > time_set_round and state_ref == 1:
                     print('ckick to win')
@@ -820,7 +825,7 @@ class yeekee_bot(object):
                             sleep(0.5)
                             
                             ######### ยิงเลขครั้งแรก ##############
-                            
+                            now = datetime.datetime.now() 
                             self.driver.execute_script(js_send_number) 
                             print('done ckick 1st')
                             print(now)
@@ -829,6 +834,7 @@ class yeekee_bot(object):
                             ######### ยิงเลขครั้ง 2 movewin ##############
                             if this_host == 'movewinbet':
                                 sleep(10.2)
+                                now = datetime.datetime.now() 
                                 self.driver.execute_script(js_send_number) 
                                 print('done ckick 2nd')
                                 print(now)
@@ -837,32 +843,36 @@ class yeekee_bot(object):
                             ######### ยิงเลขครั้ง 3 movewin ##############
                             if this_host == 'movewinbet':
                                 sleep(10.2)
+                                now = datetime.datetime.now() 
                                 self.driver.execute_script(js_send_number) 
-                                print('done ckick 2nd')
+                                print('done ckick 3')
                                 print(now)
                                 sleep(1)
                             
                             ######### ยิงเลขครั้ง 4 movewin ##############
                             if this_host == 'movewinbet':
                                 sleep(10.2)
+                                now = datetime.datetime.now() 
                                 self.driver.execute_script(js_send_number) 
-                                print('done ckick 2nd')
+                                print('done ckick 4')
                                 print(now)
                                 sleep(1)
                             
                             ######### ยิงเลขครั้ง 5 movewin ##############
                             if this_host == 'movewinbet':
                                 sleep(10.2)
+                                now = datetime.datetime.now() 
                                 self.driver.execute_script(js_send_number) 
-                                print('done ckick 2nd')
+                                print('done ckick 5')
                                 print(now)
                                 sleep(1)
                                 
                             ######### ยิงเลขครั้ง 6 movewin ##############
                             if this_host == 'movewinbet':
                                 sleep(10.2)
+                                now = datetime.datetime.now() 
                                 self.driver.execute_script(js_send_number) 
-                                print('done ckick 2nd')
+                                print('done ckick 6')
                                 print(now)
                                 sleep(1)
                             
@@ -1643,10 +1653,8 @@ if __name__ == "__main__":
                     now = datetime.datetime.now()
                     time_in_minute = (now.hour*60 + now.minute)
                     
-                    if now.minute in [13,14,15,16,28,29,30,31,43,44,45,46,58,59,0,1] and data[codename]['host'] == 'movewinbet':
-                        pass
-                    else:
-                        class_obj.go_shoot_number(codename, int(data[codename]['time_delay']) ,test_process,bet_type,room=class_obj.room_number_special,state=class_obj.state_special)
+                    
+                    class_obj.go_shoot_number(codename, int(data[codename]['time_delay']) ,test_process,bet_type,room=class_obj.room_number_special,state=class_obj.state_special)
                     
                     sleep(3)
                     
