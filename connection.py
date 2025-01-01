@@ -773,7 +773,7 @@ class yeekee_bot(object):
             
         use_time = 0
         if this_host == 'movewinbet':
-            rand_time = (50 + random.randint(50, 200)/100)
+            rand_time = (52 + random.randint(50, 200)/100)
         else:
             rand_time = (20 + random.randint(50, 200)/100)
 
@@ -835,6 +835,14 @@ class yeekee_bot(object):
                                 sleep(1)
                             
                             ######### ยิงเลขครั้ง 3 movewin ##############
+                            if this_host == 'movewinbet':
+                                sleep(10.2)
+                                self.driver.execute_script(js_send_number) 
+                                print('done ckick 2nd')
+                                print(now)
+                                sleep(1)
+                            
+                            ######### ยิงเลขครั้ง 4 movewin ##############
                             if this_host == 'movewinbet':
                                 sleep(10.2)
                                 self.driver.execute_script(js_send_number) 
