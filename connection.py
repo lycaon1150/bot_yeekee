@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.03c"
+version_yeekee = "v2.03d"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -773,7 +773,7 @@ class yeekee_bot(object):
             
         use_time = 0
         if this_host == 'movewinbet':
-            rand_time = (72 + random.randint(50, 200)/100)
+            rand_time = (68 + random.randint(50, 200)/100)
         else:
             rand_time = (20 + random.randint(50, 200)/100)
 
@@ -833,7 +833,7 @@ class yeekee_bot(object):
                             
                             ######### ยิงเลขครั้ง 2 movewin ##############
                             if this_host == 'movewinbet':
-                                sleep(10.2)
+                                sleep(12)
                                 now = datetime.datetime.now() 
                                 self.driver.execute_script(js_send_number) 
                                 print('done ckick 2nd')
@@ -842,7 +842,7 @@ class yeekee_bot(object):
                             
                             ######### ยิงเลขครั้ง 3 movewin ##############
                             if this_host == 'movewinbet':
-                                sleep(10.2)
+                                sleep(12)
                                 now = datetime.datetime.now() 
                                 self.driver.execute_script(js_send_number) 
                                 print('done ckick 3')
@@ -851,7 +851,7 @@ class yeekee_bot(object):
                             
                             ######### ยิงเลขครั้ง 4 movewin ##############
                             if this_host == 'movewinbet':
-                                sleep(10.2)
+                                sleep(12)
                                 now = datetime.datetime.now() 
                                 self.driver.execute_script(js_send_number) 
                                 print('done ckick 4')
@@ -860,21 +860,14 @@ class yeekee_bot(object):
                             
                             ######### ยิงเลขครั้ง 5 movewin ##############
                             if this_host == 'movewinbet':
-                                sleep(10.2)
+                                sleep(12)
                                 now = datetime.datetime.now() 
                                 self.driver.execute_script(js_send_number) 
                                 print('done ckick 5')
                                 print(now)
                                 sleep(1)
                                 
-                            ######### ยิงเลขครั้ง 6 movewin ##############
-                            if this_host == 'movewinbet':
-                                sleep(10.2)
-                                now = datetime.datetime.now() 
-                                self.driver.execute_script(js_send_number) 
-                                print('done ckick 6')
-                                print(now)
-                                sleep(1)
+                       
                             
                             self.driver.refresh()
                             
