@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.04b"
+version_yeekee = "v2.04c"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -775,7 +775,7 @@ class yeekee_bot(object):
         if this_host == 'movewinbet':
             rand_time = (68 + random.randint(50, 200)/100)
         elif this_host == 'thailotto' and bet_type == 'normal':
-            rand_time = (42 + random.randint(50, 200)/100)
+            rand_time = (38 + random.randint(50, 600)/100)
         else:
             rand_time = (20 + random.randint(50, 200)/100)
 
