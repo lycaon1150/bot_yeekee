@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.04c"
+version_yeekee = "v2.04d"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -938,7 +938,12 @@ class yeekee_bot(object):
                     secret_name = str(secret_name) + str(c) 
                 n = n + 1
             print(secret_name)
-        
+
+            if bet_type == 'normal':
+                js_100 = """return document.querySelectorAll("a[href='?page=2&scrollToRow=50']")[0].innerText"""
+                name_100 = str(self.driver.execute_script(js_100))
+                if name_100 == name or name_100 == secret_name:
+                    return 100
         
             for i in range(50):
                 js = "return document.getElementsByClassName('username')[%s].innerText" %i 
