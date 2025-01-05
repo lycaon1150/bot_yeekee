@@ -939,11 +939,14 @@ class yeekee_bot(object):
                 n = n + 1
             print(secret_name)
 
-            if bet_type == 'normal':
-                js_100 = """return document.querySelectorAll("a[href='?page=2&scrollToRow=50']")[0].innerText"""
-                name_100 = str(self.driver.execute_script(js_100))
-                if name_100 == name or name_100 == secret_name:
-                    return 100
+            try:
+                if bet_type == 'normal':
+                    js_100 = """return document.querySelectorAll("a[href='?page=2&scrollToRow=50']")[0].innerText"""
+                    name_100 = str(self.driver.execute_script(js_100))
+                    if name_100 == name or name_100 == secret_name:
+                        return 100
+            except Exception as e:
+                print(e)
         
             for i in range(50):
                 js = "return document.getElementsByClassName('username')[%s].innerText" %i 
