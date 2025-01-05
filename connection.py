@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.03d"
+version_yeekee = "v2.04"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -774,6 +774,8 @@ class yeekee_bot(object):
         use_time = 0
         if this_host == 'movewinbet':
             rand_time = (68 + random.randint(50, 200)/100)
+        elif this_host == 'thailotto' and bet_type == 'normal':
+            rand_time = (55 + random.randint(50, 200)/100)
         else:
             rand_time = (20 + random.randint(50, 200)/100)
 
@@ -833,39 +835,22 @@ class yeekee_bot(object):
                             
                             ######### ยิงเลขครั้ง 2 movewin ##############
                             if this_host == 'movewinbet':
-                                sleep(12)
-                                now = datetime.datetime.now() 
-                                self.driver.execute_script(js_send_number) 
-                                print('done ckick 2nd')
-                                print(now)
-                                sleep(1)
-                            
-                            ######### ยิงเลขครั้ง 3 movewin ##############
-                            if this_host == 'movewinbet':
-                                sleep(12)
-                                now = datetime.datetime.now() 
-                                self.driver.execute_script(js_send_number) 
-                                print('done ckick 3')
-                                print(now)
-                                sleep(1)
-                            
-                            ######### ยิงเลขครั้ง 4 movewin ##############
-                            if this_host == 'movewinbet':
-                                sleep(12)
-                                now = datetime.datetime.now() 
-                                self.driver.execute_script(js_send_number) 
-                                print('done ckick 4')
-                                print(now)
-                                sleep(1)
-                            
-                            ######### ยิงเลขครั้ง 5 movewin ##############
-                            if this_host == 'movewinbet':
-                                sleep(12)
-                                now = datetime.datetime.now() 
-                                self.driver.execute_script(js_send_number) 
-                                print('done ckick 5')
-                                print(now)
-                                sleep(1)
+                                for _i in range(4):
+                                    sleep(12)
+                                    now = datetime.datetime.now() 
+                                    self.driver.execute_script(js_send_number) 
+                                    print('done ckick ',_i+2)
+                                    print(now)
+                                    sleep(1)
+                                
+                                if this_host == 'thailotto' and bet_type == 'normal':
+                                    for _i in range(2):
+                                        sleep(16)
+                                        now = datetime.datetime.now() 
+                                        self.driver.execute_script(js_send_number) 
+                                        print('done ckick ',_i+2)
+                                        print(now)
+                                        sleep(1)
                                 
                        
                             
