@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.04f"
+version_yeekee = "v2.05"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -1521,7 +1521,7 @@ if __name__ == "__main__":
     a = subprocess.call("pkill chrome", shell=True)
     a = subprocess.call("pkill Xvfb", shell=True)
   
-    sleep(5)
+    sleep(30)
     resend_normal = 0
     try:
         now = datetime.datetime.now()
