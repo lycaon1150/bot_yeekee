@@ -775,7 +775,8 @@ class yeekee_bot(object):
         if this_host == 'movewinbet':
             rand_time = (68 + random.randint(50, 200)/100)
         elif this_host == 'thailotto' and bet_type == 'normal':
-            rand_time = (34 + random.randint(50, 300)/100)
+            # rand_time = (34 + random.randint(50, 300)/100)
+            rand_time = 16
         else:
             rand_time = (20 + random.randint(50, 200)/100)
 
@@ -831,26 +832,27 @@ class yeekee_bot(object):
                             self.driver.execute_script(js_send_number) 
                             print('done ckick 1st')
                             print(now)
-                            sleep(1)
+                            sleep(2)
+                            self.driver.refresh()
                             
-                            ######### ยิงเลขครั้ง 2 movewin ##############
-                            if this_host == 'movewinbet':
-                                for _i in range(4):
-                                    sleep(12)
-                                    now = datetime.datetime.now() 
-                                    self.driver.execute_script(js_send_number) 
-                                    print('done ckick ',_i+2)
-                                    print(now)
-                                    sleep(1)
+                            # ######### ยิงเลขครั้ง 2 movewin ##############
+                            # if this_host == 'movewinbet':
+                            #     for _i in range(4):
+                            #         sleep(12)
+                            #         now = datetime.datetime.now() 
+                            #         self.driver.execute_script(js_send_number) 
+                            #         print('done ckick ',_i+2)
+                            #         print(now)
+                            #         sleep(1)
                                 
-                            if this_host == 'thailotto' and bet_type == 'normal':
+                            # if this_host == 'thailotto' and bet_type == 'normal':
                                 
-                                sleep(16)
-                                now = datetime.datetime.now() 
-                                self.driver.execute_script(js_send_number) 
-                                print('done ckick ',_i+2)
-                                print(now)
-                                sleep(1)
+                            #     sleep(16)
+                            #     now = datetime.datetime.now() 
+                            #     self.driver.execute_script(js_send_number) 
+                            #     print('done ckick ',_i+2)
+                            #     print(now)
+                            #     sleep(1)
                             
                        
                             
