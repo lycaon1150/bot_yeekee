@@ -776,7 +776,7 @@ class yeekee_bot(object):
             rand_time = (68 + random.randint(50, 200)/100)
         elif this_host == 'thailotto' and bet_type == 'normal':
             # rand_time = (34 + random.randint(50, 300)/100)
-            rand_time = 17
+            rand_time = 17.5
         else:
             rand_time = (20 + random.randint(50, 200)/100)
 
