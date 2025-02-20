@@ -776,7 +776,7 @@ class yeekee_bot(object):
             rand_time = (68 + random.randint(50, 200)/100)
         elif this_host == 'thailotto' and bet_type == 'normal':
             # rand_time = (34 + random.randint(50, 300)/100)
-            rand_time = 17.5
+            rand_time = 18
         else:
             rand_time = (20 + random.randint(50, 200)/100)
 
@@ -1539,7 +1539,7 @@ if __name__ == "__main__":
         data_json = {'ip': external_ip , 'host' : 'jetsada'  ,'process' : 'get_user' }
         
         sleep(random.randint(0, 30)/100)
-        data_get = json.loads(requests.post('http://128.199.236.187:8888/jesadabet/get_id',data=data_json ,timeout=60).text)
+        data_get = json.loads(requests.post('http://128.199.236.187:8888/jesadabet/get_id',data=data_json ,timeout=120).text)
         # json_user = json.dumps(data.text)
         
         print(data_get)
