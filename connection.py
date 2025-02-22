@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.05b"
+version_yeekee = "v2.06"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -1630,7 +1630,7 @@ if __name__ == "__main__":
                         
                         class_obj.select_number(codename,l,bet_type=bet_type,room=class_obj.room_number_special,state=class_obj.state_special)
                         
-                        if now.minute in [13,14,28,29,43,44,58,59]:
+                        if now.minute in [13,14,15,16,28,29,30,31,43,44,45,46,58,59,0,1]:
                             resend_normal = 1
                             class_obj.select_number(codename,l,bet_type="normal",room=class_obj.room_number_normal,state=class_obj.state_normal)
                             
@@ -1763,6 +1763,7 @@ if __name__ == "__main__":
                         'delay_use' : int(data[codename]['time_delay']) ,
                         'time_use' : class_obj.use_time_special,
                         'date' : day_start_bet , 
+                        'use_money' : data[codename]['use_money'],
                         'bet_round' : class_obj.state_special+1 , 
                         'rank' : class_obj.rank_special , 
                         'last_rank' : class_obj.last_rank_special ,
@@ -1788,6 +1789,7 @@ if __name__ == "__main__":
                     'delay_use' : delay_use ,
                     'time_use' : class_obj.use_time_normal,
                     'date' : day_start_bet , 
+                    'use_money' : data[codename]['use_money'],
                     'bet_round' :  class_obj.state_normal+1, 
                     'rank' : class_obj.rank_normal , 
                     'last_rank' : class_obj.last_rank_normal ,
