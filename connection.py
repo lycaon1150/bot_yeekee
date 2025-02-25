@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.06"
+version_yeekee = "v2.06b"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -602,7 +602,7 @@ class yeekee_bot(object):
         
         print('done bet number')
 
-    def go_shoot_number(self, user, set_delay,test_setting,bet_type,room,state):   # 225k no.16-25
+    def go_shoot_number(self, user, set_delay,test_setting,bet_type,room,state,money):   # 225k no.16-25
         code = self.session_data[user]['authorization']
         this_host = self.session_data[user]['host']
         set_time_start = (21600 + 2*60) * 1000000
@@ -828,12 +828,13 @@ class yeekee_bot(object):
                             sleep(0.5)
                             
                             ######### ยิงเลขครั้งแรก ##############
-                            now = datetime.datetime.now() 
-                            self.driver.execute_script(js_send_number) 
-                            print('done ckick 1st')
-                            print(now)
-                            sleep(2)
-                            self.driver.refresh()
+                            if money == 'yes':
+                                now = datetime.datetime.now() 
+                                self.driver.execute_script(js_send_number) 
+                                print('done ckick 1st')
+                                print(now)
+                                sleep(2)
+                                self.driver.refresh()
                             
                             # ######### ยิงเลขครั้ง 2 movewin ##############
                             # if this_host == 'movewinbet':
@@ -1648,21 +1649,21 @@ if __name__ == "__main__":
                     time_in_minute = (now.hour*60 + now.minute)
                     
                     
-                    class_obj.go_shoot_number(codename, int(data[codename]['time_delay']) ,test_process,bet_type,room=class_obj.room_number_special,state=class_obj.state_special)
+                    class_obj.go_shoot_number(codename, int(data[codename]['time_delay']) ,test_process,bet_type,room=class_obj.room_number_special,state=class_obj.state_special,money=data[codename]['use_money'])
                     
                     sleep(3)
                     
                     if now.minute in [13,14,15,16,28,29,30,31,43,44,45,46,58,59,0,1]:
                         resend_normal = 1
-                        class_obj.go_shoot_number(codename, int(data[codename]['time_delay_normal']) ,test_process,bet_type="normal",room=class_obj.room_number_normal,state=class_obj.state_normal)
+                        class_obj.go_shoot_number(codename, int(data[codename]['time_delay_normal']) ,test_process,bet_type="normal",room=class_obj.room_number_normal,state=class_obj.state_normal,money=data[codename]['use_money'])
                         
                      
                 elif (time_in_minute > 355 or time_in_minute < 240) and bet_type == 'normal':
-                    class_obj.go_shoot_number(codename, int(data[codename]['time_delay_normal']) ,test_process,bet_type="normal",room=class_obj.room_number_normal,state=class_obj.state_normal)
+                    class_obj.go_shoot_number(codename, int(data[codename]['time_delay_normal']) ,test_process,bet_type="normal",room=class_obj.room_number_normal,state=class_obj.state_normal,money=data[codename]['use_money'])
 
                         
                 else:
-                    class_obj.go_shoot_number(codename, int(data[codename]['time_delay']),test_process,bet_type,room=class_obj.room_number_special,state=class_obj.state_special)
+                    class_obj.go_shoot_number(codename, int(data[codename]['time_delay']),test_process,bet_type,room=class_obj.room_number_special,state=class_obj.state_special,money=data[codename]['use_money'])
                         
                 sleep(10)
                     
