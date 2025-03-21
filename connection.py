@@ -1524,7 +1524,7 @@ if __name__ == "__main__":
     a = subprocess.call("pkill chrome", shell=True)
     a = subprocess.call("pkill Xvfb", shell=True)
   
-    sleep(2)
+    # sleep(2)
     resend_normal = 0
     try:
         now = datetime.datetime.now()
