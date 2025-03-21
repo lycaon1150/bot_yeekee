@@ -1524,7 +1524,7 @@ if __name__ == "__main__":
     a = subprocess.call("pkill chrome", shell=True)
     a = subprocess.call("pkill Xvfb", shell=True)
   
-    sleep(10)
+    sleep(2)
     resend_normal = 0
     try:
         now = datetime.datetime.now()
@@ -1821,7 +1821,7 @@ if __name__ == "__main__":
                 
                 r = requests.post('http://128.199.236.187:8888/jesadabet/send_history',data=data_json_special)
                 print(r.status_code)
-                sleep(5)
+                sleep(1)
                 if now.minute in [16,17,18,31,32,33,46,47,48,1,2,3]:
                     r = requests.post('http://128.199.236.187:8888/jesadabet/send_history',data=data_json_normal)
                     print(r.status_code)
