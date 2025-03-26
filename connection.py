@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.06b"
+version_yeekee = "v2.07"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -821,11 +821,11 @@ class yeekee_bot(object):
                     if (loop_time - server_delay*1000000) % time_par_round > time_par_round - 1000000*rand_time - test:
                         try:
                             print('ckick 1st')
-                            sleep(delay)
-                            self.driver.refresh()
+                            # sleep(delay)
+                            # self.driver.refresh()
 
                                 
-                            sleep(0.5)
+                            sleep(1)
                             
                             ######### ยิงเลขครั้งแรก ##############
                             if money == 'yes':
