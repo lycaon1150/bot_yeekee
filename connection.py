@@ -776,7 +776,7 @@ class yeekee_bot(object):
             rand_time = (68 + random.randint(50, 200)/100)
         elif this_host == 'thailotto' and bet_type == 'normal':
             # rand_time = (34 + random.randint(50, 300)/100)
-            rand_time = 18
+            rand_time = 17
         else:
             rand_time = (20 + random.randint(50, 200)/100)
 
@@ -825,7 +825,7 @@ class yeekee_bot(object):
                             # self.driver.refresh()
 
                                 
-                            sleep(1)
+                            sleep(1.5)
                             
                             ######### ยิงเลขครั้งแรก ##############
                             if money == 'yes':
