@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.07"
+version_yeekee = "v2.07b"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -835,7 +835,15 @@ class yeekee_bot(object):
                                 print(now)
                                 sleep(2)
                                 self.driver.refresh()
-                            
+                            elif this_host == 'thailotto' and bet_type == 'normal' and money == 'no':
+                                sleep(5)
+                                now = datetime.datetime.now() 
+                                self.driver.execute_script(js_send_number) 
+                                print('done ckick 1st')
+                                print(now)
+                                sleep(2)
+                                self.driver.refresh()
+                                
                             # ######### ยิงเลขครั้ง 2 movewin ##############
                             # if this_host == 'movewinbet':
                             #     for _i in range(4):
