@@ -799,9 +799,12 @@ class yeekee_bot(object):
                     print(delay)
                     sleep(delay)
                     
-                    now = datetime.datetime.now()  
-                    res = self.driver.execute_script(js_send_number) 
-                    end = datetime.datetime.now()
+                    if this_host == 'thailotto' and bet_type == 'normal' and money == 'no':
+                        pass
+                    else:
+                        now = datetime.datetime.now()  
+                        res = self.driver.execute_script(js_send_number) 
+                        end = datetime.datetime.now()
                     print(res)
     
                     
@@ -838,7 +841,7 @@ class yeekee_bot(object):
                             elif this_host == 'thailotto' and bet_type == 'normal' and money == 'no':
                                 sleep(5)
                                 now = datetime.datetime.now() 
-                                self.driver.execute_script(js_send_number) 
+                                # self.driver.execute_script(js_send_number) 
                                 print('done ckick 1st')
                                 print(now)
                                 sleep(2)
