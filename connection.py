@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.07b"
+version_yeekee = "v2.08"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -98,9 +98,9 @@ class yeekee_bot(object):
             self.driver.delete_all_cookies()
             
             try:
-                sleep(2)
+                sleep(0.5)
                 json_data['authorization'] = self.login( json_data['host'],json_data['ID'], json_data['Password'], json_data['url'])
-                sleep(2)
+                sleep(0.5)
             except:
                 print('error with login')
                 return 0
@@ -116,7 +116,7 @@ class yeekee_bot(object):
         r = ''
         print(url)
         self.driver.get(url)
-        sleep(5)
+        sleep(1)
         self.driver.save_screenshot('pic_home.png')
         print(self.driver.execute_script('return navigator.webdriver'))
         
@@ -138,13 +138,13 @@ class yeekee_bot(object):
             if host in [ 'jetsada' , 'huay' , 'thailotto' ] :
             
                 self.driver.execute_script("document.querySelectorAll('button[type=submit]')[1].click();")
-                sleep(2)
+                sleep(1)
                 r = self.driver.execute_script("return (await window.cookieStore.get('XSRF-TOKEN')).value")
             
             elif host in  ['ruay','lottovip'] :
                 
                 self.driver.execute_script("document.querySelectorAll('button[type=submit]')[0].click();")
-                sleep(2)
+                sleep(1)
                 # self.driver.save_screenshot('pic_login.png')
                 r = self.driver.execute_script("""a = document.cookie.split(';');c = '' ; for (let i = 0; i < a.length; i++) { b = a[i].split('=');if(b[0] == ' csrf_cookie'){c = b[1] }} return c; """)
                 print(r)
@@ -254,7 +254,7 @@ class yeekee_bot(object):
                 
                 self.driver.execute_script("document.querySelectorAll('button[type=submit]')[0].click();")
                 
-        sleep(3)
+        sleep(1)
         self.driver.save_screenshot('pic_login.png')
         return r    
        
@@ -1572,13 +1572,13 @@ if __name__ == "__main__":
             class_obj = yeekee_bot(data)
 
             a = subprocess.call("pkill chrome", shell=True)
-            sleep(2)
+            sleep(0.5)
             r = class_obj.create_connection()
                 
                 
             start = int(data[codename]['start'])
             end = int(data[codename]['end'])+1
-            sleep(2)
+            # sleep(2)
             
             get_af = int(data[codename]['get_af'])
             
