@@ -828,7 +828,7 @@ class yeekee_bot(object):
                             # self.driver.refresh()
 
                                 
-                            sleep(1.5)
+                            sleep(1.8)
                             
                             ######### ยิงเลขครั้งแรก ##############
                             if money == 'yes':
