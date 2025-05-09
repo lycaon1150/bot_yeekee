@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.08b"
+version_yeekee = "v2.08c"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -841,8 +841,8 @@ class yeekee_bot(object):
                             elif this_host == 'thailotto' and bet_type == 'normal' and money == 'no':
                                 sleep(7)
                                 now = datetime.datetime.now() 
-                                if room > 216:
-                                    self.driver.execute_script(js_send_number) 
+                                # if room < 216:
+                                #     self.driver.execute_script(js_send_number) 
                                 print('done ckick 1st')
                                 print(now)
                                 sleep(2)
