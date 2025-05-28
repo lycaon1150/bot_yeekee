@@ -126,19 +126,19 @@ class yeekee_bot(object):
             if host == 'jetsada':
                 self.driver.execute_script("document.getElementsByClassName('btn btn-bar btn-border btn-login-modal')[0].click();")
                 class_username = 'username'
-                sleep(1)
+                sleep(0.5)
             elif host == 'thailotto':
                 # self.driver.execute_script("document.getElementsByClassName('btn btn-bar btn-login-modal')[0].click();")
                 sleep(0.5)
                 
             self.driver.execute_script("document.getElementsByName('username')[0].value='%s';" % str(id))
             self.driver.execute_script("document.getElementsByName('password')[0].value='%s';" % str(pwd))
-            sleep(1)
+            sleep(0.5)
             
             if host in [ 'jetsada' , 'huay' , 'thailotto' ] :
             
                 self.driver.execute_script("document.querySelectorAll('button[type=submit]')[1].click();")
-                sleep(1)
+                sleep(0.5)
                 r = self.driver.execute_script("return (await window.cookieStore.get('XSRF-TOKEN')).value")
             
             elif host in  ['ruay','lottovip'] :
@@ -988,7 +988,7 @@ class yeekee_bot(object):
                 if find_name == name or find_name == secret_name:
                     return i+1
             
-            sleep(0.5)
+           
             new_url = room_url + '?page=2'    
             self.driver.get(new_url)
             sleep(0.5)
@@ -1676,8 +1676,11 @@ if __name__ == "__main__":
                         
                 else:
                     class_obj.go_shoot_number(codename, int(data[codename]['time_delay']),test_process,bet_type,room=class_obj.room_number_special,state=class_obj.state_special,money=data[codename]['use_money'])
-                        
-                sleep(10)
+                
+                if now.minute in [2,17,32,47]:
+                    pass
+                else:        
+                    sleep(10)
                     
                 try:
                     class_obj.get_bonus_vip(codename,data[codename]['host'])
