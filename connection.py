@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.08c"
+version_yeekee = "v2.08d"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -776,7 +776,7 @@ class yeekee_bot(object):
             rand_time = (68 + random.randint(50, 200)/100)
         elif this_host == 'thailotto' and bet_type == 'normal':
             # rand_time = (34 + random.randint(50, 300)/100)
-            rand_time = 17
+            rand_time = 18
         else:
             rand_time = (20 + random.randint(50, 200)/100)
 
@@ -841,8 +841,8 @@ class yeekee_bot(object):
                             elif this_host == 'thailotto' and bet_type == 'normal' and money == 'no':
                                 sleep(7)
                                 now = datetime.datetime.now() 
-                                if room < 235 or (room > 253 and room < 265):
-                                    self.driver.execute_script(js_send_number) 
+                                # if room < 235 or (room > 253 and room < 265):
+                                self.driver.execute_script(js_send_number) 
                                 print('done ckick 1st')
                                 print(now)
                                 sleep(2)
