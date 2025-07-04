@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.08e"
+version_yeekee = "v2.09"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -842,7 +842,7 @@ class yeekee_bot(object):
                                 sleep(7)
                                 now = datetime.datetime.now() 
                                 # if room < 235 or (room > 253 and room < 265):
-                                self.driver.execute_script(js_send_number) 
+                                #     self.driver.execute_script(js_send_number) 
                                 print('done ckick 1st')
                                 print(now)
                                 sleep(2)
