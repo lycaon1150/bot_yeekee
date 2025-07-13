@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.10"
+version_yeekee = "v2.10b"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -789,9 +789,9 @@ class yeekee_bot(object):
             while(1):
                 now = datetime.datetime.now()
                 
-                if now.minute in [13,14,15,16,28,29,30,31,43,44,45,46,58,59,0,1] and data[codename]['host'] == 'movewinbet' and bet_type != 'normal':
-                    self.use_time_special = 0
-                    break
+                # if now.minute in [13,14,15,16,28,29,30,31,43,44,45,46,58,59,0,1] and data[codename]['host'] == 'movewinbet' and bet_type != 'normal':
+                #     self.use_time_special = 0
+                #     break
                         
                 if state_ref == 1 and now.second == 59:
                 # if (loop_time - server_delay_sec) % time_par_round > time_set_round and state_ref == 1:
