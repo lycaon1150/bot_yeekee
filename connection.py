@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.09b"
+version_yeekee = "v2.10"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -1564,7 +1564,7 @@ if __name__ == "__main__":
         time_delay = int(data[codename]['time_delay'])
         username = data[codename]['ID']
         bet_type = data[codename]['bet_type'] 
-        
+        normal_bet = int(data[codename]['normal'])
         
         if data[codename]['test'] == 'yes':
             test_process = True
@@ -1643,7 +1643,7 @@ if __name__ == "__main__":
                         
                         class_obj.select_number(codename,l,bet_type=bet_type,room=class_obj.room_number_special,state=class_obj.state_special)
                         
-                        if now.minute in [13,14,15,16,28,29,30,31,43,44,45,46,58,59,0,1]:
+                        if now.minute in [13,14,15,16,28,29,30,31,43,44,45,46,58,59,0,1] and normal_bet == 1:
                             resend_normal = 1
                             class_obj.select_number(codename,l,bet_type="normal",room=class_obj.room_number_normal,state=class_obj.state_normal)
                             
@@ -1665,7 +1665,7 @@ if __name__ == "__main__":
                     
                     sleep(3)
                     
-                    if now.minute in [13,14,15,16,28,29,30,31,43,44,45,46,58,59,0,1]:
+                    if now.minute in [13,14,15,16,28,29,30,31,43,44,45,46,58,59,0,1] and normal_bet == 1:
                         resend_normal = 1
                         class_obj.go_shoot_number(codename, int(data[codename]['time_delay_normal']) ,test_process,bet_type="normal",room=class_obj.room_number_normal,state=class_obj.state_normal,money=data[codename]['use_money'])
                         
@@ -1677,7 +1677,7 @@ if __name__ == "__main__":
                 else:
                     class_obj.go_shoot_number(codename, int(data[codename]['time_delay']),test_process,bet_type,room=class_obj.room_number_special,state=class_obj.state_special,money=data[codename]['use_money'])
                 
-                if now.minute in [2,17,32,47]:
+                if now.minute in [2,17,32,47] :
                     pass
                 else:        
                     sleep(10)
@@ -1717,7 +1717,7 @@ if __name__ == "__main__":
                     class_obj.rank_special = class_obj.get_result(codename,bet_type=bet_type)
                     print("class_obj.rank_special",class_obj.rank_special)
                     
-                    if now.minute in [16,17,31,32,46,47,1,2]:
+                    if now.minute in [16,17,31,32,46,47,1,2] and normal_bet == 1:
                         class_obj.rank_normal = class_obj.get_result(codename,bet_type="normal")
                         print("class_obj.rank_normal",class_obj.rank_normal)
                         
@@ -1798,27 +1798,30 @@ if __name__ == "__main__":
                 delay_use = int(data[codename]['time_delay_normal'])
             else:
                 delay_use = int(data[codename]['time_delay'])
-                
-            data_json_normal = {'username' : username ,
-                    'host' : data[codename]['host'] , 
-                    'bet_type' : 'normal' ,
-                    'delay_use' : delay_use ,
-                    'time_use' : class_obj.use_time_normal,
-                    'date' : day_start_bet , 
-                    'use_money' : data[codename]['use_money'],
-                    'bet_round' :  class_obj.state_normal+1, 
-                    'rank' : class_obj.rank_normal , 
-                    'last_rank' : class_obj.last_rank_normal ,
-                    'balance' : balance ,
-                    'version' : version_yeekee ,
-                    'bonus' : bonus ,
-                    'number_shot' : class_obj.number_send_normal ,
-                    'get_af' : get_af ,
-                    'point' : point , 
-                    'last_reboot' : date_obj,
-                    'server_delay' : data[codename]['server_delay'] 
-                    }
-            print(data_json_normal)
+            
+            try:    
+                data_json_normal = {'username' : username ,
+                        'host' : data[codename]['host'] , 
+                        'bet_type' : 'normal' ,
+                        'delay_use' : delay_use ,
+                        'time_use' : class_obj.use_time_normal,
+                        'date' : day_start_bet , 
+                        'use_money' : data[codename]['use_money'],
+                        'bet_round' :  class_obj.state_normal+1, 
+                        'rank' : class_obj.rank_normal , 
+                        'last_rank' : class_obj.last_rank_normal ,
+                        'balance' : balance ,
+                        'version' : version_yeekee ,
+                        'bonus' : bonus ,
+                        'number_shot' : class_obj.number_send_normal ,
+                        'get_af' : get_af ,
+                        'point' : point , 
+                        'last_reboot' : date_obj,
+                        'server_delay' : data[codename]['server_delay'] 
+                        }
+                print(data_json_normal)
+            except:
+                pass
             
             now = datetime.datetime.now()
             print(now)
@@ -1837,7 +1840,7 @@ if __name__ == "__main__":
                 r = requests.post('http://128.199.236.187:8888/jesadabet/send_history',data=data_json_special)
                 print(r.status_code)
                 sleep(1)
-                if now.minute in [16,17,18,31,32,33,46,47,48,1,2,3]:
+                if now.minute in [16,17,18,31,32,33,46,47,48,1,2,3] and normal_bet == 1:
                     r = requests.post('http://128.199.236.187:8888/jesadabet/send_history',data=data_json_normal)
                     print(r.status_code)
                 
