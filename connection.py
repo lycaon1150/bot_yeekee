@@ -848,7 +848,7 @@ class yeekee_bot(object):
                                 sleep(2)
                                 self.driver.refresh()
                             
-                            if this_host == 'thailotto' and bet_type == 'normal':
+                            if this_host == 'thailotto' and bet_type == 'normal' and money == 'yes':
                                 sleep(16-2.2)
                                 now = datetime.datetime.now() 
                                 self.driver.execute_script(js_send_number) 
