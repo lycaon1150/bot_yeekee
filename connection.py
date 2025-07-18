@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.10d"
+version_yeekee = "v2.10e"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -828,7 +828,7 @@ class yeekee_bot(object):
                             # self.driver.refresh()
 
                                 
-                            sleep(0.5)
+                            sleep(2.5)
                             
                             ######### ยิงเลขครั้งแรก ##############
                             if money == 'yes':
