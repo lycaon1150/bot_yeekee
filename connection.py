@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.10c"
+version_yeekee = "v2.10d"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -828,7 +828,7 @@ class yeekee_bot(object):
                             # self.driver.refresh()
 
                                 
-                            sleep(1.5)
+                            sleep(0.5)
                             
                             ######### ยิงเลขครั้งแรก ##############
                             if money == 'yes':
@@ -1782,26 +1782,29 @@ if __name__ == "__main__":
             date_obj = datetime.datetime.strptime(date_str, date_format) 
             print(date_obj)
             
-            data_json_special = {'username' : username ,
-                        'host' : data[codename]['host'] , 
-                        'bet_type' : data[codename]['bet_type'] ,
-                        'delay_use' : int(data[codename]['time_delay']) ,
-                        'time_use' : class_obj.use_time_special,
-                        'date' : day_start_bet , 
-                        'use_money' : data[codename]['use_money'],
-                        'bet_round' : class_obj.state_special+1 , 
-                        'rank' : class_obj.rank_special , 
-                        'last_rank' : class_obj.last_rank_special ,
-                        'balance' : balance ,
-                        'version' : version_yeekee ,
-                        'bonus' : bonus ,
-                        'number_shot' : class_obj.number_send_special ,
-                        'get_af' : get_af ,
-                        'point' : point , 
-                        'last_reboot' : date_obj,
-                        'server_delay' : data[codename]['server_delay'] 
-                        }
-            print(data_json_special)
+            try:
+                data_json_special = {'username' : username ,
+                            'host' : data[codename]['host'] , 
+                            'bet_type' : data[codename]['bet_type'] ,
+                            'delay_use' : int(data[codename]['time_delay']) ,
+                            'time_use' : class_obj.use_time_special,
+                            'date' : day_start_bet , 
+                            'use_money' : data[codename]['use_money'],
+                            'bet_round' : class_obj.state_special+1 , 
+                            'rank' : class_obj.rank_special , 
+                            'last_rank' : class_obj.last_rank_special ,
+                            'balance' : balance ,
+                            'version' : version_yeekee ,
+                            'bonus' : bonus ,
+                            'number_shot' : class_obj.number_send_special ,
+                            'get_af' : get_af ,
+                            'point' : point , 
+                            'last_reboot' : date_obj,
+                            'server_delay' : data[codename]['server_delay'] 
+                            }
+                print(data_json_special)
+            except:
+                pass
             
             if resend_normal == 1:
                 delay_use = int(data[codename]['time_delay_normal'])
