@@ -839,7 +839,7 @@ class yeekee_bot(object):
                                 sleep(2.2)
                                 self.driver.refresh()
                             elif this_host == 'thailotto' and bet_type == 'normal' and money == 'no':
-                                sleep(7)
+                                sleep(7+16)
                                 now = datetime.datetime.now() 
                                 if room < 235 or (room > 253 and room < 265):
                                     self.driver.execute_script(js_send_number) 
