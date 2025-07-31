@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.10f"
+version_yeekee = "v2.11"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -1872,25 +1872,7 @@ if __name__ == "__main__":
                 class_obj.stop_display()
         
         
-        ################# add file ##################
-         
-        if data[codename]['host'] == "movewinbet" :
-            today = datetime.datetime.now() + datetime.timedelta(minutes=3)
-        else:
-            today = datetime.datetime.now() - datetime.timedelta(hours=5)
-            
-        target_F = "/home/bitnami/project/xpsoft/log_data/"+ str(today.year) + "_" + str(today.month) + "_" + str(today.day)
-        
-        if not os.path.isdir("/home/bitnami/project/xpsoft/log_data"): 
-            os.makedirs("/home/bitnami/project/xpsoft/log_data")   
-               
-        if not os.path.isdir(target_F): 
-            os.makedirs(target_F)         
-        
-        if bet_type == "normal":        
-            log_out = str(class_obj.state_normal+1)+".txt"     
-        else:
-            log_out = str(class_obj.state_special+1)+".txt"     
+           
         
     except Exception as e :
         print(e)
@@ -1914,7 +1896,27 @@ if __name__ == "__main__":
     
     print('done')
     # sys.stdout.close()
-    
+    ################# add file ##################
+    try:
+        if data[codename]['host'] == "movewinbet" :
+            today = datetime.datetime.now() + datetime.timedelta(minutes=3)
+        else:
+            today = datetime.datetime.now() - datetime.timedelta(hours=5)
+            
+        target_F = "/home/bitnami/project/xpsoft/log_data/"+ str(today.year) + "_" + str(today.month) + "_" + str(today.day)
+        
+        if not os.path.isdir("/home/bitnami/project/xpsoft/log_data"): 
+            os.makedirs("/home/bitnami/project/xpsoft/log_data")   
+               
+        if not os.path.isdir(target_F): 
+            os.makedirs(target_F)         
+        
+        if bet_type == "normal":        
+            log_out = str(class_obj.state_normal+1)+".txt"     
+        else:
+            log_out = str(class_obj.state_special+1)+".txt"  
+    except:
+        pass
 
     sys.stdout.close()
     shutil.copyfile("/home/bitnami/project/xpsoft/outputfile.txt", target_F+"/"+log_out)
