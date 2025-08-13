@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.13"
+version_yeekee = "v2.12"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -793,8 +793,8 @@ class yeekee_bot(object):
                 #     self.use_time_special = 0
                 #     break
                         
-                if state_ref == 1 and now.second == 59:
-                    sleep(0.05)
+                if state_ref == 1 and now.second == 58:
+                    sleep(0.98)
                 # if (loop_time - server_delay_sec) % time_par_round > time_set_round and state_ref == 1:
                     print('ckick to win')
                     print(delay)
