@@ -1886,7 +1886,7 @@ if __name__ == "__main__":
             pass
         
         
-    sleep(2)    
+    sleep(1)    
     a = subprocess.call("pkill chrome", shell=True)
     t = datetime.datetime.now()
     
@@ -1921,7 +1921,7 @@ if __name__ == "__main__":
 
     sys.stdout.close()
     shutil.copyfile("/home/bitnami/project/xpsoft/outputfile.txt", target_F+"/"+log_out)
-    sleep(2)
+    sleep(1)
         
-    sleep(2)
+    sleep(1)
     exit()
