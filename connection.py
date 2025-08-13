@@ -794,7 +794,7 @@ class yeekee_bot(object):
                 #     break
                         
                 if state_ref == 1 and now.second == 58:
-                    sleep(0.98)
+                    sleep(0.97)
                 # if (loop_time - server_delay_sec) % time_par_round > time_set_round and state_ref == 1:
                     print('ckick to win')
                     print(delay)
@@ -1687,6 +1687,7 @@ if __name__ == "__main__":
                 else:
                     class_obj.go_shoot_number(codename, int(data[codename]['time_delay']),test_process,bet_type,room=class_obj.room_number_special,state=class_obj.state_special,money=data[codename]['use_money'])
                 
+                now = datetime.datetime.now()
                 if now.minute in [2,17,32,47] :
                     pass
                 else:        
