@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.13"
+version_yeekee = "v2.13b"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -526,9 +526,9 @@ class yeekee_bot(object):
         if this_host == 'jetsada' or this_host == 'thailotto':
             bet_text = '{"stake_method":2,"bet_category_id":%s,"betListJsonStringify":"%s","thaistock20checklist":[]}' % (str(room),betListJsonStringify)
             js = js_code.bet_number_jesadabet(code,bet_text)
-            sleep(2)
+            sleep(0.5)
             self.driver.get('https://lotto5555.com/member/affiliate')
-            sleep(2)
+            sleep(0.5)
             
         elif this_host == 'movewinbet':
             if bet_type == 'normal':
@@ -1546,7 +1546,7 @@ if __name__ == "__main__":
     a = subprocess.call("pkill chrome", shell=True)
     a = subprocess.call("pkill Xvfb", shell=True)
   
-    # sleep(2)
+    sleep(2)
     resend_normal = 0
     try:
         now = datetime.datetime.now()
