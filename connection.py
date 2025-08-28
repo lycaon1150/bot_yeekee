@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.13b"
+version_yeekee = "v2.14"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -1519,15 +1519,27 @@ class yeekee_bot(object):
         print('done bet number for get AF')
         
     def get_bonus_vip(self,user,host):
-        
+        slot_machine = 0
         try:
             if host == "thailotto":
+                
                 self.driver.execute_script(js_code.post_bonus_thailotto())
+                sleep(2)
+                self.driver.get("https://lotto5555.com/member/game/lucky-box")
+                sleep(2)
+                slot_machine = int(self.driver.execute_script("return document.getElementsByClassName('slotwrapper m-auto')[0].innerText[0]"))*10000
+                slot_machine = slot_machine + int(self.driver.execute_script("return document.getElementsByClassName('slotwrapper m-auto')[0].innerText[2]"))*1000
+                slot_machine = slot_machine + int(self.driver.execute_script("return document.getElementsByClassName('slotwrapper m-auto')[0].innerText[4]"))*100
+                slot_machine = slot_machine + int(self.driver.execute_script("return document.getElementsByClassName('slotwrapper m-auto')[0].innerText[6]"))*10
+                slot_machine = slot_machine + int(self.driver.execute_script("return document.getElementsByClassName('slotwrapper m-auto')[0].innerText[8]"))
+                
             else:
                 print('Only Cj can get VIP process')
         except:
             print("get_bonus_vip error")
-            
+        
+        return slot_machine 
+           
     def stop_display(self):
         self.display.stop()
     
@@ -1664,6 +1676,14 @@ if __name__ == "__main__":
                     else:
                         
                         class_obj.select_number(codename,l,bet_type=bet_type,room=class_obj.room_number_special,state=class_obj.state_special)
+                
+                
+#################### เอาโบนัส ########################                
+                try:
+                    bonus_vip_num = class_obj.get_bonus_vip(codename,data[codename]['host'])
+                except:
+                    pass
+                
                             
 #################### ยิงเลข ########################
                 if (time_in_minute > 355 or time_in_minute < 240) and bet_type != 'normal':
@@ -1693,10 +1713,7 @@ if __name__ == "__main__":
                 else:        
                     sleep(10)
                     
-                try:
-                    class_obj.get_bonus_vip(codename,data[codename]['host'])
-                except:
-                    pass
+                
                 
                 sleep(2)
             
@@ -1802,7 +1819,8 @@ if __name__ == "__main__":
                             'get_af' : get_af ,
                             'point' : point , 
                             'last_reboot' : date_obj,
-                            'server_delay' : data[codename]['server_delay'] 
+                            'server_delay' : data[codename]['server_delay'] ,
+                            'bonus_vip_num' : bonus_vip_num
                             }
                 print(data_json_special)
             except:
@@ -1831,7 +1849,9 @@ if __name__ == "__main__":
                         'get_af' : get_af ,
                         'point' : point , 
                         'last_reboot' : date_obj,
-                        'server_delay' : data[codename]['server_delay'] 
+                        'server_delay' : data[codename]['server_delay'] ,
+                        'bonus_vip_num' : bonus_vip_num
+                        
                         }
                 print(data_json_normal)
             except:
