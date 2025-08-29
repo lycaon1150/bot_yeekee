@@ -457,7 +457,7 @@ def post_number_jesadabet(code,room,num):
 
 
 def bet_number_jesadabet(code,bet_text):
-    js = """fetch('https://lotto5555.com/member/lottery', {
+    js = """return await fetch('https://lotto5555.com/member/lottery', {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
                 mode: 'cors', // no-cors, *cors, same-origin
                 cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -469,7 +469,7 @@ def bet_number_jesadabet(code,bet_text):
                     'x-xsrf-token': '%s'
                 },
                 'body': JSON.stringify(%s)
-                })""" % (str(code),str(bet_text))
+                }).then(response => { return response.json() } );""" % (str(code),str(bet_text))
     return js
 
 
