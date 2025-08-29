@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.15b"
+version_yeekee = "v2.15c"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -602,8 +602,8 @@ class yeekee_bot(object):
             pass
        
         
-        print('done bet number')
-
+        print('done bet number',datetime.datetime.now())
+        
     def go_shoot_number(self, user, set_delay,test_setting,bet_type,room,state,money):   # 225k no.16-25
         code = self.session_data[user]['authorization']
         this_host = self.session_data[user]['host']
@@ -1666,7 +1666,7 @@ if __name__ == "__main__":
                         
                         
                         class_obj.select_number(codename,l,bet_type=bet_type,room=class_obj.room_number_special,state=class_obj.state_special)
-                        
+                        sleep(10)
                         if now.minute in [13,14,15,16,28,29,30,31,43,44,45,46,58,59,0,1] and normal_bet == 1:
                             resend_normal = 1
                             class_obj.select_number(codename,l,bet_type="normal",room=class_obj.room_number_normal,state=class_obj.state_normal)
