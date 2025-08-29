@@ -24,7 +24,7 @@ import js_code
 import os
 
 file_part = os.path.dirname(os.path.realpath(__file__))
-version_yeekee = "v2.14"
+version_yeekee = "v2.15"
 print(datetime.datetime.now())
 target_F = ""
 log_out = ""
@@ -594,8 +594,10 @@ class yeekee_bot(object):
         
         self.driver.save_screenshot('bet_number.png')
         try:
-            self.driver.execute_script(js)
-
+            print(bet_type)
+            output = self.driver.execute_script(js)
+            print(output)
+            
         except:
             pass
        
