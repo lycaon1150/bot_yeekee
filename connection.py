@@ -1666,7 +1666,7 @@ if __name__ == "__main__":
                         
                         
                         class_obj.select_number(codename,l,bet_type=bet_type,room=class_obj.room_number_special,state=class_obj.state_special)
-                        sleep(10)
+                        sleep(6)
                         if now.minute in [13,14,15,16,28,29,30,31,43,44,45,46,58,59,0,1] and normal_bet == 1:
                             resend_normal = 1
                             class_obj.select_number(codename,l,bet_type="normal",room=class_obj.room_number_normal,state=class_obj.state_normal)
